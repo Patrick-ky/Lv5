@@ -9,56 +9,53 @@
     <link rel="stylesheet" href="{{ asset('fontawesome-free-6.4.2-web/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('sb-admin-2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-</head>
-
-<div class="content">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" >
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
-        /* Remove border and other styles from the input field */
-        .borderless-input {
-            border: none;
-            outline: none; /* Remove the focus outline */
-            background: transparent; /* Remove the background color */
-            padding: 0; /* Remove any padding */
-            margin: 0; /* Remove any margin */
-            font-size: inherit; /* Inherit font size */
-            /* Add any other custom styles you want */
+        .container {
+            text-align: center;
         }
-        .no-border {
-    border: none;
-    /* Optionally, you can remove other box-shadow styles as well */
-    box-shadow: none;
-    /* Optionally, you can remove any padding and margin */
-    padding: 0;
-    margin: 0;
-    /* Optionally, you can adjust the background color */
-    background-color: transparent;
-}
-</style>
 
+        .form-group {
+            display: inline-block;
+            text-align: left;
+            margin-right: 20px; /* Add some spacing between the two input fields */
+        }
 
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
+        .form-control {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+    
 
-    @yield('clients.addclients')
-    @yield('clients.edit')
-    @yield('client_info.add')
-    @yield('client_info.view')
+    <link href="{{ asset('css/your-custom-styles.css') }}" rel="stylesheet">
+</head>
 
-</div>
+<body>
+    <div class="content">
+        @yield('clients.addclients')
+        @yield('clients.edit')
+        @yield('client_info.view')
+        @yield('client_info.add')
+    </div>
+
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Include your custom scripts here -->
+    <script src="{{ asset('js/datepicker.js') }}"></script>
 
 </body>
 

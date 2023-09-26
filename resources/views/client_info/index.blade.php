@@ -75,11 +75,11 @@
                 </button>
             </div>
             <div class="modal-body" id="editModalContent">
-                <!-- Add your modal content here -->
             </div>
         </div>
     </div>
 </div>
+
 <script src="{{ asset('js/script.js') }}"></script>
 @endsection
 

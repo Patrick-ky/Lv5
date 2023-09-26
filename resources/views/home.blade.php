@@ -30,44 +30,44 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="step-box">
-                <h1>Step 1</h1>
-                <p>Add <strong>Stall Names</strong> and <strong>Stall Numbers</strong> for each stall.</p>
-                <a href="/stall-types">(Go now)</a>
-            </div>
-            <div class="step-box">
-                <h1>Step 2</h1>
-                <p>Add <strong>Violations</strong>.</p>
-                <a href="/violations">(Go now)</a>
-            </div>
-            <div class="step-box">
-                <h1>Step 3</h1>
-                <p>Add <strong>Clients</strong> who become stall owners. <strong>Set their due dates</strong>.</p>
-                <a href="/clients">(Go now)</a>
-            </div>
+   <div class="row">
+    <div class="col-md-6">
+        <div class="step-box text-center">
+            <h1 style="font-size: 18px;">Step 1</h1>
+            <p style="font-size: 14px;">Add <strong>Stall Names</strong> and <strong>Stall Numbers</strong> for each stall.</p>
+            <a href="/stall-types">(Go now)</a>
         </div>
+        <div class="step-box text-center">
+            <h1 style="font-size: 18px;">Step 2</h1>
+            <p style="font-size: 14px;">Add <strong>Violations</strong>.</p>
+            <a href="/violations">(Go now)</a>
+        </div>
+        <div class="step-box text-center">
+            <h1 style="font-size: 18px;">Step 3</h1>
+            <p style="font-size: 14px;">Add <strong>Clients</strong> who become stall owners. <strong>Set their due dates</strong>.</p>
+            <a href="/clients">(Go now)</a>
+        </div>
+    </div>
 
-        <div class="col-md-6">
-            <div class="step-box">
-                <h1>Step 4</h1>
-                <p>Create <strong>Billings</strong>.</p>
-                <a href="/billingskie">(Go now)</a>
-            </div>
-            <div class="step-box">
-                <h1>Step 5</h1>
-                <p>Track/Monitor <strong>Violations</strong> for stall owners by viewing them.</p>
-                <a href="/billingskie">(Go now)</a>
-            </div>
-            <div class="step-box">
-                <h1>Step 6</h1>
-                <p>Monitor <strong>Clients</strong> for their payment.</p>
-                <a href="/stall-types">(Go now)</a>
-            </div>
+    <div class="col-md-6">
+        <div class="step-box text-center">
+            <h1 style="font-size: 18px;">Step 4</h1>
+            <p style="font-size: 14px;">Create <strong>Billings</strong>.</p>
+            <a href="/billingskie">(Go now)</a>
+        </div>
+        <div class="step-box text-center">
+            <h1 style="font-size: 18px;">Step 5</h1>
+            <p style="font-size: 14px;">Track/Monitor <strong>Violations</strong> for stall owners by viewing them.</p>
+            <a href="/billingskie">(Go now)</a>
+        </div>
+        <div class="step-box text-center">
+            <h1 style="font-size: 18px;">Step 6</h1>
+            <p style="font-size: 14px;">Monitor <strong>Clients</strong> for their payment.</p>
+            <a href="/stall-types">(Go now)</a>
         </div>
     </div>
 </div>
+
 
 <style>
 .center-container {

@@ -26,10 +26,10 @@ class ClientInfoController extends Controller
         $clients = Client::all();
         $stalltypes = StallTypes::all();
         $stallnumbers = StallNumber::all();
-
+    
         return view('client_info.add', compact('clients', 'stalltypes', 'stallnumbers'));
     }
-
+    
     public function clientinfostore(Request $request)
     {
         // Validation rules and messages
