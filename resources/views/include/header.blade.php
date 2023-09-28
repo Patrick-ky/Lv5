@@ -91,13 +91,13 @@
             <li class="nav-item active">
                 <a class="nav-link active" href="/clients">
                 <i class="fas fa-solid fa-users"></i>
-                    <span>Clients</span></a>
+                    <span>Stall Owner Registration</span></a>
             </li>
             <!-- Nav Item - Clients Info -->
             <li class="nav-item active">
                 <a class="nav-link active" href="/client_info">
                 <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Stall Owners</span></a>
+                    <span>Stall Owner Information</span></a>
             </li>
             <!-- Nav Item - Billings -->
             <li class="nav-item active">
