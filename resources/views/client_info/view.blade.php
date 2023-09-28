@@ -11,7 +11,7 @@
     <div class="row justify-content-center"> 
         <div class="col-md-12">
                 <div class="mb-4">
-                <h4><label class="form-label"><strong>Full Name:</strong> {{ $clientInfo->client->firstname }} {{ $clientInfo->client->middlename }} {{ $clientInfo->client->lastname }}</label></h4>
+                <h4><label class="form-label"><strong>Name:</strong> {{ $clientInfo->client->firstname }} {{ $clientInfo->client->middlename }} {{ $clientInfo->client->lastname }}</label></h4>
                 </div>
 
                 <div class="md-2 justify-content-center float-left">

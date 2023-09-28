@@ -22,10 +22,10 @@
       <body>
           <div class="row">
             <div class="col-md-6">
-                <h2><strong>Clients List</strong></h2>
+                <h2><strong>Stall Owner List</strong></h2>
             </div>
             <div class="col-md-6 text-md-right">
-                <a href="{{ route('clients.addclients') }}" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Client</a>
+                <a href="{{ route('clients.addclients') }}" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Register Stall Owner</a>
             </div>
         </div>
           @if(session('success'))
@@ -78,7 +78,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="addModalLabel">Add Client</h4>
+                    <h4 class="modal-title" id="addModalLabel">Stall Owner Registration</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -92,7 +92,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="editModalLabel">Edit Client</h4>
+                    <h4 class="modal-title" id="editModalLabel">Edit Stall Owner Information</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

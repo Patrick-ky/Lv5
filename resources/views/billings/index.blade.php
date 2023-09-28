@@ -51,7 +51,7 @@
                             <td class="text-center"><strong> {{ $billing->stallNumber->nameforstallnumber }} </td>
                            
                             
-                            <td class="text-center"><strong>{{ $billing->stallType->price }}</td>
+                            <td class="text-center"><strong>₱{{ $billing->stallType->price }}</td>
                             <td class="text-center"><strong>{{ \Carbon\Carbon::parse($billing->due_date)->format('F j, Y') }}</td>
 
                             <td class="text-center">

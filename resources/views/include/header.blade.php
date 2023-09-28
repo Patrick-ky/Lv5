@@ -26,7 +26,7 @@
         }
         /* Add light green background color to the top navbar */
         .navbar-nav {
-            background-color: rgb(3, 90, 3);
+            background-color: rgb(9, 131, 9);
         }
 
         .navbar-nipatrick {
@@ -40,7 +40,7 @@
     
         /* Add light green background color to the user profile dropdown */
         .navbar-nav .dropdown-menu {
-            background-color: rgb(3, 90, 3);
+            background-color: rgb(9, 131, 9);
         }
     
         /* Adjust text color for items in the dropdown menu */
@@ -66,7 +66,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <img style="width:65px;height:65px;" src="{{URL('images\logo-lgu.png')}}">
                 </div>
-                <div class="sidebar-brand-text mx-50" style="font-size: 10px;">{{ config('app.name') }}</div>
+                <div class="sidebar-brand-text mx-50" style="font-size: 13px;">{{ config('app.name') }}</div>
             </a>
     
             <!-- Divider -->
@@ -84,7 +84,7 @@
     
             <!-- Heading -->
             <div class="sidebar-heading">
-                TABS
+                <h4>TABS</h4>
             </div>
     
             <!-- Nav Item - Clients -->
@@ -197,12 +197,12 @@
                             aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Manage Account
+                              <strong>  Manage Account</strong>
                             </a>
                             <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                 <strong>   Logout   </strong>
                                 </a>
                             </div>
                         </li>

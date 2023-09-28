@@ -40,12 +40,13 @@
     </div>
 <table class= "table">
 
-  <thead>     
-    <th class="text-center"><strong>Citation Date</strong></th>
+  <thead>
     <th class="text-center"><strong>Stall Code</strong></th>
     <th class="text-center"><strong>Landmark</strong> </th>
     <th class="text-center"><strong>Violation</strong></th>
-    <th class="text-center"><strong>Penalty Price</strong></th> 
+    <th class="text-center"><strong>Citation Date</strong></th>
+    <th class="text-center"><strong>Penalty Price</strong></th>
+    
     
 
 </thead>
@@ -64,7 +65,16 @@
         <td></td>
         <td></td>
         <td></td>
-        <td>total: </td>
+        <td></td>
+        <td></td>
+        
+    </tr>
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>TOTAL: </td>
         <td>0.00</td>
     </tr>
     
