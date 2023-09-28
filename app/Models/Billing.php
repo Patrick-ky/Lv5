@@ -37,4 +37,6 @@ class Billing extends Model
     {
         return $this->belongsTo(StallNumber::class, 'stall_number_id');
     }
+
+ 
 }

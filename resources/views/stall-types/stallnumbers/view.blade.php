@@ -30,16 +30,16 @@
                 {{ session('error') }}
             </div>
             @endif
-            <h1>Stalls on : {{ $stallType->stall_name }}</h1>
+            <h1><strong>Stalls on : {{ $stallType->stall_name }}</h1>
 
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th class="text-center">Stall Number</th>
-                        <th class="text-center">Stall Code</th>
-                        <th class="text-center">Landmark</th> <!-- Added this line -->
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center"><strong>Stall Number</th>
+                        <th class="text-center"><strong>Stall Code</th>
+                        <th class="text-center"><strong>Landmark</th> <!-- Added this line -->
+                        <th class="text-center"><strong>Status</th>
+                        <th class="text-center"><strong>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-dark">Billings</h2>
+            <h2 class="text-dark"><strong>Billings</strong></h2>
 
             @if(session('success'))
             <div class="alert alert-success">
@@ -35,24 +35,24 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-center">Full Name</th>
-                            <th class="text-center">Stall Category</th>
-                            <th class="text-center">Stall Code</th>
-                            <th class="text-center">Monthly</th>
-                            <th class="text-center">Due Date</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center"><strong>Full Name</th>
+                            <th class="text-center"><strong>Stall Category</th>
+                            <th class="text-center"><strong>Stall Code</th>
+                            <th class="text-center"><strong>Monthly</th>
+                            <th class="text-center"><strong>Due Date</th>
+                            <th class="text-center"><strong>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($clientInfo as $billing)
                         <tr>
-                            <td class="text-center">{{ $billing->client->firstname }} {{ $billing->client->middlename }} {{ $billing->client->lastname }}</td>
-                            <td class="text-center"> {{ $billing->stallType->stall_name }}  </td>
-                            <td class="text-center"> {{ $billing->stallNumber->nameforstallnumber }} </td>
+                            <td class="text-center"><strong>{{ $billing->client->firstname }} {{ $billing->client->middlename }} {{ $billing->client->lastname }}</td>
+                            <td class="text-center"> <strong>{{ $billing->stallType->stall_name }}  </td>
+                            <td class="text-center"><strong> {{ $billing->stallNumber->nameforstallnumber }} </td>
                            
                             
-                            <td class="text-center">{{ $billing->stallType->price }}</td>
-                            <td class="text-center">{{ \Carbon\Carbon::parse($billing->due_date)->format('F j, Y') }}</td>
+                            <td class="text-center"><strong>{{ $billing->stallType->price }}</td>
+                            <td class="text-center"><strong>{{ \Carbon\Carbon::parse($billing->due_date)->format('F j, Y') }}</td>
 
                             <td class="text-center">
                                 <a href="" class="btn btn-primary">Update</a>
@@ -64,10 +64,6 @@
                 </table>
 
             <br>
-            <form action='/create-billingskie' method="GET">
-                <button type="submit" class="btn btn-primary">Create new Billing</button>
-            </form>
-
             
         </div>
     </div>

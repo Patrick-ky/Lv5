@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Violation;
 use App\Models\ClientInfo;
 use App\Models\StallTypes;
 use App\Models\StallNumber;
@@ -156,9 +157,9 @@ public function view($id)
     $clientInfos = ClientInfo::where('client_id', $clientInfo->client_id)->get(); // Filter by client_id
     $stallTypes = StallTypes::all();
     $stallNumbers = StallNumber::all();
+    $violations = Violation::all();
 
-    return view('client_info.view', compact('clientInfo', 'clientInfos'));
+    return view('client_info.view', compact('clientInfo', 'clientInfos','violations'));
 }
-
 
 }

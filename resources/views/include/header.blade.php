@@ -13,10 +13,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+    <style>
+        .bg{
+            background-color: rgb(182, 247, 182);
+        }
+        /* Add light green background color to the top navbar */
+        .navbar-nav {
+            background-color: rgb(3, 90, 3);
+        }
+
+        .navbar-nipatrick {
+            background-color: rgb(9, 131, 9);
+        }
+    
+        /* Adjust text color for links in the top navbar */
+        .navbar-nav .nav-link {
+            color: rgb(211, 247, 227); /* You can change the text color as needed */
+        }
+    
+        /* Add light green background color to the user profile dropdown */
+        .navbar-nav .dropdown-menu {
+            background-color: rgb(3, 90, 3);
+        }
+    
+        /* Adjust text color for items in the dropdown menu */
+        .navbar-nav .dropdown-menu .dropdown-item {
+            color: rgb(211, 247, 227); /* You can change the text color as needed */
+        }
+    </style>
     
 </head>
+
 
 
 <body id="page-top">
@@ -25,7 +59,7 @@
     <div id="wrapper">
     
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color: #198754;" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color:rgb(3, 90, 3);" id="accordionSidebar">
     
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center">
@@ -42,7 +76,7 @@
             <li class="nav-item active">
                 <a class="nav-link active" href="/home">
                 <i class="fas fa-fw fa-gauge-high"></i>
-                    <span>Introduction</span></a>
+                    <span>Dashboard</span></a>
             </li>
     
             <!-- Divider -->
@@ -63,7 +97,7 @@
             <li class="nav-item active">
                 <a class="nav-link active" href="/client_info">
                 <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Stall Info</span></a>
+                    <span>Stall Owners</span></a>
             </li>
             <!-- Nav Item - Billings -->
             <li class="nav-item active">
@@ -106,9 +140,9 @@
             <!-- Main Content -->
           <div id="content">
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <div class="flex ml-3" >
-                        <h4>Welcome, {{ Auth::user()->name }}!</h4>
+                <nav class=" navbar navbar-nipatrick navbar-expand navbar-light topbar mb-4 static-top shadow">
+                    <div class="flex ml-3">
+                        <h4 style="color:rgb(210, 248, 210)">Welcome, <strong>{{ Auth::user()->name }}!</strong></h4>
                     </div>
                 
       
@@ -154,7 +188,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-white"><strong>{{ Auth::user()->name }}<strong></span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('images/undraw_profile.svg') }}">
                             </a>
@@ -194,20 +228,24 @@
         </div>
     </div>
                 <!-- End of Topbar -->
-                <div class="content">
+                <div class="content ">
+
+
+
                     <!-- Include Bootstrap CSS and JS -->
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" >
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-                    
+
 
                     @yield('clients.index')
                     @yield('clients.addclients')
                     @yield('client_info.index')
                     @yield('client_info.add')
                     @yield('client_info.edit')
+                    @yield('client_info.violationbilling')
                     {{-- @yield('clients.edit') --}}
                     @yield('billings.index')
                     @yield('billings.create')

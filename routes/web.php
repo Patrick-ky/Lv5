@@ -102,8 +102,9 @@ Route::get('/clientrecords', [ClientRecordController::class, 'index'])->name('cl
 
 
 // naa sya sa billing controller arun ma access ang data in general and iwas confusion
-Route::get('/violations/view/{id}',[BillingController:: class, 'viewViolation'])
-->name('violations.view');
+Route::get('/client_info/violationbilling',[BillingController:: class, 'violationbilling'])
+->name('client_info.violationbilling');
+
 
 Route::get('/create-violation',[ViolationController:: class, 'create'])
 ->name('violation.create');

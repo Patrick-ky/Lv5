@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
         .container {
@@ -46,6 +48,7 @@
         @yield('clients.edit')
         @yield('client_info.view')
         @yield('client_info.add')
+        @yield('client_info.viewviolation')
     </div>
 
     <!-- Bootstrap core JavaScript-->

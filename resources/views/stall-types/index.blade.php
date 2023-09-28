@@ -35,17 +35,17 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th class="text-center">Stall Name</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Stall Number</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center"><strong>Stall Name</strong></th>
+                        <th class="text-center"><strong>Price</strong></th>
+                        <th class="text-center"><strong>Stall Number</strong></th>
+                        <th class="text-center"><strong>Actions</strong></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($stalltypes as $stalltype)
                     <tr>
                         <td class="text-center">{{ $stalltype->stall_name }}</td>
-                        <td class="text-center">{{ $stalltype->price }}</td>
+                        <td class="text-center">₱{{ $stalltype->price }}</td>
                         <td class="text-center"> 
                             
                             <a href="{{ route('stall-types.stallnumbers.view', ['stallType' => $stalltype->id]) }}" class="btn btn-primary">VIEW</a>

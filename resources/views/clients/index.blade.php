@@ -22,7 +22,7 @@
       <body>
           <div class="row">
             <div class="col-md-6">
-                <h2>Clients List</h2>
+                <h2><strong>Clients List</strong></h2>
             </div>
             <div class="col-md-6 text-md-right">
                 <a href="{{ route('clients.addclients') }}" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Client</a>
@@ -42,23 +42,23 @@
           <table class= "table table-bordered">
             <thead>
                 <tr>
-                    <th class="text-center">Full Name</th>
-                    <th class="text-center">Age</th>
-                    <th class="text-center">Gender</th>
-                    <th class="text-center">Contact Number</th>
-                    <th class="text-center">Address</th> <!-- Add Address column -->
-                    <th class="text-center">Actions</th>
+                    <th class="text-center"><strong>Full Name</th>
+                    <th class="text-center"><strong>Age</th>
+                    <th class="text-center"><strong>Gender</th>
+                    <th class="text-center"><strong>Contact Number</th>
+                    <th class="text-center"><strong>Address</th> <!-- Add Address column -->
+                    <th class="text-center"><strong>Actions</th>
                 </tr>
             </thead>
             
             <tbody>
                 @foreach ($clients as $client)
                     <tr>
-                        <td>{{ $client->firstname }} {{ $client->middlename }} {{ $client->lastname }}</td>
-                        <td>{{ $client->age }}</td>
-                        <td>{{ $client->gender }}</td>
-                        <td>{{ $client->clients_number }}</td>
-                        <td>{{ $client->address }}</td> <!-- Display Address -->
+                        <td><strong>{{ $client->firstname }} {{ $client->middlename }} {{ $client->lastname }}</td>
+                        <td><strong>{{ $client->age }}</td>
+                        <td><strong>{{ $client->gender }}</td>
+                        <td><strong>{{ $client->clients_number }}</td>
+                        <td><strong>{{ $client->address }}</td> <!-- Display Address -->
                         <td>
                             <a href="{{ route('clients.editclient', ['id' => $client->id]) }}" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</a>
                             {{-- deletefunctionlangsuah --}}

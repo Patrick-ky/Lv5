@@ -21,7 +21,7 @@
             </select>
         </div>
         <div class="mb-2">
-            <label for="stalltype_id" class="form-label">Select Stall Type</label>
+            <label for="stalltype_id" class="form-label">Stall Type</label>
             <select class="form-control" id="stalltype_id" name="stalltype_id" required>
                 <option value="" disabled selected>Select Stall Type</option>
                 @foreach ($stalltypes as $stalltype)
@@ -33,7 +33,7 @@
         </div>
         
         <div class="mb-2">
-            <label for="stall_number_id" class="form-label">Select Stall Number</label>
+            <label for="stall_number_id" class="form-label">Stall Number</label>
             <select class="form-control" id="stall_number_id" name="stall_number_id" required>
                 <option value="" disabled selected>Select Stall Number</option>
             </select>

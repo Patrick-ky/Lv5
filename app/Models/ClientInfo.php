@@ -18,8 +18,9 @@ class ClientInfo extends Model
         'client_id',
         'stalltype_id',
         'stall_number_id',
+        'violation_id',
         'start_date',
-        'due_date', 
+        'due_date'
     ];
     
 
@@ -36,6 +37,11 @@ class ClientInfo extends Model
     public function stallNumber()
     {
         return $this->belongsTo(StallNumber::class, 'stall_number_id');
+    }
+
+    public function violations()
+    {
+        return $this->hasMany(Violation::class, 'violation_id');
     }
 }
 

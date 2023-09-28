@@ -89,7 +89,17 @@ public function records()
 }
 
 
+// for billing with violations ni dria na banda sa controller 
 
+
+
+public function violationbilling()
+{
+
+    $BillandViolations = Billing::with('client', 'violation', 'stallNumber','stallType')->get();
+ 
+    return view('client_info.violationbilling',compact('BillandViolations'));
+}
 
 }
 

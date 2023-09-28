@@ -30,5 +30,10 @@ class Client extends Model
         return $this->belongsTo(StallNumber::class, 'stall_number_id');
     }
     
+    public function violations()
+    {
+        return $this->hasMany(Violation::class);
+    }
+    
    
 }
