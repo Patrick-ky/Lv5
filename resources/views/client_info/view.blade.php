@@ -13,14 +13,14 @@
                 <div class="mb-4">
                 <h4><label class="form-label"><strong>Name:</strong> {{ $clientInfo->client->firstname }} {{ $clientInfo->client->middlename }} {{ $clientInfo->client->lastname }}</label></h4>
                 </div>
-
                 <div class="md-2 justify-content-center float-left">
-                    <a href="/client_info/violationbilling" class="btn btn-danger">View Violation</a>
+                    <a href="{{ route('violationbilling', ['client_id' => $clientInfo->client->id]) }}" class="btn btn-danger">View Violations</a>
                     <tr>
                         <td><strong>Citations:</strong></td>
                         <td>0</td>
                     </tr>
                 </div><br><br>
+                
                
 
 <div class="table-responsive">

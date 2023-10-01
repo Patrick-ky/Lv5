@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\Violation;
+use App\Models\Client;
 use App\Models\Billing;
+use App\Models\Violation;
 use App\Models\StallTypes;
+use App\Models\StallNumber;
+use Illuminate\Http\Request;
 
 class ViolationController extends Controller
 {
@@ -20,77 +22,87 @@ class ViolationController extends Controller
         return view('violations.index', $data);
     }
 
-    public function create() {
 
-        return view('violations.create');
-    }
-
-    public function store(Request $request) { 
+    public function create()
+    {
+        $clients = Client::all();
+        $stallTypes = StallTypes::all();
+        $stallNumbers = StallNumber::where('status', 'occupied')->get();
         
-        $data = $request->validate([ 
-            'violation_name' => 'required',
-            'penalty_value' => 'required|numeric',
-    
-        ]);
-     
-        $existingviolation = Violation::where('violation_name', $data['violation_name'])->first();
+        return view('violations.create', compact('clients', 'stallTypes', 'stallNumbers'));
+    }
 
-        if ($existingviolation) {
-            // Billing record already exists for this client, show an error message and redirect
-            return redirect()->route('violation.index')->with('error', 'This type of violation is already exist .');
-        }
+
+//     public function store(Request $request)
+// {
+//     // Validate the form data
+//     $data = $request->validate([
+//         'client_id' => 'required|exists:clients,id',
+//         'stalltype_id' => 'required|exists:stall_types,id',
+//         'stall_number_id' => 'required|exists:stall_numbers,id',
+//         'violation_name' => 'required',
+//         'penalty_value' => 'required|numeric',
+//     ]);
+
+//     // Create a new Violation record
+//     $violation = Violation::create($data);
+
+//     if ($violation) {
+//         // The violation was successfully created
+//         return redirect()->route('violation.index')->with('success', 'Violation successfully created!');
+//     } else {
+//         // There was an error creating the violation
+//         return redirect()->route('violation.create')->with('error', 'Failed to create violation. Please try again.');
+//     }
+// }
+
+//     public function edit($id)
+// {
+//     $violation = Violation::findOrFail($id);
+
+//     return view('violations.edit', compact('violation'));
+// }
+
+// public function update(Request $request, $id)
+// {
+//     $data = $request->validate([
+//         'violation_name' => 'required',
+//         'penalty_value' => 'required|numeric',
+//     ]);
+
+//     $violation = Violation::findOrFail($id);
+
+//     $violation->penalty_value = $data['penalty_value'];
+//     // Update the violation attributes based on the form data
+//     $violation->update($data);
+
+//     // Update the total_balance in associated billing records
+//     $billings = Billing::where('violation_id', $id)->get();
+
+//     foreach ($billings as $billing) {
+//         $client = $billing->client; 
+//         $stallType = $client->stallType;
+//         $stalltypePrice = $stallType->price;
         
-        $violation = Violation::create($data);
-        return redirect(route('violation.index'))->with('success', 'Violation successfully created!'); 
-    }
-
-    public function edit($id)
-{
-    $violation = Violation::findOrFail($id);
-
-    return view('violations.edit', compact('violation'));
-}
-
-public function update(Request $request, $id)
-{
-    $data = $request->validate([
-        'violation_name' => 'required',
-        'penalty_value' => 'required|numeric',
-    ]);
-
-    $violation = Violation::findOrFail($id);
-
-    $violation->penalty_value = $data['penalty_value'];
-    // Update the violation attributes based on the form data
-    $violation->update($data);
-
-    // Update the total_balance in associated billing records
-    $billings = Billing::where('violation_id', $id)->get();
-
-    foreach ($billings as $billing) {
-        $client = $billing->client; 
-        $stallType = $client->stallType;
-        $stalltypePrice = $stallType->price;
-        
-        $billing->total_balance = $violation->penalty_value + $stalltypePrice;
-        $billing->save();
-    }
+//         $billing->total_balance = $violation->penalty_value + $stalltypePrice;
+//         $billing->save();
+//     }
 
 
-    return redirect()->route('violation.index')->with('success', 'Violation updated successfully');
-}
+//     return redirect()->route('violation.index')->with('success', 'Violation updated successfully');
+// }
 
-public function destroy($id)
-{
-    try {
-        $violation = Violation::findOrFail($id);
-        $violation->delete();
+// public function destroy($id)
+// {
+//     try {
+//         $violation = Violation::findOrFail($id);
+//         $violation->delete();
 
-        return redirect()->route('violation.index')->with('success', 'Violation deleted successfully');
-    } catch (\Illuminate\Database\QueryException $e) {
-        return redirect()->route('violation.index')->with('error', 'Cannot delete violation. Some clients may have acquired it.');
-    }
-}
+//         return redirect()->route('violation.index')->with('success', 'Violation deleted successfully');
+//     } catch (\Illuminate\Database\QueryException $e) {
+//         return redirect()->route('violation.index')->with('error', 'Cannot delete violation. Some clients may have acquired it.');
+//     }
+// }
 
 public function viewViolation($id)
 {

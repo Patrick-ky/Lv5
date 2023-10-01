@@ -15,7 +15,7 @@
                 <option value="" disabled selected>Select Client</option>
                 @foreach ($clients as $client)
                     <option value="{{ $client->id }}">
-                        {{ $client->lastname }} {{ $client->firstname }} {{ $client->middlename }}
+                        {{ $client->firstname }} {{ $client->lastname }} {{ $client->middlename }}
                     </option>
                 @endforeach
             </select>

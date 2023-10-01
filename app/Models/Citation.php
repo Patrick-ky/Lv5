@@ -20,7 +20,7 @@ class Citation extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function stallType()
+    public function stallTypes()
     {
         return $this->belongsTo(StallType::class, 'stalltype_id');
     }

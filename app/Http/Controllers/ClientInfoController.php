@@ -15,13 +15,40 @@ use Illuminate\Validation\ValidationException;
 class ClientInfoController extends Controller
 
 {
-    public function index()
-    {
-        $clientInfoModels = ClientInfo::with(['client', 'stallNumber', 'stallType'])->get();
 
-        return view('client_info.index', compact('clientInfoModels'));
+    public function delete($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $clientInfo = ClientInfo::findOrFail($id);
+
+            // Update the related stall's status to "available"
+            $stallNumber = $clientInfo->stallNumber;
+            $stallNumber->status = 'available';
+            $stallNumber->save();
+
+            // Delete the client information
+            $clientInfo->delete();
+
+            DB::commit();
+
+            return redirect()->route('client_info.index')->with('success', 'Client info deleted successfully!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client_info.index')->with('error', 'Failed to delete client info. Please try again.');
+        }
     }
 
+
+    public function index()
+    {
+        // Retrieve all client info records
+        $clientInfoModels = ClientInfo::with(['client', 'stallNumber', 'stallType'])->get();
+    
+        return view('client_info.index', compact('clientInfoModels'));
+    }
+    
     public function addclientinfo()
     {
         $clients = Client::all();
@@ -32,56 +59,56 @@ class ClientInfoController extends Controller
     }
     
     public function clientinfostore(Request $request)
-    {
-        // Validation rules and messages
-        $rules = [
-            'client_id' => 'required|exists:clients,id',
-            'stalltype_id' => 'required|exists:stall_types,id',
-            'stall_number_id' => 'required|exists:stall_numbers,id',
-            'start_date' => 'required|date',
-            'due_date' => 'required|date|after:start_date',
-        ];
+{
+    // Validation rules and messages
+    $rules = [
+        'client_id' => 'required|exists:clients,id',
+        'stalltype_id' => 'required|exists:stall_types,id',
+        'stall_number_id' => 'required|exists:stall_numbers,id',
+        'start_date' => 'required|date',
+        'due_date' => 'required|date|after:start_date',
+    ];
 
-        $messages = [
-            'stall_number_id.exists' => 'The selected stall number does not exist.',
-            'stalltype_id.exists' => 'The selected stall type does not exist.',
-            'due_date.after' => 'The due date must be after the start date.',
-        ];
+    $messages = [
+        'stall_number_id.exists' => 'The selected stall number does not exist.',
+        'stalltype_id.exists' => 'The selected stall type does not exist.',
+        'due_date.after' => 'The due date must be after the start date.',
+    ];
 
-        // Validate the request
-        $validatedData = $request->validate($rules, $messages);
+    // Validate the request
+    $validatedData = $request->validate($rules, $messages);
 
-        try {
-            DB::beginTransaction();
+    try {
+        DB::beginTransaction();
 
-            // Check if the selected stall number belongs to the specified stall type
-            $stallType = StallTypes::findOrFail($validatedData['stalltype_id']);
-            $stallNumber = StallNumber::findOrFail($validatedData['stall_number_id']);
+        // Check if a client info record with the same client_id already exists
+        $existingClientInfo = ClientInfo::where('client_id', $validatedData['client_id'])
+            ->where('stalltype_id', $validatedData['stalltype_id'])
+            ->where('stall_number_id', $validatedData['stall_number_id'])
+            ->first();
 
-            if ($stallNumber->stall_type_id !== $stallType->id) {
-                throw ValidationException::withMessages(['stall_number_id' => 'The selected stall number is not valid for the chosen stall type.']);
-            }
-
-            // Check if the selected stall number is available
-            if ($stallNumber->status !== 'available') {
-                throw ValidationException::withMessages(['stall_number_id' => 'The selected stall number is not available.']);
-            }
-
-            // Update stall number status to 'occupied'
-            $stallNumber->status = 'occupied';
-            $stallNumber->save();
-
-            // Create the client info record
+        if ($existingClientInfo) {
+            // If the record exists, update it instead of creating a new one
+            $existingClientInfo->update($validatedData);
+        } else {
+            // Otherwise, create a new client info record
             ClientInfo::create($validatedData);
-
-            DB::commit();
-
-            return redirect()->route('client_info.index')->with('success', 'Client info created successfully!');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('client_info.index')->with('error', 'Failed to create client info. Please try again.');
         }
+
+        // Ensure the stall number status is updated to 'occupied'
+        $stallNumber = StallNumber::findOrFail($validatedData['stall_number_id']);
+        $stallNumber->status = 'occupied';
+        $stallNumber->save();
+
+        DB::commit();
+
+        return redirect()->route('client_info.index')->with('success', 'Client info created/updated successfully!');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->route('client_info.index')->with('error', 'Failed to create/update client info. Please try again.');
     }
+}
+
     public function updateClient(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -123,6 +150,28 @@ class ClientInfoController extends Controller
 
 
 }
+
+public function getDropdownOptions(Request $request)
+{
+    $clientId = $request->input('clientId');
+
+    // Fetch dropdown options based on the selected client
+    $stallTypes = StallTypes::where('client_id', $clientId)->get();
+    
+    // Filter available stalls by status "occupied"
+    $stallNumbers = StallNumber::where('client_id', $clientId)
+        ->where('status', 'occupied')
+        ->get();
+    
+    $violations = Violation::all(); // You can customize this based on your requirements
+
+    return response()->json([
+        'stallTypes' => $stallTypes,
+        'stallNumbers' => $stallNumbers,
+        'violations' => $violations,
+    ]);
+}
+
 
 public function storeStall(Request $request)
 {

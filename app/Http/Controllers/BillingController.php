@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Billing;
+use App\Models\Citation;
 use App\Models\Violation;
 use App\Models\ClientInfo;
 use App\Models\StallTypes;
@@ -16,11 +17,32 @@ class BillingController extends Controller
 
     public function index()
     {
+        // Group client information by their names and collect stall information
         $clientInfo = ClientInfo::with('client', 'stallNumber', 'stallType')->get();
+        $groupedData = [];
     
-        return view('billings.index', compact('clientInfo'));
+        foreach ($clientInfo as $billing) {
+            $clientName = $billing->client->firstname . ' ' . $billing->client->middlename . ' ' . $billing->client->lastname;
+    
+            // If the client is not yet in the grouped data, add them
+            if (!isset($groupedData[$clientName])) {
+                $groupedData[$clientName] = [
+                    'client' => $billing->client,
+                    'stalls' => [],
+                ];
+            }
+    
+            // Add stall information to the client's data
+            $groupedData[$clientName]['stalls'][] = [
+                'stallType' => $billing->stallType,
+                'stallNumber' => $billing->stallNumber,
+                'due_date' => $billing->due_date,
+                'price' => $billing->stallType->price,
+            ];
+        }
+    
+        return view('billings.index', compact('groupedData'));
     }
-    
 public function records()
 {
     $billings = Billing::with('client', 'violation', 'stallNumber','stallType')->get();
@@ -93,13 +115,23 @@ public function records()
 
 
 
-public function violationbilling()
+public function getDropdownOptions(Request $request)
 {
+    $clientId = $request->input('clientId');
 
-    $BillandViolations = Billing::with('client', 'violation', 'stallNumber','stallType')->get();
- 
-    return view('client_info.violationbilling',compact('BillandViolations'));
+    // Fetch dropdown options based on the selected client
+    $stallTypes = StallTypes::where('client_id', $clientId)->get();
+    $stallNumbers = StallNumber::where('client_id', $clientId)->get();
+    $violations = Violation::all(); // You can customize this based on your requirements
+
+    return response()->json([
+        'stallTypes' => $stallTypes,
+        'stallNumbers' => $stallNumbers,
+        'violations' => $violations,
+    ]);
 }
+
+
 
 }
 

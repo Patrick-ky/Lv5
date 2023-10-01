@@ -7,7 +7,7 @@ use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ViolationController;
 use App\Http\Controllers\ClientInfoController;
 use App\Http\Controllers\StallTypescontroller;
-
+use App\Http\Controllers\CitationController;
 use App\Http\Controllers\StallNumberController;
 use App\Http\Controllers\ClientRecordController;
 
@@ -102,8 +102,15 @@ Route::get('/clientrecords', [ClientRecordController::class, 'index'])->name('cl
 
 
 // naa sya sa billing controller arun ma access ang data in general and iwas confusion
-Route::get('/client_info/violationbilling',[BillingController:: class, 'violationbilling'])
-->name('client_info.violationbilling');
+
+
+ Route::get('/get-dropdown-options',[ClientInfoController::class,'getDropdownOptions']);
+
+
+
+
+
+
 
 
 Route::get('/create-violation',[ViolationController:: class, 'create'])
@@ -170,6 +177,17 @@ Route::post('/client_info/store', [ClientInfoController::class, 'clientinfostore
 Route::get('/client_info/view/{id}', [ClientInfoController::class, 'view'])->name('client_info.view');
 Route::put('/client_info/update/{id}', [ClientInfoController::class, 'updateClient'])->name('client_info.update');
 Route::delete('/client_info/delete/{id}', [ClientInfoController::class, 'deleteClient'])->name('client_info.delete');
+
+
+// citations
+Route::get('/client_info/violationbilling/{client_id}', [CitationController::class, 'violationbilling'])->name('violationbilling');
+Route::get('/add-violation-form/{client_id}', [CitationController::class, 'addViolationForm'])->name('addViolationForm');
+Route::post('/get-stall-numbers-by-stall-type', [CitationController::class, 'getStallNumbersByStallType'])->name('getStallNumbersByStallType');
+Route::post('/store-violation/{client_id}', [CitationController::class, 'storeViolation'])->name('storeViolation');
+
+
+
+
 
 Route::get('/add-stall', 'ClientInfoController@addStall')->name('add_stall');
 Route::post('/add-stall', 'ClientInfoController@storeStall')->name('store_stall');

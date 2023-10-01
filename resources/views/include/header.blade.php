@@ -246,6 +246,7 @@
                     @yield('client_info.add')
                     @yield('client_info.edit')
                     @yield('client_info.violationbilling')
+                    @yield('client_info.addbilling')
                     {{-- @yield('clients.edit') --}}
                     @yield('billings.index')
                     @yield('billings.create')
@@ -265,6 +266,8 @@
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                    
                 </div>
                 <!-- Scroll to Top Button-->
                 <a class="scroll-to-top rounded" href="#page-top">
@@ -277,6 +280,8 @@
 
 
     <!-- Bootstrap core JavaScript-->
+
+
     <script src="{{ asset('jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
