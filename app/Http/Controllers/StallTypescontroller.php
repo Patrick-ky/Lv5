@@ -32,7 +32,7 @@ class StallTypescontroller extends Controller
     
         if ($existingStalltype) {
    
-            return redirect()->route('stall-types.index')->with('error', 'This Type of stall already exists');
+            return redirect()->route('stall-types.create')->with('error', 'This Type of stall already exists');
         }
         $stalltype = StallTypes::create($data);
     

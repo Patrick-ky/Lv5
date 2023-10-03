@@ -86,38 +86,34 @@
             <div class="sidebar-heading">
                 <h4>TABS</h4>
             </div>
-    
-            <!-- Nav Item - Clients -->
-            <li class="nav-item active">
-                <a class="nav-link active" href="/clients">
-                <i class="fas fa-solid fa-users"></i>
-                    <span>Stall Owner Registration</span></a>
-            </li>
-            <!-- Nav Item - Clients Info -->
-            <li class="nav-item active">
-                <a class="nav-link active" href="/client_info">
-                <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Stall Owner Information</span></a>
-            </li>
-            <!-- Nav Item - Billings -->
-            <li class="nav-item active">
-                <a class="nav-link active" href="/billingskie">
-                <i class="fas fa-solid fa-table"></i>
-                    <span>Billings</span></a>
-            </li>
-            <!-- Nav Item - Violations -->
-            <li class="nav-item active">
-                <a class="nav-link active" href="/violations">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>Violations</span></a>
-            </li>
-            <!-- Nav Item - Stall Type -->
             <li class="nav-item active">
                 <a class="nav-link active" href="/stall-types">
                     <i class="fas fa-fw fa-store"></i>
                     <span>Stall Category</span></a>
             </li>
-            <!-- Nav Item - Client Records -->
+            <li class="nav-item active">
+                <a class="nav-link active" href="/violations">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Violations</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link active" href="/clients">
+                <i class="fas fa-solid fa-users"></i>
+                    <span>Stall Owner Registration</span></a>
+            </li>
+            
+            <li class="nav-item active">
+                <a class="nav-link active" href="/client_info">
+                <i class="fas fa-fw fa-clipboard-list"></i>
+                    <span>Stall Owner Information</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link active" href="/billingskie">
+                <i class="fas fa-solid fa-table"></i>
+                    <span>Billings</span></a>
+            </li>
+
             <li class="nav-item active">
                 <a class="nav-link active" href="/billing-record">
                     <i class="fas fa-fw fa-clipboard-list"></i>

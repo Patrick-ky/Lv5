@@ -14,7 +14,7 @@
                 <h4><label class="form-label"><strong>Name:</strong> {{ $clientInfo->client->firstname }} {{ $clientInfo->client->middlename }} {{ $clientInfo->client->lastname }}</label></h4>
                 </div>
                 <div class="md-2 justify-content-center float-left">
-                    <a href="{{ route('violationbilling', ['client_id' => $clientInfo->client->id]) }}" class="btn btn-danger">View Violations</a>
+                    <a href="{{ route('violationbilling', ['client_id' => $clientInfo->id]) }}" class="btn btn-danger">View Violations</a>
                     <tr>
                         <td><strong>Citations:</strong></td>
                         <td>0</td>
@@ -43,11 +43,7 @@
                 <td>{{ $client->stallNumber->description }}</td>
                 
             </tr>   
-            @endforeach
-
-
-
-            
+            @endforeach     
         </tbody>
 
     </table>

@@ -203,7 +203,7 @@ public function view($id)
 {
     $clientInfo = ClientInfo::findOrFail($id);
     $clients = Client::all();
-    $clientInfos = ClientInfo::where('client_id', $clientInfo->client_id)->get(); // Filter by client_id
+    $clientInfos = ClientInfo::where('client_id', $clientInfo->client_id)->get(); 
     $stallTypes = StallTypes::all();
     $stallNumbers = StallNumber::all();
     $violations = Violation::all();

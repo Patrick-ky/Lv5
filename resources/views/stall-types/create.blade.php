@@ -2,6 +2,12 @@
 
 @section('stall-types.create')
 
+@if(session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -10,7 +16,7 @@
                     <h4 class="text-center">Create Stall Type</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('stall-types.store') }}">
+                    <form action="{{ route('stall-types.store') }}" method="POST" >
                         @csrf
                         <div class="mb-3">
                             <label for="stall_name" class="form-label">Stall Name</label>

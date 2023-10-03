@@ -20,7 +20,7 @@
             </div>
             @endif
 
-            <table class="table table-bordered">
+            <table class="table ">
                 <thead>
                     <tr>
                         <th class="text-center"><strong>Violation Name</th>
@@ -40,9 +40,7 @@
             </table>
 
             <br>
-            <form action='/create-violation' method="GET">
-                <button type="submit" class="btn btn-primary">Create new Violation</button>
-            </form>
+ 
         </div>
     </div>
 </div>

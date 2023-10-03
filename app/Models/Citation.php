@@ -8,26 +8,19 @@ class Citation extends Model
 {
     protected $fillable = [
         'client_id',
-        'stalltype_id',
         'violation_id',
         'stall_number_id',
         'start_date',
     ];
 
-    // Define relationships with other models if necessary
     public function client()
     {
-        return $this->belongsTo(Client::class);
-    }
-
-    public function stallTypes()
-    {
-        return $this->belongsTo(StallType::class, 'stalltype_id');
+        return $this->belongsTo(Client::class, 'client_id');
     }
 
     public function violation()
     {
-        return $this->belongsTo(Violation::class);
+        return $this->belongsTo(Violation::class, 'violation_id');
     }
 
     public function stallNumber()

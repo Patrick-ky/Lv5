@@ -72,13 +72,7 @@
                         <td>
                             <a href="{{ route('client_info.view',['id' => $clientInfo->id]) }}" class="btn btn-primary"
                                 data-toggle="modal" data-target="#editModal">View</a>
-                            <form action="{{ route('client_info.delete', ['id' => $clientInfo->id]) }}" method="DELETE"
-                                class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Are you sure you want to delete this client info?')">Delete</button>
-                            </form>
+
                         </td>
                     </tr>
                 @endif

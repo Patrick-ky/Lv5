@@ -17,7 +17,7 @@
     <h2 class="text-center">Objectives</h2>
     <p>
         The<strong><i> Rental Billing System</i></strong> is designed to simplify billing monitoring for stall owners in the Public Market of 
-        <strong><i>General Santos City</i></strong> by providing automated SMS notifications five days prior their due dates.
+        <strong><i>General Santos City</i></strong> by providing automated SMS notifications five days prior to their due dates.
     </p>
 </div>
 
@@ -29,45 +29,44 @@
         </p>
     </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="step-box text-center step-hover">
+                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 1</h1>
+                <p style="font-size: 14px;">Add <strong>Stall Names</strong> and <strong>Stall Numbers</strong> for each stall.</p>
+                <a href="/stall-types">(Go now)</a>
+            </div>
+            <div class="step-box text-center step-hover">
+                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 2</h1>
+                <p style="font-size: 14px;">Add <strong>Violations</strong>.</p>
+                <a href="/violations">(Go now)</a>
+            </div>
+            <div class="step-box text-center step-hover">
+                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 3</h1>
+                <p style="font-size: 14px;">Add <strong>Clients</strong> who become stall owners. <strong>Set their due dates</strong>.</p>
+                <a href="/clients">(Go now)</a>
+            </div>
+        </div>
 
-   <div class="row">
-    <div class="col-md-6">
-        <div class="step-box text-center">
-            <h1 style="font-size: 18px;">Step 1</h1>
-            <p style="font-size: 14px;">Add <strong>Stall Names</strong> and <strong>Stall Numbers</strong> for each stall.</p>
-            <a href="/stall-types">(Go now)</a>
-        </div>
-        <div class="step-box text-center">
-            <h1 style="font-size: 18px;">Step 2</h1>
-            <p style="font-size: 14px;">Add <strong>Violations</strong>.</p>
-            <a href="/violations">(Go now)</a>
-        </div>
-        <div class="step-box text-center">
-            <h1 style="font-size: 18px;">Step 3</h1>
-            <p style="font-size: 14px;">Add <strong>Clients</strong> who become stall owners. <strong>Set their due dates</strong>.</p>
-            <a href="/clients">(Go now)</a>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="step-box text-center">
-            <h1 style="font-size: 18px;">Step 4</h1>
-            <p style="font-size: 14px;">Create <strong>Billings</strong>.</p>
-            <a href="/billingskie">(Go now)</a>
-        </div>
-        <div class="step-box text-center">
-            <h1 style="font-size: 18px;">Step 5</h1>
-            <p style="font-size: 14px;">Track/Monitor <strong>Violations</strong> for stall owners by viewing them.</p>
-            <a href="/billingskie">(Go now)</a>
-        </div>
-        <div class="step-box text-center">
-            <h1 style="font-size: 18px;">Step 6</h1>
-            <p style="font-size: 14px;">Monitor <strong>Clients</strong> for their payment.</p>
-            <a href="/stall-types">(Go now)</a>
+        <div class="col-md-6">
+            <div class="step-box text-center step-hover">
+                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 4</h1>
+                <p style="font-size: 14px;">Create <strong>Billings</strong>.</p>
+                <a href="/billingskie">(Go now)</a>
+            </div>
+            <div class="step-box text-center step-hover">
+                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 5</h1>
+                <p style="font-size: 14px;">Track/Monitor <strong>Violations</strong> for stall owners by viewing them.</p>
+                <a href="/billingskie">(Go now)</a>
+            </div>
+            <div class="step-box text-center step-hover">
+                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 6</h1>
+                <p style="font-size: 14px;">Monitor <strong>Clients</strong> for their payment.</p>
+                <a href="/stall-types">(Go now)</a>
+            </div>
         </div>
     </div>
 </div>
-
 
 <style>
 .center-container {
@@ -101,6 +100,11 @@
     padding: 20px;
     margin-bottom: 20px;
     background-color: #fff;
+    transition: transform 0.2s;
+}
+
+.step-box:hover {
+    transform: translateY(-5px);
 }
 
 .step-box h2 {
@@ -110,6 +114,11 @@
 
 .step-box p {
     font-size: 16px;
+}
+
+/* Custom class for step boxes with hover effect */
+.step-hover:hover {
+    transform: translateY(-5px);
 }
 </style>
 

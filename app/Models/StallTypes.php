@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class StallTypes extends Model
 {
-    protected $fillable = ['stall_name', 'price'];
+    protected $fillable =
+     [
+        'stall_name',
+        'price'
+    ];
 
     public function stallNumbers()
     {
