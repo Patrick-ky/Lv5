@@ -27,7 +27,17 @@ class Violation extends Model
         return $this->belongsTo(StallNumber::class, 'stall_number_id');
     }
 
+
+    public function citations()
+    {
+        return $this->hasMany(Citation::class, 'violation_id');
+    }
+
+    public function clientInfo()
+    {
+        return $this->hasMany(ClientInfo::class); // Use hasMany for One-to-Many relationship
+    }
+
+
     
-
-
 }

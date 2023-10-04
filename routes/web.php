@@ -187,29 +187,20 @@ Route::put('/client_info/update/{id}', [ClientInfoController::class, 'updateClie
 Route::delete('/client_info/delete/{id}', [ClientInfoController::class, 'deleteClient'])->name('client_info.delete');
 
 
-// citations
+
+
 Route::get('/client_info/violationbilling/{client_id}', [CitationController::class, 'violationbilling'])
 ->name('violationbilling');
+Route::get('/client_info/addviolation/{client_id}', [CitationController::class, 'addviolation'])
+->name('client_info.addbiling');
+Route::get('/client_info/citation/{client_id}', [CitationController::class, 'clientcitation'])
+    ->name('client_info.citation');
 
-Route::get('/add-violation-form/{client_id}', [CitationController::class, 'addViolationForm'])
-->name('addViolationForm');
+Route::post('/client_info/storeviolation', [CitationController::class, 'storeviolation'])->name('client_info.storeviolation');
 
-Route::post('/get-stall-numbers-by-stall-type', [CitationController::class, 'getStallNumbersByStallType'])
-->name('getStallNumbersByStallType');
 
-Route::post('/store-violation/{client_id}', [CitationController::class, 'storeViolation'])
-->name('storeViolation');
 
-Route::get('/get-occupied-stall-numbers/{stallTypeId}', 'CitationController@getOccupiedStallNumbersByStallType')
-->name('getOccupiedStallNumbersByStallType');
 
-Route::post('/report-violation/{client_id}',  [CitationController::class, 'reportViolation'])
-->name('reportViolation');
-
-Route::get('/fetch-violations', [CitationController::class, 'fetchViolations'])
-->name('fetchViolations');
-
-Route::post('/report/store',  [CitationController::class,'storeReport'])->name('report.store');
 
 
 

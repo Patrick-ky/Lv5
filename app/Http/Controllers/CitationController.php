@@ -9,7 +9,7 @@ use App\Models\ClientInfo;
 use App\Models\StallTypes;
 use App\Models\StallNumber;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class CitationController extends Controller
 {
 
@@ -25,64 +25,80 @@ class CitationController extends Controller
     
         return view('client_info.violationbilling', compact('clientInfo', 'clientInfos','violations'));
     }
-    
+    public function addviolation($client_id)
+{
+    // Retrieve the client data based on the provided client ID
+    $client = Client::find($client_id);
 
-    
-    public function addViolationForm($client_id)
-    {
-        // Retrieve the client data based on the provided client ID
-        $client = Client::find($client_id);
-
-        if (!$client) {
-            return redirect()->back()->with('error', 'Client not found.');
-        }
-
-        // Fetch stallTypes (replace with your query to fetch stallTypes)
-        $stallTypes = StallTypes::all();
-
-        return view('client_info.addviolation', compact('client', 'stallTypes'));
+    if (!$client) {
+        return redirect()->back()->with('error', 'Client not found.');
     }
 
-    public function getStallNumbersByStallType(Request $request)
-    {
-        $selectedStallType = $request->input('stalltype_id');
-        $client_id = $request->input('client_id');
-    
-        // Fetch stall numbers based on the selected stall type and the client
-        $stallNumbers = StallNumber::where('stall_type_id', $selectedStallType)
-            ->where('status', 'occupied')
-            ->where('client_id', $client_id)
-            ->get();
-    
-        return response()->json(['stallNumbers' => $stallNumbers]);
-    }
+    // Fetch the list of violations from the Violation model
+    $violations = Violation::all();
 
-public function storeReport(Request $request)
+    // Fetch the list of clientInfos
+    $clientInfos = ClientInfo::where('client_id', $client_id)->get();
+
+    // Pass the client, violations, and clientInfos data to the view
+    return view('client_info.addviolation', compact('client', 'violations', 'clientInfos'));
+}
+
+    
+    
+
+public function storeviolation(Request $request)
 {
     // Validate the form data
     $request->validate([
-        'violation_name' => 'required|string',
-        'penalty_value' => 'required|numeric',
+        'client_id' => 'required',
+        'stall_number_id' => 'required', // Add this validation rule
+        'violation_id' => 'required',
         'start_date' => 'required|date',
     ]);
 
-    // Create a new report record
-    $report = new Citation();
-    $report->violation_name = $request->input('violation_name');
-    $report->penalty_value = $request->input('penalty_value');
-    $report->start_date = $request->input('start_date');
-    // Add any additional fields you need to store
+    try {
+        // Create a new Citation record
+        $citation = new Citation();
+        $citation->client_id = $request->input('client_id');
+        $citation->stall_number_id = $request->input('stall_number_id'); // Add stall_number_id
+        $citation->violation_id = $request->input('violation_id');
+        $citation->start_date = $request->input('start_date');
+        // You may need to set other fields as needed
 
-    // Save the report
-    $report->save();
+        $citation->save();
 
-    // You can return a response or redirect as needed
-    return redirect()->back()->with('success', 'Report submitted successfully.');
-}
-
-    public function fetchViolations(Request $request)
-    {
-        $violations = Violation::all();
-        return response()->json(['violations' => $violations]);
+        return redirect(route('client_info.citation', ['client_id' => $request->input('client_id')]))
+            ->with('success', 'Violation added successfully.');
+    } catch (\Exception $e) {
+        return redirect(route('client_info.citation', ['client_id' => $request->input('client_id')]))
+            ->with('error', 'Error adding violation: ' . $e->getMessage());
     }
 }
+
+    
+    
+    
+    
+
+    
+
+    public function clientcitation($id)
+    {
+        $clientInfo = ClientInfo::findOrFail($id);
+        
+        // Retrieve violations associated with the client using a join query
+        $violations = DB::table('violations')
+            ->join('citations', 'violations.id', '=', 'citations.violation_id')
+            ->where('citations.client_info_id', $clientInfo->id)
+            ->select('violations.violation_name', 'violations.penalty_value', 'citations.start_date')
+            ->get();
+        
+        return view('client_info.citation', compact('clientInfo', 'violations'));
+    }
+    
+
+}
+
+    
+

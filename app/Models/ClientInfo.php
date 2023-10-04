@@ -41,7 +41,6 @@ class ClientInfo extends Model
 
     public function violations()
     {
-        return $this->hasMany(Violation::class, 'violation_id');
+        return $this->belongsToMany(Violation::class); // Use belongsToMany if a clientInfo can be associated with multiple violations.
     }
 }
-

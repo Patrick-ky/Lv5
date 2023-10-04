@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>Stalls</h2>
+            <h1><strong> Stalls </strong></h1>
 
             @if(session('success'))
             <div class="alert alert-success">

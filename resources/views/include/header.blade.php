@@ -243,6 +243,7 @@
                     @yield('client_info.edit')
                     @yield('client_info.violationbilling')
                     @yield('client_info.addbilling')
+                    @yield('client_info.citation')
                     {{-- @yield('clients.edit') --}}
                     @yield('billings.index')
                     @yield('billings.create')

@@ -46,8 +46,19 @@ class ClientInfoController extends Controller
         // Retrieve all client info records
         $clientInfoModels = ClientInfo::with(['client', 'stallNumber', 'stallType'])->get();
     
-        return view('client_info.index', compact('clientInfoModels'));
+        // Group the data by client names
+        $groupedData = [];
+        foreach ($clientInfoModels as $clientInfo) {
+            $clientName = $clientInfo->client->firstname . ' ' . $clientInfo->client->middlename . ' ' . $clientInfo->client->lastname;
+    
+            if (!isset($groupedData[$clientName])) {
+                $groupedData[$clientName] = $clientInfo;
+            }
+        }
+    
+        return view('client_info.index', compact('groupedData'));
     }
+    
     
     public function addclientinfo()
     {
@@ -199,7 +210,7 @@ public function getAvailableStalls($stalltype_id)
     return response()->json($availableStalls);
 }
 
-public function view($id)
+public function violationbilling($id)
 {
     $clientInfo = ClientInfo::findOrFail($id);
     $clients = Client::all();
@@ -208,7 +219,13 @@ public function view($id)
     $stallNumbers = StallNumber::all();
     $violations = Violation::all();
 
-    return view('client_info.view', compact('clientInfo', 'clientInfos','violations'));
+    return view('client_info.violationbilling', compact('clientInfo', 'clientInfos','violations'));
 }
+
+
+
+
+
+
 
 }

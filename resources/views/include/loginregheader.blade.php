@@ -57,7 +57,7 @@
                     <img src="{{ URL('images\logo-lgu.png') }}" alt="Logo">
                 </div>
                 <span class="navbar-title"><b> <strong>  LGU GENERAL SANTOS CITY |</strong></b></span>
-                <span class="navbar-title"><b><strong>Rental</strong> and <strong>Billing</strong> with</b> <b><strong>SMS</strong> Notification</strong></b></span>
+                <span class="navbar-title">Rental and Billing with SMS Notification</span>
             </div>
         </a>
     </div>

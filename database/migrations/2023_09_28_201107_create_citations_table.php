@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('citations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('client_info_id');
             $table->unsignedBigInteger('violation_id');
             $table->unsignedBigInteger('stall_number_id')->unique();
             $table->date('start_date');
 
+
+            $table->foreign('client_info_id')->references('id')->on('client_info');
             $table->foreign('violation_id')->references('id')->on('violations');
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('stall_number_id')->references('id')->on('stall_numbers');

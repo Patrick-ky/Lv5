@@ -69,6 +69,10 @@
                         <td>₱{{ $stall['price'] }}</td>
                     </tr>
                     @endforeach
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Total Balance:</strong></td>
+                        <td><strong>₱{{ array_sum(array_column($data['stalls'], 'price')) }}.00</strong></td>
+                    </tr>
                 </table>
             </div>
         </div>

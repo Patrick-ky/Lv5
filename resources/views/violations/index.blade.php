@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2><strong>Violations List</h2>
+            <h2>Violations List</h2>
 
             @if(session('success'))
             <div class="alert alert-success">
@@ -23,8 +23,8 @@
             <table class="table ">
                 <thead>
                     <tr>
-                        <th class="text-center"><strong>Violation Name</th>
-                        <th class="text-center"><strong>Penalty</th>
+                        <th class="text-center">Violation Name</th>
+                        <th class="text-center">Penalty</th>
                         
                     </tr>
                 </thead>
