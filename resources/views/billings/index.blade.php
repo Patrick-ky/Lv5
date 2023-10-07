@@ -18,26 +18,30 @@
             </div>
             @endif
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="text-center"><strong>Full Name</strong></th>
-                        <th class="text-center"><strong>Action</strong></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($groupedData as $clientName => $data)
-                    <tr>
-                        <td class="text-center">
-                            <strong>{{ $clientName }}</strong>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billingModal{{ $data['client']->id }}">View</button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @if(count($groupedData) > 0) <!-- Check if there are any billings -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center"><strong>Full Name</strong></th>
+                            <th class="text-center"><strong>Action</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($groupedData as $clientName => $data)
+                        <tr>
+                            <td class="text-center">
+                                <strong>{{ $clientName }}</strong>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billingModal{{ $data['client']->id }}">View</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>No Billings Recorded</p> <!-- Display this message when no billings are available -->
+            @endif
         </div>
     </div>
 </div>

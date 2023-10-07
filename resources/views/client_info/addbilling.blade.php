@@ -27,8 +27,9 @@
                 <div class="card-body">
                     <form action="{{ route('client_info.storeviolation') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="client_id" value="">
-                        <input type="hidden" name="stall_number_id" value="{{ $client->stall_number_id }}"> <!-- Add this line -->
+                        <input type="hidden" name="client_id" value="{{ $client->id }}">
+                        <input type="hidden" name="stall_number_id" value="{{ $client->stall_number_id }}">
+
                         <div class="mb-2">
                             <label for="violation_id" class="form-label">Select Violation</label>
                             <select class="form-control" id="violation_id" name="violation_id" required>

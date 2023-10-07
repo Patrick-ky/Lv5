@@ -39,10 +39,12 @@
                                     <td>{{ $client->stallNumber->nameforstallnumber }}</td>
                                     <td>{{ $client->stallNumber->description }}</td>
                                     <td>                                      
-                                        <a  href="{{ route('client_info.citation', ['client_id' => $clientInfo->id]) }}"  type="button" class="btn btn-primary">Details</a>                                          
+                                        <a href="{{ route('client_info.citation', ['id' => $clientInfo->id]) }}" class="btn btn-primary">View</a>
+
+                                          
                                        </td>
                                     <td>
-                                     <a  href="{{ route('client_info.addbiling', ['client_id' => $clientInfo->id]) }}"  type="button" class="btn btn-danger">Report</a>                                          
+                                     <a  href="{{ route('client_info.addbilling', ['client_id' => $clientInfo->id]) }}"  type="button" class="btn btn-danger">Report</a>                                          
                                     </td>
                                 </tr>
 

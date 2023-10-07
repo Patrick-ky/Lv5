@@ -189,14 +189,11 @@ Route::delete('/client_info/delete/{id}', [ClientInfoController::class, 'deleteC
 
 
 
-Route::get('/client_info/violationbilling/{client_id}', [CitationController::class, 'violationbilling'])
-->name('violationbilling');
-Route::get('/client_info/addviolation/{client_id}', [CitationController::class, 'addviolation'])
-->name('client_info.addbiling');
-Route::get('/client_info/citation/{client_id}', [CitationController::class, 'clientcitation'])
-    ->name('client_info.citation');
+Route::get('/client_info/violationbilling/{id}', [CitationController::class,'violationbilling'])->name('client_info.violationbilling');
+Route::get('/client_info/citation/{id}',  [CitationController::class,'clientcitation'])->name('client_info.citation');
+Route::get('/client_info/addbilling/{client_id}',  [CitationController::class,'addbilling'])->name('client_info.addbilling');
+Route::post('/client_info/storeviolation',  [CitationController::class,'storeviolation'])->name('client_info.storeviolation');
 
-Route::post('/client_info/storeviolation', [CitationController::class, 'storeviolation'])->name('client_info.storeviolation');
 
 
 

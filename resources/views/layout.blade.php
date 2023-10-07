@@ -46,9 +46,7 @@
     <div class="content">
         @yield('clients.addclients')
         @yield('clients.edit')
-        @yield('client_info.view')
-        @yield('client_info.add')
-        @yield('client_info.viewviolation')
+
     </div>
 
     <!-- Bootstrap core JavaScript-->

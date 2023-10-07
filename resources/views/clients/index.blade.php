@@ -39,39 +39,46 @@
               {{ session('error') }}
           </div>
           @endif
-          <table class= "table table-bordered">
-            <thead>
-                <tr>
-                    <th class="text-center"><strong>Full Name</th>
-                    <th class="text-center"><strong>Age</th>
-                    <th class="text-center"><strong>Gender</th>
-                    <th class="text-center"><strong>Contact Number</th>
-                    <th class="text-center"><strong>Address</th> <!-- Add Address column -->
-                    <th class="text-center"><strong>Actions</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach ($clients as $client)
+          
+          @if(count($clients) > 0) <!-- Check if there are any clients -->
+              <table class= "table table-bordered">
+                <thead>
                     <tr>
-                        <td><strong>{{ $client->firstname }} {{ $client->middlename }} {{ $client->lastname }}</td>
-                        <td><strong>{{ $client->age }}</td>
-                        <td><strong>{{ $client->gender }}</td>
-                        <td><strong>{{ $client->clients_number }}</td>
-                        <td><strong>{{ $client->address }}</td> <!-- Display Address -->
-                        <td>
-                            <a href="{{ route('clients.editclient', ['id' => $client->id]) }}" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</a>
-                            {{-- deletefunctionlangsuah --}}
-                            <form action="{{ route('deleteClient', ['id' => $client->id]) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this client?')">Delete</button>
-                            </form>
-                        </td>
+                        <th class="text-center"><strong>Full Name</th>
+                        <th class="text-center"><strong>Age</th>
+                        <th class="text-center"><strong>Gender</th>
+                        <th class="text-center"><strong>Contact Number</th>
+                        <th class="text-center"><strong>Address</th> <!-- Add Address column -->
+                        <th class="text-center"><strong>Actions</th>
                     </tr>
-                @endforeach
-            </tbody>              
-          </table><br><br>
+                </thead>
+                
+                <tbody>
+                    @foreach ($clients as $client)
+                        <tr>
+                            <td><strong>{{ $client->firstname }} {{ $client->middlename }} {{ $client->lastname }}</td>
+                            <td><strong>{{ $client->age }}</td>
+                            <td><strong>{{ $client->gender }}</td>
+                            <td><strong>{{ $client->clients_number }}</td>
+                            <td><strong>{{ $client->address }}</td> <!-- Display Address -->
+                            <td>
+                                <a href="{{ route('clients.editclient', ['id' => $client->id]) }}" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</a>
+                                {{-- deletefunctionlangsuah --}}
+                                <form action="{{ route('deleteClient', ['id' => $client->id]) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this client?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>              
+              </table>
+          @else
+              <p>No Stall Owners Recorded</p> <!-- Display this message when no clients are available -->
+          @endif
+          
+          <br><br>
           <br>
       </body>
       <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
