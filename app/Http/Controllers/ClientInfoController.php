@@ -45,7 +45,9 @@ class ClientInfoController extends Controller
     {
         // Retrieve all client info records
         $clientInfoModels = ClientInfo::with(['client', 'stallNumber', 'stallType'])->get();
-    
+        $clients = Client::all();
+        $stalltypes = StallTypes::all();
+        $stallnumbers = StallNumber::all();
         // Group the data by client names
         $groupedData = [];
         foreach ($clientInfoModels as $clientInfo) {
@@ -56,7 +58,7 @@ class ClientInfoController extends Controller
             }
         }
     
-        return view('client_info.index', compact('groupedData'));
+        return view('client_info.index', compact('groupedData','clients', 'stalltypes', 'stallnumbers'));
     }
     
     
