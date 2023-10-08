@@ -38,7 +38,8 @@
                     <tr>
                         <td>{{ $clientName }}</td>
                         <td>
-                            <a href="{{ route('violationbilling', ['client_id' => $clientInfo->id]) }}" class="btn btn-primary">View</a>
+                            <a href="{{ route('client_info.violationbilling', ['id' => $clientInfo->id]) }}" class="btn btn-primary">View</a>
+
                         </td>
                     </tr>
                 @endforeach

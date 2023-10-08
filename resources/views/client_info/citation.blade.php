@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h2><strong>Violations on Stall: </strong></h2>
+            <h2><strong>Violations on Stall: {{ $clientInfo->stallNumber->nameforstallnumber }}</strong></h2>
         </div>
     </div>
 
@@ -33,12 +33,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($violations as $violation)
-                <tr>
-                    <td>{{ $violation->violation_name }}</td>
-                    <td>{{ $violation->penalty_value }}</td>
-                    <td>{{ $violation->start_date }}</td>
-                </tr>
+            @foreach($citations as $citation)
+            <tr>
+                <td>{{ $citation->violation->violation_name }}</td>
+                <td>{{ $citation->violation->penalty_value }}</td>
+                <td>{{ $citation->start_date }}</td>
+            </tr>
             @endforeach
         </tbody>
     </table>

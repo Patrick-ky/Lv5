@@ -27,8 +27,8 @@ use App\Http\Controllers\ClientRecordController;
 /*
 Login-registration routes
 */
-Route::get('/', [Authcontroller::class, 'login'])->name('login');
-Route::post('/', [Authcontroller::class, 'loginp'])->name('login.p');
+Route::get('/login', [Authcontroller::class, 'login'])->name('login');
+Route::post('/login', [Authcontroller::class, 'loginp'])->name('login.p');
 Route::get('/registration', [Authcontroller::class, 'registration'])->name('registration');
 Route::post('/registration', [Authcontroller::class, 'registrationp'])->name('registration.p');
 Route::get('/logout',[Authcontroller::class,'logout'])->name('logout');
@@ -37,7 +37,7 @@ Route::get('/logout',[Authcontroller::class,'logout'])->name('logout');
 Homepage routes
 */
 Route::get('/home', function () {return view('home');})->name('homepage');
-
+Route::get('/', function () {return view('welcome');})->name('welcomepage');
 
 
 // para sa clients
@@ -188,12 +188,11 @@ Route::delete('/client_info/delete/{id}', [ClientInfoController::class, 'deleteC
 
 
 
-
 Route::get('/client_info/violationbilling/{id}', [CitationController::class,'violationbilling'])->name('client_info.violationbilling');
-Route::get('/client_info/citation/{id}',  [CitationController::class,'clientcitation'])->name('client_info.citation');
-Route::get('/client_info/addbilling/{client_id}',  [CitationController::class,'addbilling'])->name('client_info.addbilling');
-Route::post('/client_info/storeviolation',  [CitationController::class,'storeviolation'])->name('client_info.storeviolation');
+Route::get('/client_info/citation/{id}', [CitationController::class,'clientcitation'])->name('client_info.citation');
+Route::get('/client_info/report_citation_form/{client_id}/{stall_number_id}/{stall_type_id}', [CitationController::class,'reportCitationForm'])->name('client_info.report_citation_form');
 
+Route::post('/client_info/store-citation', [CitationController::class,'storeCitation'])->name('client_info.store_citation');
 
 
 

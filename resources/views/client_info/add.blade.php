@@ -7,36 +7,27 @@
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('client_info.store') }}" method="POST">
+    <form action="{{ route('client_info.storecitation') }}" method="POST">
         @csrf
-        <div class="mb-2">
-            <label for="stalltype_id" class="form-label">Select Client</label>
-            <select class="form-control" id="client_id" name="client_id" required>
-                <option value="" disabled selected>Select Client</option>
-                @foreach ($clients as $client)
-                    <option value="{{ $client->id }}">
-                        {{ $client->firstname }} {{ $client->lastname }} {{ $client->middlename }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="mb-2">
-            <label for="stalltype_id" class="form-label">Stall Type</label>
-            <select class="form-control" id="stalltype_id" name="stalltype_id" required>
+        <div class="form-group">
+            <label for="stall_type_id">Select Stall Type</label>
+            <select class="form-control" id="stall_type_id" name="stall_type_id" required>
                 <option value="" disabled selected>Select Stall Type</option>
-                @foreach ($stalltypes as $stalltype)
-                    <option value="{{ $stalltype->id }}">
-                        {{ $stalltype->stall_name }}
-                    </option>
+                @foreach ($stallTypes as $stallType)
+                    <option value="{{ $stallType->id }}">{{ $stallType->stall_name }}</option>
                 @endforeach
             </select>
         </div>
         
-        <div class="mb-2">
-            <label for="stall_number_id" class="form-label">Stall Number</label>
+        <div class="form-group">
+            <label for="stall_number_id">Stall Number</label>
             <select class="form-control" id="stall_number_id" name="stall_number_id" required>
                 <option value="" disabled selected>Select Stall Number</option>
             </select>
+        </div>
+        
+        
+
         </div>
 
         <div class="form-group">
@@ -53,29 +44,39 @@
     </form>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        // Stalltype change event
-        $('#stalltype_id').change(function () {
-            var stalltype_id = $(this).val();
-            if (stalltype_id) {
-                $.ajax({
-                    url: '/get-available-stalls/' + stalltype_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        $('#stall_number_id').empty();
-                        $('#stall_number_id').append('<option value="" disabled selected>Select Stall Number</option>');
-                        $.each(data, function (key, value) {
-                            $('#stall_number_id').append('<option value="' + key + '">' + value + '</option>');
-                        });
-                    }
+    // Get references to the select elements
+    const $stallTypeSelect = $('#stall_type_id');
+    const $stallNumberSelect = $('#stall_number_id');
+
+    // Add an onchange event handler to the Stall Type select element
+    $stallTypeSelect.on('change', function () {
+        const selectedStallType = $(this).val();
+        const clientId = "{{ $clientInfo->id }}"; // Replace with your actual client ID
+
+        // Make an AJAX request to fetch associated stall numbers
+        $.ajax({
+            url: `/fetch-stall-numbers?stallType=${selectedStallType}&clientId=${clientId}`,
+            method: 'GET',
+            success: function (data) {
+                // Clear existing options
+                $stallNumberSelect.empty();
+
+                // Add the default "Select Stall Number" option
+                $stallNumberSelect.append('<option value="" disabled selected>Select Stall Number</option>');
+
+                // Add the retrieved stall numbers to the select element
+                data.forEach(function (stallNumber) {
+                    $stallNumberSelect.append(`<option value="${stallNumber.id}">${stallNumber.nameforstallnumber}</option>`);
                 });
-            } else {
-                $('#stall_number_id').empty();
-                $('#stall_number_id').append('<option value="" disabled selected>Select Stall Number</option>');
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error('Error:', errorThrown);
             }
         });
     });
 </script>
+
+
 @endsection

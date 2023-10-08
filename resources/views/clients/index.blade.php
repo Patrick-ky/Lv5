@@ -22,7 +22,7 @@
       <body>
           <div class="row">
             <div class="col-md-6">
-                <h2><strong>Stall Owner List</strong></h2>
+                <h2><strong>Stall Owners Profile</strong></h2>
             </div>
             <div class="col-md-6 text-md-right">
                 <a href="{{ route('clients.addclients') }}" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Register Stall Owner</a>
