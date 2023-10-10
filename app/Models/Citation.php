@@ -9,7 +9,7 @@ class Citation extends Model
     protected $fillable = [
         'client_info_id',
         'violation_id',
-        'stalltype_id',
+        'stalltypes_id',
         'stall_number_id',
         'start_date',
         
@@ -27,7 +27,7 @@ class Citation extends Model
 
     public function stallType()
     {
-        return $this->belongsTo(StallTypes::class, 'stalltype_id');
+        return $this->belongsTo(StallTypes::class, 'stalltypes_id');
     }
 
     public function clientInfo()

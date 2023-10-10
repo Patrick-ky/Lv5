@@ -18,9 +18,13 @@ class CitationController extends Controller
         $clientInfo = ClientInfo::findOrFail($id);
         $clientInfos = ClientInfo::where('client_id', $clientInfo->client_id)->get();
         $violations = Violation::all();
+        
+        // Retrieve violations associated with the selected stall
+        $citations = Citation::where('stall_number_id', $clientInfo->stall_number_id)->get();
     
-        return view('client_info.violationbilling', compact('clientInfo', 'clientInfos', 'violations'));
+        return view('client_info.violationbilling', compact('clientInfo', 'clientInfos', 'violations', 'citations'));
     }
+    
     
     public function reportCitationForm($client_id)
     {
@@ -34,53 +38,49 @@ class CitationController extends Controller
     }
 
     public function storeCitation(Request $request)
-{
-    // Validate the form data
-    $request->validate([
-        'violation_id' => 'required|exists:violations,id',
-        'start_date' => 'required|date',
-        'client_info_id' => 'required|exists:client_info,id',
-        'stall_number_id' => 'required|exists:stall_numbers,id', // Add validation for stall_number_id
-    ]);
-
-    // Get the selected stall_number_id from the request
-    $stallNumberId = $request->input('stall_number_id');
-
-    // Find the corresponding stall record
-    $stall = StallNumber::findOrFail($stallNumberId);
-
-    // Create and store the citation data in the databasew
-    $data = [
-        'client_info_id' => $request->input('client_info_id'),
-        'violation_id' => $request->input('violation_id'),
-        'stalltype_id' => $stall->stall_type_id, // Assign stall type based on the selected stall
-        'stall_number_id' => $stallNumberId,
-        'start_date' => $request->input('start_date'),
-    ];
-
-    Citation::create($data);
-
-    return redirect(route('client_info.violationbilling', ['id' => $request->input('client_info_id')]))
-        ->with('success', 'Citation created successfully.');
-}
-
-
-public function clientcitation($id)
-{
-    // Retrieve the ClientInfo model with the related stallNumber
-    $clientInfo = ClientInfo::with('stallNumber')->findOrFail($id);
-
-    // Check if the $clientInfo variable is not null
-    if (!$clientInfo) {
-        // Handle the case where the ClientInfo record was not found
-        return redirect()->route('client_info.violationbilling')
-            ->with('error', 'Client Info not found');
+    {
+        // Validate the form data
+        $request->validate([
+            'violation_id' => 'required|exists:violations,id',
+            'start_date' => 'required|date',
+            'stalltypes_id' =>'required',
+            'client_info_id' => 'required|exists:client_info,id',
+            'stall_number_id' => 'required|exists:stall_numbers,id', // Add validation for stall_number_id
+        ]);
+    
+        // Get the selected stall_number_id from the request
+        $stallNumberId = $request->input('stall_number_id');
+    
+        // Find the corresponding stall record
+        $stall = StallNumber::findOrFail($stallNumberId);
+    
+        // Create and store the citation data in the database
+        $data = [
+            'client_info_id' => $request->input('client_info_id'),
+            'violation_id' => $request->input('violation_id'),
+            'stalltypes_id' => $stall->stall_type_id, // Assign stall type based on the selected stall
+            'stall_number_id' => $stallNumberId,
+            'start_date' => $request->input('start_date'),
+        ];
+    
+        Citation::create($data);
+    
+        return redirect(route('client_info.violationbilling', ['id' => $request->input('client_info_id')]))
+            ->with('success', 'Citation created successfully.');
     }
-
-    // Retrieve violations associated with the client using a join query
-    $citations = Citation::all();
-
-    return view('client_info.citation', compact('clientInfo', 'citations'));
-}
+    
+    public function viewCitations($stall_id)
+    {
+        $clientInfo = ClientInfo::findOrFail($stall_id);
+        // Retrieve the selected stall and its associated citations
+        $stall = StallNumber::findOrFail($stall_id);
+    
+        // Retrieve citations associated with the selected stall
+        $citations = Citation::where('stall_number_id', $stall->id)->get();
+    
+        return view('client_info.citation', compact('stall', 'citations', 'clientInfo'));
+    }
+    
+    
 
 }

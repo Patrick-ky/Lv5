@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('client_info_id');
             $table->unsignedBigInteger('violation_id');
             $table->unsignedBigInteger('stalltypes_id'); 
-            $table->unsignedBigInteger('stall_number_id')->unique();
+            $table->unsignedBigInteger('stall_number_id');
             $table->date('start_date');
 
 

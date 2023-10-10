@@ -19,5 +19,10 @@ class StallNumber extends Model
         return $this->belongsTo(StallTypes::class, 'stall_type_id'); 
     }
 
+    public function clientInfo()
+{
+    return $this->belongsTo(ClientInfo::class);
+}
+
 }
 

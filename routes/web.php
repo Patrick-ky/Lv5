@@ -189,12 +189,13 @@ Route::delete('/client_info/delete/{id}', [ClientInfoController::class, 'deleteC
 
 
 Route::get('/client_info/violationbilling/{id}', [CitationController::class,'violationbilling'])->name('client_info.violationbilling');
-Route::get('/client_info/citation/{id}', [CitationController::class,'clientcitation'])->name('client_info.citation');
-Route::get('/client_info/report_citation_form/{client_id}/{stall_number_id}/{stall_type_id}', [CitationController::class,'reportCitationForm'])->name('client_info.report_citation_form');
+// Route::get('/client_info/citation/{stall_number_id}', [CitationController::class,'clientcitation'])->name('client_info.citation');
+Route::get('/client_info/report_citation_form/{client_id}/{stall_number_id}', [CitationController::class, 'reportCitationForm'])->name('client_info.report_citation_form');
+// Route::get('/client_info/report_citation/{client_id}/{stall_number_id}/{stall_type_id}', [CitationController::class,'reportCitationForm'])->name('client_info.report_citation_form');
 
 Route::post('/client_info/store-citation', [CitationController::class,'storeCitation'])->name('client_info.store_citation');
-
-
+// Route::get('/client_info/citation/{stall_id}',[CitationController::class,'viewCitations'])->name('client_info.citation');
+Route::get('/client_info/citation/{stall_id}', [CitationController::class,'viewCitations'])->name('client_info.view_citations');
 
 
 
