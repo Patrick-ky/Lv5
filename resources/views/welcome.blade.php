@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="public/images/logo-lgu.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -43,31 +43,37 @@
   <section id="topbar" class="topbar d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">2022_cete_casuyonpc@online.htsgsc.edu.ph</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+63 977-419-5927</span></i>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="https://gensantos.gov.ph" class="facebook"><i class="bi bi-facebook"></i>Visit LGU-Gensan</a>
       </div>
-      <div class="social-links d-none d-md-flex align-items-center">
-        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      {{-- <div class="social-links d-none d-md-flex align-items-center">
+        {{-- <a href="#" class="twitter"><i class="bi bi-twitter"></i></a> --}}
+        {{-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>  --}}
+        {{-- <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a> --}}
       </div>
     </div>
   </section><!-- End Top Bar -->
 
   <header id="header" class="header d-flex align-items-center">
-
+    
+      
+  
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      
       <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Impact<span>.</span></h1>
+        <img src="{{ URL('images\logo-lgu.png') }}">
+        <h1>LOCAL GOVERNMENT UNIT | THE RENTAL BILLING SYSTEM<span>.</span></h1>
       </a>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/login">Log in</a></li>
+          <li class=" fw-lighter"> OR </li>
+          <li><a href="/registration">Register</a></li>
 
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -86,7 +92,7 @@
           </li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-      </nav><!-- .navbar -->
+      </nav><!-- .navbar --> --}}
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
@@ -100,11 +106,10 @@
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-          <h2>Welcome to <span>Impact</span></h2>
-          <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+          <h2>Welcome to <span>The rental billing system</span></h2>
+          <p>An application built and developed to notify stall Owners via SMS.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#about" class="btn-get-started">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <a href="/login" class="btn-get-started">Get Started</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
@@ -113,7 +118,7 @@
       </div>
     </div>
 
-    <div class="icon-boxes position-relative">
+    {{-- <div class="icon-boxes position-relative">
       <div class="container position-relative">
         <div class="row gy-4 mt-5">
 
@@ -147,7 +152,7 @@
 
         </div>
       </div>
-    </div>
+    </div> --}}
 
     </div>
   </section>
@@ -167,7 +172,7 @@
         <div class="row gy-4">
           <div class="col-lg-6">
             <h3>Voluptatem dignissimos provident quasi corporis</h3>
-            <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
+            {{-- <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt=""> --}}
             <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
             <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
           </div>
@@ -187,19 +192,19 @@
                 velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
               </p>
 
-              <div class="position-relative mt-4">
+              {{-- <div class="position-relative mt-4">
                 <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
                 <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
       </div>
     </section><!-- End About Us Section -->
 
     <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients">
+    {{-- <section id="clients" class="clients">
       <div class="container" data-aos="zoom-out">
 
         <div class="clients-slider swiper">
@@ -1081,7 +1086,7 @@
         </div>
 
       </div>
-    </div>
+    </div> --}}
 
     <div class="container mt-4">
       <div class="copyright">

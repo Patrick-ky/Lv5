@@ -31,7 +31,7 @@
         }
 
         .navbar-nipatrick {
-            background-color: rgb(9, 131, 9);
+            background-color: #098309;
         }
     
         /* Adjust text color for links in the top navbar */
@@ -41,7 +41,7 @@
     
         /* Add light green background color to the user profile dropdown */
         .navbar-nav .dropdown-menu {
-            background-color: rgb(9, 131, 9);
+            background-color: #098309;
         }
     
         /* Adjust text color for items in the dropdown menu */

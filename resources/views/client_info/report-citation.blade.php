@@ -10,14 +10,16 @@
     }
 </style><br><br>
 <div class="container">
-    <h2>Create Citation for Stall: {{ $clientInfo->stallNumber->nameforstallnumber }}</h2>
+    <h3><strong>Citations for Stall: {{ $stall->nameforstallnumber }}</strong></h3>
+<!-- Other form elements -->
+
     <form action="{{ route('client_info.store_citation') }}" method="POST">
         @csrf
 
         <input type="hidden" name="client_info_id" value="{{ $clientInfo->client->id }}">
         <input type="hidden" name="stalltypes_id" value="{{ $clientInfo->stallType->id }}">
-        <input type="hidden" name="stall_number_id" value="{{ $clientInfo->stall_number_id }}">
-
+        <input type="hidden" name="stall_id" value="{{ $stall->id }}">
+        
 
         <div class="form-group">
             <label for="violation_id">Violation</label>

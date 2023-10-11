@@ -45,9 +45,11 @@ class BillingController extends Controller
     }
 public function records()
 {
-    $billings = Billing::with('client', 'violation', 'stallNumber','stallType')->get();
+    
+    $clientinfos = with('client', 'stallNumber','stallType')->get();
+    $violations = Citation::all();
 
-    return view('billings.record', compact('billings'));
+    return view('billings.record', compact('violations','clientinfos','stallType'));
 }
 
 

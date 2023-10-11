@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .bg{
-            background-color: rgb(1, 65, 1);
+            background-color: #098309;
         }
 
         .wallpaper{
@@ -21,7 +21,7 @@
         }
         /* Increase the size of the logo */
         .navbar-logo img {
-            background-color: rgb(1, 65, 1);
+            background-color: #098309;
             width: 85px;
             height: auto;
         }
@@ -33,17 +33,17 @@
         }
         /* Style for title and subtitle */
         .navbar-content {
-            background-color: rgb(1, 65, 1);
+            background-color: #098309;
             display: flex;
             align-items: center;
         }
         .navbar-title {
-            background-color: rgb(1, 65, 1);
+            background-color: #098309;
             font-size: 20px;
             margin-right: 10px;
         }
         .navbar-subtitle {
-            background-color: rgb(1, 65, 1);
+            background-color: #098309;
             font-size: 14px;
         }
     </style>
