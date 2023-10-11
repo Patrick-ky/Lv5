@@ -12,7 +12,7 @@
         }
 
         .wallpaper{
-            background-color: rgb(218, 243, 198);
+            background-color: #daf3c6;
         }
 
         /* Add light green font color to the navbar brand */

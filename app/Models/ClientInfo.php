@@ -43,4 +43,9 @@ class ClientInfo extends Model
     {
         return $this->belongsToMany(Violation::class); // Use belongsToMany if a clientInfo can be associated with multiple violations.
     }
+    public function citations()
+{
+    return $this->hasMany(Citation::class, 'client_info_id');
+}
+
 }

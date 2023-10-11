@@ -43,14 +43,8 @@ class BillingController extends Controller
     
         return view('billings.index', compact('groupedData'));
     }
-public function records()
-{
     
-    $clientinfos = with('client', 'stallNumber','stallType')->get();
-    $violations = Citation::all();
-
-    return view('billings.record', compact('violations','clientinfos','stallType'));
-}
+    
 
 
 

@@ -46,7 +46,7 @@
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">2022_cete_casuyonpc@online.htsgsc.edu.ph</a></i>
         <i class="bi bi-phone d-flex align-items-center ms-4"><span>+63 977-419-5927</span></i>
         <div class="social-links d-none d-md-flex align-items-center">
-          <a href="https://gensantos.gov.ph" class="facebook"><i class="bi bi-facebook"></i>Visit LGU-Gensan</a>
+          <a href="https://www.facebook.com/LguGensan" class="facebook"><i class="bi bi-facebook"></i>Visit LGU-Gensan</a>
       </div>
       {{-- <div class="social-links d-none d-md-flex align-items-center">
         {{-- <a href="#" class="twitter"><i class="bi bi-twitter"></i></a> --}}

@@ -90,6 +90,14 @@ class CitationController extends Controller
     
         return view('client_info.citation', compact('stall', 'citations', 'clientInfo','violations'));
     }
+    public function records()
+{
+    $clientinfos = ClientInfo::with(['client', 'stallNumber.stallType', 'citations.violation'])->get();
+    
+
+    return view('billings.record', compact('clientinfos'));
+}
+
     
     
     

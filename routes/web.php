@@ -87,7 +87,7 @@ Route::get('/violations',[ViolationController:: class, 'index'])
 Route::delete('/billings/delete/{id}', [BillingController:: class, 'delete'])
 ->name('billings.delete');
 
-Route::get('/billing-record', [BillingController:: class, 'records']) ->name('billing.record');
+Route::get('/billing-record', [CitationController:: class, 'records']) ->name('billing.record');
 
 
 

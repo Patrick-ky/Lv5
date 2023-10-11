@@ -34,4 +34,6 @@ class Citation extends Model
     {
         return $this->belongsTo(ClientInfo::class, 'client_info_id');
     }
+    
+
 }

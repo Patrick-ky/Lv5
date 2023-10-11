@@ -113,15 +113,9 @@ class ClientController extends Controller
     public function deleteClient($id)
     {
         $client = Client::findOrFail($id);
-        $stallNumber = $client->stallNumber;
-
-        $client->delete();
-
-        if ($stallNumber) {
-            $stallNumber->update(['status' => 'available']);
-        }
-
-        return redirect()->route('clients.index')->with('success', 'Client deleted successfully');
+    
+        // Display an error message and prevent deletion
+        return redirect()->back()->with('error', 'Cannot delete Stall Owner (Has Associations with stalls, bills, etc.)');
     }
 
     public function editClient($id)
