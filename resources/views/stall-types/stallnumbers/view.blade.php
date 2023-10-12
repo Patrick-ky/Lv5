@@ -39,7 +39,7 @@
                         <tr>
                             <th class="text-center"><strong>Stall Number</strong></th>
                             <th class="text-center"><strong>Stall Code</strong></th>
-                            <th class="text-center"><strong>Landmark</strong></th> <!-- Added this line -->
+                            <th class="text-center"><strong>Description</strong></th> <!-- Added this line -->
                             <th class="text-center"><strong>Status</strong></th>
                             <th class="text-center"><strong>Actions</strong></th>
                         </tr>
@@ -112,7 +112,7 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="description">Landmark:</label>
+                        <label for="description">Description:</label>
                         <input type="text" class="form-control" name="description" id="description" required>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">

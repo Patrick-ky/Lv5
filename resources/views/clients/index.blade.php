@@ -45,7 +45,7 @@
                 <thead>
                     <tr>
                         <th class="text-center"><strong>Full Name</th>
-                        <th class="text-center"><strong>Age</th>
+                        <th class="text-center"><strong>Birthdate</th>
                         <th class="text-center"><strong>Gender</th>
                         <th class="text-center"><strong>Contact Number</th>
                         <th class="text-center"><strong>Address</th> <!-- Add Address column -->

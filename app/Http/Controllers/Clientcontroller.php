@@ -54,7 +54,7 @@ class ClientController extends Controller
             'firstname' => 'required|string|max:255',
             'middlename' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'Age' => 'required|numeric', // Added 'Age' field
+            'Age' => 'required|date', // Added 'Age' field
             'clients_number' => 'required|numeric',
             'gender' => 'required|in:Male,Female',
             'Address' => 'required|string|max:255'
@@ -84,26 +84,27 @@ class ClientController extends Controller
 
     public function updateClient(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'full_name' => 'required|string|max:255',
+        $rules = [
+            'firstname' => 'required|string|max:255',
+            'middlename' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'Age' => 'required|date', // Adjusted 'Age' field
             'clients_number' => 'required|numeric',
-            'Age' => 'required|numeric',
-            'Gender' => 'required|in:Male,Female', // Added validation for Gender
-        ]);
-
+            'gender' => 'required|in:Male,Female',
+            'Address' => 'required|string|max:255',
+        ];
+    
+        $messages = [
+            'unique' => 'A client with the same first name, middle name, and last name already exists.',
+        ];
+    
+        $validatedData = $request->validate($rules, $messages);
+    
         try {
             $client = Client::findOrFail($id);
-
-            list($firstname, $middlename, $lastname) = explode(' ', $validatedData['full_name'], 3);
-
-            $client->update([
-                'firstname' => $firstname,
-                'middlename' => $middlename,
-                'lastname' => $lastname,
-                'clients_number' => $validatedData['clients_number'],
-                'Gender' => $validatedData['Gender'], // Update Gender field
-            ]);
-
+    
+            $client->update($validatedData);
+    
             return redirect()->route('clients.index')->with('success', 'Client information updated successfully!');
         } catch (\Exception $e) {
             return redirect()->route('clients.editclient', ['id' => $id])->with('error', 'Failed to update client information. Please try again.');

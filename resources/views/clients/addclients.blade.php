@@ -48,12 +48,13 @@
                 </div>
             </div>
 
-            <!-- Age and Contact Number (side by side) -->
+            
+            <!-- Birthdate -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="Age" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="Age" name="Age" required>
+                        <label for="Age" class="form-label">Birthdate</label>
+                        <input type="date" class="form-control" id="Age" name="Age" required>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -63,6 +64,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- Gender -->
             <div class="row">
@@ -93,4 +95,7 @@
     </div>
 </div>
 
+
 @endsection
+
+

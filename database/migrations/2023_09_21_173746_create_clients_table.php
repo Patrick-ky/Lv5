@@ -12,7 +12,7 @@ class CreateClientsTable extends Migration
         $table->string('firstname');
         $table->string('middlename');
         $table->string('lastname');
-        $table->integer('Age');
+        $table->date('Age');
         $table->string('Address');
         $table->string('clients_number');
         $table->enum('gender', ['Male', 'Female']);

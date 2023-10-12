@@ -38,8 +38,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="Age" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="Age" name="Age" value="{{ $client->Age }}" required>
+                        <label for="Age" class="form-label">Birthdate</label>
+                        <input type="date" class="form-control" id="Age" name="Age" value="{{ $client->Age }}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
