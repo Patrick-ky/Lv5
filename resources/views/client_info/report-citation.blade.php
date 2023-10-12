@@ -26,7 +26,7 @@
             <select class="form-control" id="violation_id" name="violation_id" required>
                 <option value="" disabled selected>Select Violation</option>
                 @foreach ($violations as $violation)
-                    <option value="{{ $violation->id }}">{{ $violation->violation_name }}</option>
+                    <option value="{{ $violation->id }}">{{ $violation->violation_name}} (Price:{{ $violation->penalty_value}})</option>
                 @endforeach
             </select>
         </div>

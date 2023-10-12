@@ -9,31 +9,54 @@
             <th class="text-center"><strong>Stall Type</strong></th>
             <th class="text-center"><strong>Stall Type Price</strong></th>
             <th class="text-center"><strong>Violations</strong></th>
+            <th class="text-center"><strong>Overall Balance</strong></th>
         </tr>
     </thead>
     <tbody>
+        @php
+        $currentStallOwner = null; // To keep track of the current stall owner
+        $totalFee = 0;
+        @endphp
         @foreach($clientinfos as $clientinfo)
-        <tr>
-            <td class="text-center">{{ $clientinfo->client->firstname }} {{ $clientinfo->client->lastname }}</td>
-            <td class="text-center">{{ $clientinfo->stallNumber->nameforstallnumber }}</td>
-            <td class="text-center">{{ $clientinfo->stallType->stall_name }}</td>
-            <td class="text-center">₱{{ $clientinfo->stallType->price }}</td>
-            <td class="text-center">
-                @if ($clientinfo->stallType->citations->isNotEmpty())
-                    @foreach($clientinfo->stallType->citations as $citation)
-                        @if ($citation->violation)
-                            {{ $citation->violation->violation_name }} (₱{{ $citation->violation->penalty_value }})
-                            @if (!$loop->last)
-                                <br>
+            <tr>
+                <td class="text-center">{{ $clientinfo->client->firstname }} {{ $clientinfo->client->lastname }}</td>
+                <td class="text-center">{{ $clientinfo->stallNumber->nameforstallnumber }}</td>
+                <td class="text-center">{{ $clientinfo->stallType->stall_name }}</td>
+                <td class="text-center">₱{{ $clientinfo->stallType->price }}</td>
+                <td class="text-center">
+                    @php
+                    $violationTotal = 0;
+                    @endphp
+                    @if ($clientinfo->stallType->citations->isNotEmpty())
+                        @foreach($clientinfo->stallType->citations as $citation)
+                            @if ($citation->violation)
+                                {{ $citation->violation->violation_name }} (₱{{ $citation->violation->penalty_value }})
+                                @php
+                                $violationTotal += $citation->violation->penalty_value;
+                                @endphp
+                                @if (!$loop->last)
+                                    <br>
+                                @endif
                             @endif
-                        @endif
-                    @endforeach
-                @else
-                    No Violations
-                @endif
-            </td>
-        </tr>
-    @endforeach
+                        @endforeach
+                    @else
+                        No Violations
+                    @endif
+                    @php
+                    $totalFee += $clientinfo->stallType->price + $violationTotal;
+                    @endphp
+                </td>
+                <td class="text-center">
+                    ₱{{ $totalFee }}
+                </td>
+            </tr>
+            @if ($currentStallOwner !== $clientinfo->stallNumber->nameforstallnumber)
+                @php
+                $currentStallOwner = $clientinfo->stallNumber->nameforstallnumber;
+                $totalFee = 0; // Reset total fee for the next stall owner
+                @endphp
+            @endif
+        @endforeach
     </tbody>
 </table>
 @endsection
