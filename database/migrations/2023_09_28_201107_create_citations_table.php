@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('client_info_id');
             $table->unsignedBigInteger('violation_id');
-            $table->unsignedBigInteger('stalltypes_id'); 
+            $table->unsignedBigInteger('stall_type_id'); 
             $table->unsignedBigInteger('stall_number_id');
             $table->date('start_date');
 
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('client_info_id')->references('id')->on('client_info');
             $table->foreign('violation_id')->references('id')->on('violations');
             $table->foreign('stall_number_id')->references('id')->on('stall_numbers');
-            $table->foreign('stalltypes_id')->references('id')->on('stall_types');
+            $table->foreign('stall_type_id')->references('id')->on('stall_types');
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@
         @csrf
 
         <input type="hidden" name="client_info_id" value="{{ $clientInfo->client->id }}">
-        <input type="hidden" name="stalltypes_id" value="{{ $clientInfo->stallType->id }}">
+        <input type="hidden" name="stall_type_id" value="{{ $clientInfo->stall_type_id }}">
         <input type="hidden" name="stall_id" value="{{ $stall->id }}">
         
 

@@ -71,8 +71,8 @@
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label for="stalltype_id" class="form-label">Stall Type</label>
-                            <select class="form-control" id="stalltype_id" name="stalltype_id" required>
+                            <label for="stall_type_id" class="form-label">Stall Type</label>
+                            <select class="form-control" id="stall_type_id" name="stall_type_id" required>
                                 <option value="" disabled selected>Select Stall Type</option>
                                 @foreach ($stalltypes as $stalltype)
                                     <option value="{{ $stalltype->id }}">
@@ -111,7 +111,7 @@
     <script>
         $(document).ready(function () {
             // Stalltype change event
-            $('#stalltype_id').change(function () {
+            $('#stall_type_id').change(function () {
                 var stalltype_id = $(this).val();
                 if (stalltype_id) {
                     $.ajax({

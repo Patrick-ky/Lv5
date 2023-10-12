@@ -16,14 +16,11 @@ class ClientInfo extends Model
 
     protected $fillable = [
         'client_id',
-        'stalltype_id',
+        'stall_type_id',
         'stall_number_id',
-        'violation_id',
         'start_date',
         'due_date'
     ];
-    
-
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
@@ -31,7 +28,12 @@ class ClientInfo extends Model
 
     public function stallType()
     {
-        return $this->belongsTo(StallTypes::class, 'stalltype_id');
+        return $this->belongsTo(StallTypes::class, 'stall_type_id');
+    }
+
+    public function citations()
+    {
+        return $this->hasMany(Citation::class, 'client_info_id');
     }
 
     public function stallNumber()
@@ -41,11 +43,7 @@ class ClientInfo extends Model
 
     public function violations()
     {
-        return $this->belongsToMany(Violation::class); // Use belongsToMany if a clientInfo can be associated with multiple violations.
+        return $this->belongsToMany(Violation::class, 'citations', 'client_info_id', 'violation_id')->withPivot('start_date');
     }
-    public function citations()
-{
-    return $this->hasMany(Citation::class, 'client_info_id');
-}
 
 }

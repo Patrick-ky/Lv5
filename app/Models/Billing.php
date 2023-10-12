@@ -15,7 +15,7 @@ class Billing extends Model
         'total_balance',
         'client_id',
         'stall_number_id',
-        'stalltype_id',
+        'stall_type_id',
     ];
 
     public function client()
@@ -30,7 +30,7 @@ class Billing extends Model
 
     public function stallType()
     {
-        return $this->belongsTo(StallTypes::class, 'stalltype_id');
+        return $this->belongsTo(StallTypes::class, 'stall_type_id');
     }
 
     public function stallNumber()

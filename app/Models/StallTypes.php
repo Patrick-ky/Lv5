@@ -17,6 +17,11 @@ class StallTypes extends Model
     {
         return $this->hasMany(StallNumber::class, 'stall_type_id');
     }
+
+    public function citations()
+    {
+        return $this->hasMany(Citation::class, 'stall_type_id');
+    }
     
 }
 

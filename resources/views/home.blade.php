@@ -100,7 +100,7 @@
     padding: 20px;
     margin-bottom: 20px;
     background-color: #fff;
-    transition: transform 0.2s;
+    transition: transform 0.5s;
 }
 
 .step-box:hover {
@@ -118,7 +118,7 @@
 
 /* Custom class for step boxes with hover effect */
 .step-hover:hover {
-    transform: translateY(-5px);
+    transform: translateY(-18px);
 }
 </style>
 

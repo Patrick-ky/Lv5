@@ -23,6 +23,9 @@ class StallNumber extends Model
 {
     return $this->belongsTo(ClientInfo::class);
 }
-
+public function citations()
+{
+    return $this->hasMany(Citation::class, 'client_info_id');
+}
 }
 

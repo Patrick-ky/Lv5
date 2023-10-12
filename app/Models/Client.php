@@ -22,7 +22,7 @@ class Client extends Model
     ];
     public function stalltype()
     {
-        return $this->belongsTo(StallTypes::class, 'stalltype_id');
+        return $this->belongsTo(StallTypes::class, 'stall_type_id');
     }
     
     public function stallNumber()

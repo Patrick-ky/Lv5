@@ -9,10 +9,9 @@ class Citation extends Model
     protected $fillable = [
         'client_info_id',
         'violation_id',
-        'stalltypes_id',
+        'stall_type_id', // Change 'stalltypes_id' to 'stall_type_id' if it's the correct foreign key name
         'stall_number_id',
         'start_date',
-        
     ];
 
     public function stallNumber()
@@ -27,13 +26,11 @@ class Citation extends Model
 
     public function stallType()
     {
-        return $this->belongsTo(StallTypes::class, 'stalltypes_id');
+        return $this->belongsTo(StallTypes::class, 'stall_type_id'); // Corrected foreign key name
     }
 
     public function clientInfo()
     {
         return $this->belongsTo(ClientInfo::class, 'client_info_id');
     }
-    
-
 }

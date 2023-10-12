@@ -76,7 +76,7 @@ class ClientInfoController extends Controller
     // Validation rules and messages
     $rules = [
         'client_id' => 'required|exists:clients,id',
-        'stalltype_id' => 'required|exists:stall_types,id',
+        'stall_type_id' => 'required|exists:stall_types,id',
         'stall_number_id' => 'required|exists:stall_numbers,id',
         'start_date' => 'required|date',
         'due_date' => 'required|date|after:start_date',
@@ -84,7 +84,7 @@ class ClientInfoController extends Controller
 
     $messages = [
         'stall_number_id.exists' => 'The selected stall number does not exist.',
-        'stalltype_id.exists' => 'The selected stall type does not exist.',
+        'stall_type_id.exists' => 'The selected stall type does not exist.',
         'due_date.after' => 'The due date must be after the start date.',
     ];
 
@@ -96,7 +96,7 @@ class ClientInfoController extends Controller
 
         // Check if a client info record with the same client_id already exists
         $existingClientInfo = ClientInfo::where('client_id', $validatedData['client_id'])
-            ->where('stalltype_id', $validatedData['stalltype_id'])
+            ->where('stall_type_id', $validatedData['stall_type_id'])
             ->where('stall_number_id', $validatedData['stall_number_id'])
             ->first();
 
@@ -126,7 +126,7 @@ class ClientInfoController extends Controller
     {
         $validatedData = $request->validate([
             'client_id' => 'required|exists:clients,id',
-            'stalltype_id' => 'required|exists:stall_types,id',
+            'stall_type_id' => 'required|exists:stall_types,id',
             'stall_number_id' => 'required|exists:stall_numbers,id',
         ]);
 
@@ -136,7 +136,7 @@ class ClientInfoController extends Controller
             DB::beginTransaction();
 
             // Check if the selected stall number belongs to the specified stall type
-            $stallType = StallTypes::findOrFail($validatedData['stalltype_id']);
+            $stallType = StallTypes::findOrFail($validatedData['stall_type_id']);
             $stallNumber = StallNumber::findOrFail($validatedData['stall_number_id']);
 
             if ($stallNumber->stall_type_id !== $stallType->id) {

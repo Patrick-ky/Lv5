@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class Violation extends Model
 {
     use HasFactory;
@@ -13,31 +12,22 @@ class Violation extends Model
     protected $fillable = [
         'violation_name',
         'penalty_value',
-        'client_id',
         'stall_number_id'
     ];
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'client_id'); // Replace 'client_id' with your actual foreign key name
-    }
 
     public function stallNumber()
     {
         return $this->belongsTo(StallNumber::class, 'stall_number_id');
     }
 
-
     public function citations()
     {
         return $this->hasMany(Citation::class, 'violation_id');
     }
 
-    public function clientInfo()
+    public function clientInfos()
     {
-        return $this->hasMany(ClientInfo::class); // Use hasMany for One-to-Many relationship
+        return $this->belongsToMany(ClientInfo::class, 'citations', 'violation_id', 'client_info_id')
+            ->withPivot('start_date');
     }
-
-
-    
 }

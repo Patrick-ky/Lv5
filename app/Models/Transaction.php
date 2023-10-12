@@ -11,7 +11,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'client_id',
-        'stalltype_id',
+        'stall_type_id',
         'description',
     ];
 
@@ -22,6 +22,6 @@ class Transaction extends Model
 
     public function stallType()
     {
-        return $this->belongsTo(StallType::class, 'stalltype_id');
+        return $this->belongsTo(StallType::class, 'stall_type_id');
     }
 }

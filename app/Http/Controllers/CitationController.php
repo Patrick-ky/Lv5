@@ -47,7 +47,7 @@ class CitationController extends Controller
     $request->validate([
         'violation_id' => 'required|exists:violations,id',
         'start_date' => 'required|date',
-        'stalltypes_id' => 'required',
+        'stall_type_id' => 'required',
         'client_info_id' => 'required|exists:client_info,id',
         'stall_id' => 'required|exists:stall_numbers,id', // Update validation for stall_id
     ]);
@@ -62,7 +62,7 @@ class CitationController extends Controller
     $data = [
         'client_info_id' => $request->input('client_info_id'),
         'violation_id' => $request->input('violation_id'),
-        'stalltypes_id' => $stall->stall_type_id, // Assign stall type based on the selected stall
+        'stall_type_id' => $stall->stall_type_id, // Assign stall type based on the selected stall
         'stall_number_id' => $stallId, // Update to use stallId
         'start_date' => $request->input('start_date'),
     ];
@@ -90,14 +90,25 @@ class CitationController extends Controller
     
         return view('client_info.citation', compact('stall', 'citations', 'clientInfo','violations'));
     }
+
+
+
+
     public function records()
-{
-    $clientinfos = ClientInfo::with(['client', 'stallNumber.stallType', 'citations.violation'])->get();
+    {
+        $clientinfos = ClientInfo::with(['client', 'stallType', 'stallNumber'])->get();
     
-
-    return view('billings.record', compact('clientinfos'));
-}
-
+        foreach ($clientinfos as $clientinfo) {
+            $clientinfo->load(['stallType.citations' => function ($query) use ($clientinfo) {
+                $query->where('stall_number_id', $clientinfo->stallNumber->id);
+            }]);
+        }
+    
+        return view('billings.record', compact('clientinfos'));
+    }
+    
+    
+    
     
     
     
