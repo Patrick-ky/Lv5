@@ -13,19 +13,19 @@
                 <a href="{{ route('client_info.add') }}" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Stall Owner</a>
             </div>
         </div>
-
+    
         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
         @endif
-
+    
         @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
         </div>
         @endif
-
+    
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -39,14 +39,13 @@
                         <td>{{ $clientName }}</td>
                         <td>
                             <a href="{{ route('client_info.violationbilling', ['id' => $clientInfo->id]) }}" class="btn btn-primary">View</a>
-
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
+    
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -60,7 +59,7 @@
                     <form action="{{ route('client_info.store') }}" method="POST">
                         @csrf
                         <div class="mb-2">
-                            <label for="stalltype_id" class="form-label">Select Client</label>
+                            <label for="client_id" class="form-label">Select Client</label>
                             <select class="form-control" id="client_id" name="client_id" required>
                                 <option value="" disabled selected>Select Client</option>
                                 @foreach ($clients as $client)
@@ -81,33 +80,31 @@
                                 @endforeach
                             </select>
                         </div>
-
+    
                         <div class="form-group">
                             <label for="ownerMonthly" class="form-label">Owner Monthly</label>
                             <input type="text" class="form-control" id="ownerMonthly" name="ownerMonthly" readonly>
                         </div>
-                                                
+    
                         <div class="mb-2">
                             <label for="stall_number_id" class="form-label">Stall Number</label>
                             <select class="form-control" id="stall_number_id" name="stall_number_id" required>
                                 <option value="" disabled selected>Select Stall Number</option>
                             </select>
                         </div>
-                
+    
                         <div class="form-group">
                             <label for="start_date" class="form-label">Start Date</label>
                             <input type="date" class="form-control" id="start_date" name="start_date" required>
                         </div>
-                
+    
                         <div class="form-group">
                             <label for="due_date" class="form-label">Due Date</label>
                             <input type="date" class="form-control" id="due_date" name="due_date" required>
                         </div><br>
-                
+    
                         <button type="submit" class="btn btn-primary">Add Client Info</button>
                     </form>
-                </div>
-                
                 </div>
             </div>
         </div>
@@ -143,12 +140,11 @@
             // Get the selected stall type's price
             const selectedOption = $(this).find('option:selected');
             const price = selectedOption.data('price');
-            
+
             // Set the ownerMonthly input field to the selected stall type's price
             $('#ownerMonthly').val(price);
         });
     });
-
     </script>
 
    

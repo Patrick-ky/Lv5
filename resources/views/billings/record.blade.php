@@ -20,7 +20,7 @@
             <tr>
                 <td class="text-center">{{ $clientinfo->client->firstname }} {{ $clientinfo->client->lastname }}</td>
                 <td class="text-center">{{ $clientinfo->stallNumber->nameforstallnumber }}</td>
-                <td class="text-center">₱{{ $clientinfo->ownerMonthly }}</td> <!-- Updated this line -->
+                <td class="text-center">₱{{ $clientinfo->ownerMonthly }}</td><!-- Updated this line -->
                 <td class="text-center">
                     @php
                     $violationTotal = 0;
