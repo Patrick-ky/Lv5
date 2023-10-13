@@ -37,7 +37,7 @@
                     <thead>
                         <tr>
                             <th class="text-center"><strong>Stall Name</strong></th>
-                            <th class="text-center"><strong>Price</strong></th>
+                            <th class="text-center"><strong>Rent Per Month </strong></th>
                             <th class="text-center"><strong>Stall Number</strong></th>
                             <th class="text-center"><strong>Actions</strong></th>
                         </tr>

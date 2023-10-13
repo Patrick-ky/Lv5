@@ -11,10 +11,11 @@ return new class extends Migration {
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('stall_type_id'); 
             $table->unsignedBigInteger('stall_number_id')->unique();
+            $table->decimal('ownerMonthly', 9, 2);
             $table->date('start_date'); 
             $table->date('due_date');  
             
-
+          
             $table->foreign('client_id')->references('id')->on('clients');            
             $table->foreign('stall_type_id')->references('id')->on('stall_types');
             $table->foreign('stall_number_id')->references('id')->on('stall_numbers');
@@ -26,3 +27,6 @@ return new class extends Migration {
         Schema::dropIfExists('client_info');
     }
 };
+
+// $table->decimal('ownerMonthly',9,2);
+

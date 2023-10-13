@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome-free-6.4.2-web/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('sb-admin-2.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -138,9 +139,10 @@
           <div id="content">
                 <!-- Topbar -->
                 <nav class=" navbar navbar-nipatrick navbar-expand navbar-light topbar mb-4 static-top shadow">
-                    <div class="flex ml-3">
-                        <h4 style="color:rgb(210, 248, 210)">Welcome, <strong>{{ Auth::user()->name }}!</strong></h4>
+                    <div class="flex ml-3" id="welcome-message" style="display: none;">
+                        <h4 style="color: rgb(210, 248, 210)">Welcome, <strong>{{ Auth::user()->name }}!</strong></h4>
                     </div>
+                    
                 
       
                 
@@ -216,7 +218,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Are you sure you want to Log out?.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="/logout">Logout</a>
@@ -282,7 +284,7 @@
 
     <!-- Bootstrap core JavaScript-->
 
-
+    <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>

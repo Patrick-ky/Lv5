@@ -19,7 +19,8 @@ class ClientInfo extends Model
         'stall_type_id',
         'stall_number_id',
         'start_date',
-        'due_date'
+        'due_date',
+        'ownerMonthly', // Add 'ownerMonthly' to $fillable
     ];
     public function client()
     {
@@ -45,5 +46,13 @@ class ClientInfo extends Model
     {
         return $this->belongsToMany(Violation::class, 'citations', 'client_info_id', 'violation_id')->withPivot('start_date');
     }
-
+    public function getOwnerMonthlyAttribute()
+    {
+        // Fetch the associated stall type's price
+        $stallTypePrice = $this->stallType->price;
+    
+        // Calculate the 'ownerMonthly' value
+        return $stallTypePrice;
+    }
+    
 }

@@ -94,18 +94,19 @@ class CitationController extends Controller
 
 
 
-    public function records()
-    {
-        $clientinfos = ClientInfo::with(['client', 'stallType', 'stallNumber'])->get();
-    
-        foreach ($clientinfos as $clientinfo) {
-            $clientinfo->load(['stallType.citations' => function ($query) use ($clientinfo) {
-                $query->where('stall_number_id', $clientinfo->stallNumber->id);
-            }]);
-        }
-    
-        return view('billings.record', compact('clientinfos'));
+public function records()
+{
+    $clientinfos = ClientInfo::with(['client', 'stallType', 'stallNumber'])->get();
+
+    foreach ($clientinfos as $clientinfo) {
+        $clientinfo->load(['stallType.citations' => function ($query) use ($clientinfo) {
+            $query->where('stall_number_id', $clientinfo->stallNumber->id);
+        }]);
     }
+
+    return view('billings.record', compact('clientinfos'));
+}
+
     
     
     

@@ -70,18 +70,23 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-2">
+                        <div class="form-group">
                             <label for="stall_type_id" class="form-label">Stall Type</label>
                             <select class="form-control" id="stall_type_id" name="stall_type_id" required>
                                 <option value="" disabled selected>Select Stall Type</option>
                                 @foreach ($stalltypes as $stalltype)
-                                    <option value="{{ $stalltype->id }}">
+                                    <option value="{{ $stalltype->id }}" data-price="{{ $stalltype->price }}">
                                         {{ $stalltype->stall_name }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        
+
+                        <div class="form-group">
+                            <label for="ownerMonthly" class="form-label">Owner Monthly</label>
+                            <input type="text" class="form-control" id="ownerMonthly" name="ownerMonthly" readonly>
+                        </div>
+                                                
                         <div class="mb-2">
                             <label for="stall_number_id" class="form-label">Stall Number</label>
                             <select class="form-control" id="stall_number_id" name="stall_number_id" required>
@@ -132,6 +137,18 @@
                 }
             });
         });
+        $(document).ready(function () {
+        // Stall type change event
+        $('#stall_type_id').change(function () {
+            // Get the selected stall type's price
+            const selectedOption = $(this).find('option:selected');
+            const price = selectedOption.data('price');
+            
+            // Set the ownerMonthly input field to the selected stall type's price
+            $('#ownerMonthly').val(price);
+        });
+    });
+
     </script>
 
    
