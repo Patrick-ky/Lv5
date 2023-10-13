@@ -75,34 +75,34 @@
                                 <option value="" disabled selected>Select Stall Type</option>
                                 @foreach ($stalltypes as $stalltype)
                                     <option value="{{ $stalltype->id }}" data-price="{{ $stalltype->price }}">
-                                        {{ $stalltype->stall_name }}
+                                        {{ $stalltype->stall_name }}---Monthly:(₱{{ $stalltype->price }})
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-    
+                    
                         <div class="form-group">
-                            <label for="ownerMonthly" class="form-label">Owner Monthly</label>
-                            <input type="text" class="form-control" id="ownerMonthly" name="ownerMonthly" readonly>
+                            <label for="ownerMonthly" class="form-label"> Set Monthly Rent for Stall Owner</label>
+                            <input type="text" class="form-control" id="ownerMonthly" name="ownerMonthly" placeholder="Insert Monthly Rent Based on Selected Stall Type" required>
                         </div>
-    
+                    
                         <div class="mb-2">
                             <label for="stall_number_id" class="form-label">Stall Number</label>
                             <select class="form-control" id="stall_number_id" name="stall_number_id" required>
                                 <option value="" disabled selected>Select Stall Number</option>
                             </select>
                         </div>
-    
+                    
                         <div class="form-group">
                             <label for="start_date" class="form-label">Start Date</label>
                             <input type="date" class="form-control" id="start_date" name="start_date" required>
                         </div>
-    
-                        <div class="form-group">
+                    
+                        <div class="mb-2">
                             <label for="due_date" class="form-label">Due Date</label>
                             <input type="date" class="form-control" id="due_date" name="due_date" required>
                         </div><br>
-    
+                    
                         <button type="submit" class="btn btn-primary">Add Client Info</button>
                     </form>
                 </div>
@@ -134,17 +134,6 @@
                 }
             });
         });
-        $(document).ready(function () {
-        // Stall type change event
-        $('#stall_type_id').change(function () {
-            // Get the selected stall type's price
-            const selectedOption = $(this).find('option:selected');
-            const price = selectedOption.data('price');
-
-            // Set the ownerMonthly input field to the selected stall type's price
-            $('#ownerMonthly').val(price);
-        });
-    });
     </script>
 
    

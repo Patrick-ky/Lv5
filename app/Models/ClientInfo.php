@@ -46,18 +46,5 @@ class ClientInfo extends Model
     {
         return $this->belongsToMany(Violation::class, 'citations', 'client_info_id', 'violation_id')->withPivot('start_date');
     }
-    public function getOwnerMonthlyAttribute()
-    {
-        // Check if 'ownerMonthly' is set on the current record
-        if (!is_null($this->attributes['ownerMonthly'])) {
-            return $this->attributes['ownerMonthly'];
-        }
-    
-        // Fetch the associated stall type's price
-        $stallTypePrice = $this->stallType->price;
-    
-        // Calculate the 'ownerMonthly' value
-        return $stallTypePrice;
-    }
     
 }

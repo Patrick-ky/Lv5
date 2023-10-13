@@ -57,15 +57,7 @@ class StallTypesController extends Controller
 
         $stalltype->update($data); // Update the stall type with new data
 
-        // If the price has changed, update associated ClientInfo records
-        if ($existingPrice !== $data['price']) {
-            $clientInfos = ClientInfo::where('stall_type_id', $id)->get();
-            foreach ($clientInfos as $clientInfo) {
-                // Calculate the new ownerMonthly based on the updated price
-                $clientInfo->ownerMonthly = $data['price'];
-                $clientInfo->save();
-            }
-        }
+  
 
         return redirect()->route('stall-types.index')->with('success', 'Stall type updated successfully');
     }
