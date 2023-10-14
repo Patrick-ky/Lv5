@@ -13,14 +13,34 @@ use Illuminate\Support\Facades\DB;
 
 class CitationController extends Controller
 {
+
+    public function clientCitation($stall_number_id)
+{
+    // Retrieve the selected stall
+    $stall = StallNumber::findOrFail($stall_number_id);
+
+    // Retrieve the list of citations associated with the selected stall
+    $citations = Citation::where('stall_number_id', $stall_number_id)->get();
+
+    // You can retrieve the associated client information here
+    $clientInfo = ClientInfo::where('stall_number_id', $stall_number_id)->first();
+
+    return view('client_info.citation', compact('stall', 'citations', 'clientInfo'));
+}
+
     public function violationbilling($id)
     {
+        
+
         $clientInfo = ClientInfo::findOrFail($id);
         $clientInfos = ClientInfo::where('client_id', $clientInfo->client_id)->get();
         $violations = Violation::all();
         
         // Retrieve violations associated with the selected stall
         $citations = Citation::where('stall_number_id', $clientInfo->stall_number_id)->get();
+        
+        
+    
     
         return view('client_info.violationbilling', compact('clientInfo', 'clientInfos', 'violations', 'citations'));
     }
@@ -42,36 +62,39 @@ class CitationController extends Controller
     
 
     public function storeCitation(Request $request)
-{
-    // Validate the form data
-    $request->validate([
-        'violation_id' => 'required|exists:violations,id',
-        'start_date' => 'required|date',
-        'stall_type_id' => 'required',
-        'client_info_id' => 'required|exists:client_info,id',
-        'stall_id' => 'required|exists:stall_numbers,id', // Update validation for stall_id
-    ]);
-
-    // Get the selected stall_id from the request
-    $stallId = $request->input('stall_id');
-
-    // Find the corresponding stall record
-    $stall = StallNumber::findOrFail($stallId);
-
-    // Create and store the citation data in the database
-    $data = [
-        'client_info_id' => $request->input('client_info_id'),
-        'violation_id' => $request->input('violation_id'),
-        'stall_type_id' => $stall->stall_type_id, // Assign stall type based on the selected stall
-        'stall_number_id' => $stallId, // Update to use stallId
-        'start_date' => $request->input('start_date'),
-    ];
-
-    Citation::create($data);
-
-    return redirect(route('client_info.index', ['id' => $request->input('client_info_id')]))
-        ->with('success', 'Citation created successfully.');
-}
+    {
+        // Validate the form data
+        $request->validate([
+            'violation_id' => 'required|exists:violations,id',
+            'start_date' => 'required|date',
+            'stall_type_id' => 'required',
+            'client_info_id' => 'required|exists:client_info,id',
+            'stall_id' => 'required|exists:stall_numbers,id', // Update validation for stall_id
+            'acquiredviolationprice' => 'required|numeric', // Add validation for acquiredviolationprice
+        ]);
+    
+        // Get the selected stall_id from the request
+        $stallId = $request->input('stall_id');
+    
+        // Find the corresponding stall record
+        $stall = StallNumber::findOrFail($stallId);
+    
+        // Create and store the citation data in the database
+        $data = [
+            'client_info_id' => $request->input('client_info_id'),
+            'violation_id' => $request->input('violation_id'),
+            'stall_type_id' => $stall->stall_type_id,
+            'stall_number_id' => $stallId,
+            'start_date' => $request->input('start_date'),
+            'acquiredviolationprice' => $request->input('acquiredviolationprice'),
+        ];
+    
+        Citation::create($data);
+    
+        return redirect()->route('client_info.index', ['id' => $request->input('client_info_id')])
+            ->with('success', 'Citation created successfully.');
+    }
+    
 
     
      

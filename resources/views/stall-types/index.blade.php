@@ -1,4 +1,7 @@
 
+@auth
+    
+
 @extends('include.header')
 
 @section('stall-types.index')
@@ -79,3 +82,4 @@
     </div>
 </div>
 @endsection
+@endauth

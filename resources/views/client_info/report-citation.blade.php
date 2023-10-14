@@ -32,6 +32,11 @@
         </div>
 
         <div class="form-group">
+            <label for="acquiredviolationprice">Set Acquired Violation Price for Stall</label>
+            <input type="number" step="0.01" class="form-control" id="acquiredviolationprice" name="acquiredviolationprice" placeholder="Enter Amount Based on Violation's Price" required>
+        </div>
+
+        <div class="form-group">
             <label for="start_date">Start Date</label>
             <input type="date" class="form-control" id="start_date" name="start_date" required>
         </div>
