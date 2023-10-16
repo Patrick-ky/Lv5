@@ -46,5 +46,9 @@ class ClientInfo extends Model
     {
         return $this->belongsToMany(Violation::class, 'citations', 'client_info_id', 'violation_id')->withPivot('start_date');
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'client_info_id');
+    }
     
 }

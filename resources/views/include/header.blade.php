@@ -23,6 +23,7 @@
 
 
     <style>
+        
         .bg{
             background-color: rgb(182, 247, 182);
         }
@@ -258,11 +259,11 @@
                     @yield('stall-types.edit')
                     @yield('stall-types.stallnumbers.view')
                     @yield('stall-types.stallnumbers.create')
-                    @yield('violation.view')
                     @yield('clientrecords.index')
                     @yield('home')
                     @yield('scripts') 
                     @yield('billing.record') 
+                    @yield('payments.create')
 
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
