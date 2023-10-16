@@ -1,4 +1,3 @@
-@auth
 @extends('layout')
 
 @section('clients.edit')
@@ -20,21 +19,25 @@
             @csrf
             @method('PUT')
 
-            <!-- Full Name -->
+            <!-- First Name -->
             <div class="mb-3">
                 <label for="firstname" class="form-label">First Name</label>
                 <input type="text" class="form-control" id="firstname" name="firstname" value="{{ $client->firstname }}" required>
             </div>
+            
+            <!-- Middle Name -->
             <div class="mb-3">
                 <label for="middlename" class="form-label">Middle Name</label>
                 <input type="text" class="form-control" id="middlename" name="middlename" value="{{ $client->middlename }}" required>
             </div>
+
+            <!-- Last Name -->
             <div class="mb-3">
                 <label for="lastname" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="lastname" name="lastname" value="{{ $client->lastname }}" required>
             </div>
 
-            <!-- Age, Contact Number, Gender -->
+            <!-- Birthdate and Contact Number -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -50,6 +53,7 @@
                 </div>
             </div>
 
+            <!-- Gender -->
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender</label>
                 <select class="form-control" id="gender" name="gender" required>
@@ -59,80 +63,59 @@
                 </select>
             </div>
 
-            <!-- Address -->
+            <!-- Address Fields -->
             <div class="mb-3">
-                <label for="Address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="Address" name="Address" value="{{ $client->Address }}" required>
+                <label class="form-label">Address</label>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="purok" class="form-label">Purok</label>
+                        <input type="text" class="form-control" id="purok" name="purok" value="{{ $client->purok }}" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="street" class="form-label">Street</label>
+                        <input type="text" class="form-control" id="street" name="street" value="{{ $client->street }}" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="barangay" class="form-label">Barangay</label>
+                        <input type="text" class="form-control" id="barangay" name="barangay" value="{{ $client->barangay }}" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="province" class="form-label">Province</label>
+                        <input type="text" class="form-control" id="province" name="province" value="{{ $client->province }}" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" value="{{ $client->city }}" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="zipcode" class="form-label">Zipcode</label>
+                        <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{ $client->zipcode }}" required>
+                    </div>
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Client</button>
         </form>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('#stalltype_id').on('change', function () {
-            var selectedStallTypeId = $(this).val();
-            $('#stall_number_id option').hide(); // Hide all options
-            $('#stall_number_id option[data-stall-type="' + selectedStallTypeId + '"]').show(); // Show options matching selected stall type
-            $('#stall_number_id').val(''); // Reset the selected value
-        });
-    });
-</script>
+</div>
 
 @endsection
-@endauth
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                       {{-- <div class="mb-3">
-                            <label class="form-label">Client's Number</label>
-                            <input type="text" name="clients_number" value="{{ $client->clients_number }}" class="borderless-input">
-                        </div> --}}
-                        {{-- <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Stall Number</th>
-                                    <th class="text-center">Stall Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($clients as $client)
-                                <tr>
-                                    <td>{{ $client->stallNumber->stall_number }}</td>
-                                    <td>{{ $client->stalltype->stall_name }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-                        {{-- <div class="mb-3">
-                            <label class="form-label">Full Name:</label>
-                            <input type="text" name="full_name" value="{{ $client->firstname }} {{ $client->middlename }} {{ $client->lastname }}" class="borderless-input">
-                        </div> --}}
