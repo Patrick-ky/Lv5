@@ -48,7 +48,9 @@
                         <th class="text-center"><strong>Birthdate</th>
                         <th class="text-center"><strong>Gender</th>
                         <th class="text-center"><strong>Contact Number</th>
-                        <th class="text-center"><strong>Address</th> <!-- Add Address column -->
+                        <th class="text-center"><strong>Address</th>
+                        <th class="text-center"><strong>City</th>
+                        <th class="text-center"><strong>Zip Code</th>
                         <th class="text-center"><strong>Actions</th>
                     </tr>
                 </thead>
@@ -57,10 +59,12 @@
                     @foreach ($clients as $client)
                         <tr>
                             <td><strong>{{ $client->firstname }} {{ $client->middlename }} {{ $client->lastname }}</td>
-                            <td><strong>{{ $client->age }}</td>
+                            <td><strong>{{ $client->birthdate }}</td>
                             <td><strong>{{ $client->gender }}</td>
                             <td><strong>{{ $client->clients_number }}</td>
-                            <td><strong>{{ $client->address }}</td> <!-- Display Address -->
+                            <td><strong>{{ $client->purok}} {{ $client->street }} {{ $client->barangay }}</td>
+                            <td><strong>{{ $client->city }} of {{ $client->province }}</td>
+                            <td><strong>{{ $client->zipcode }}</td>
                             <td>
                                 <a href="{{ route('clients.editclient', ['id' => $client->id]) }}" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</a>
                                 {{-- deletefunctionlangsuah --}}

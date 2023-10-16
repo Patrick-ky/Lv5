@@ -32,7 +32,17 @@ class ClientController extends Controller
                 ->groupBy('firstname', 'middlename', 'lastname');
         })
         ->with('stallNumber', 'stallType')
-        ->select('id', 'firstname', 'middlename', 'lastname', 'age', 'address', 'gender', 'clients_number')
+        ->select('id', 
+        'firstname', 
+        'middlename',
+         'lastname', 
+         'birthdate',
+        'purok',
+        'street',
+        'barangay',
+        'city',
+        'province',
+        'zipcode', 'gender', 'clients_number')
         ->get();
 
         return view('clients.index', compact('clients'));
@@ -54,10 +64,15 @@ class ClientController extends Controller
             'firstname' => 'required|string|max:255',
             'middlename' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'Age' => 'required|date', // Added 'Age' field
+            'birthdate' => 'required|date', // Added 'Age' field
             'clients_number' => 'required|numeric',
             'gender' => 'required|in:Male,Female',
-            'Address' => 'required|string|max:255'
+            'purok'=>'required|string|max:255',
+            'street'=>'required|string|max:255',
+            'barangay'=>'required|string|max:255',
+            'city'=>'required|string|max:255',
+            'province'=>'required|string|max:255',
+            'zipcode'=>'required|string|max:255',
         ];
     
         $messages = [
@@ -88,10 +103,16 @@ class ClientController extends Controller
             'firstname' => 'required|string|max:255',
             'middlename' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'Age' => 'required|date', // Adjusted 'Age' field
+            'birthdate' => 'required|date', // Adjusted 'Age' field
             'clients_number' => 'required|numeric',
             'gender' => 'required|in:Male,Female',
             'Address' => 'required|string|max:255',
+            'purok',
+            'street',
+            'barangay',
+            'city',
+            'province',
+            'zipcode',
         ];
     
         $messages = [
