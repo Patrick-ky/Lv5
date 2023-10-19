@@ -37,8 +37,9 @@
 
             @if(count($stalltypes) > 0) <!-- Check if there are any stalltypes -->
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="">
                         <tr>
+                            <th class="text-center"><strong>Id</strong></th>
                             <th class="text-center"><strong>Stall Name</strong></th>
                             <th class="text-center"><strong>Rent Per Month </strong></th>
                             <th class="text-center"><strong>Stall Number</strong></th>
@@ -48,6 +49,7 @@
                     <tbody>
                         @foreach($stalltypes as $stalltype)
                         <tr>
+                            <th class="text-center">{{ $stalltype->id }}</th>
                             <td class="text-center">{{ $stalltype->stall_name }}</td>
                             <td class="text-center">₱{{ $stalltype->price }}</td>
                             <td class="text-center"> 

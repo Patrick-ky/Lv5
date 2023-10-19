@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class StallNumberController extends Controller
 {
+
+
+    public function index()
+    {
+        // Retrieve all stall numbers from the database
+        $stallNumbers = StallNumber::paginate(15);
+    
+        return view('stall-number.index', compact('stallNumbers'));
+    }
+    
     public function view(StallTypes $stallType)
     {
         $stallNumbers = StallNumber::where('stall_type_id', $stallType->id)->get();
@@ -17,8 +27,7 @@ class StallNumberController extends Controller
 
     public function create(StallTypes $stallType)
     {
-        return view('stall-types.stallnumbers.create', compact('stallType'));
-
+        return view('stall-number.create', compact('stallType'));
     }
 
     public function store(Request $request)

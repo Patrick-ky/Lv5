@@ -119,6 +119,11 @@ class CitationController extends Controller
 
 public function records()
 {
+
+
+
+
+    
     $clientinfos = ClientInfo::with(['client', 'stallType', 'stallNumber'])->get();
 
     foreach ($clientinfos as $clientinfo) {

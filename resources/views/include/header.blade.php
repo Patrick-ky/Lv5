@@ -11,11 +11,10 @@
 
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -89,6 +88,12 @@
             <div class="sidebar-heading">
                 <h4>TABS</h4>
             </div>
+            <li class="nav-item active">
+                <a class="nav-link active" href="/stall-number/index">
+                    <i class="fas fa-fw fa-store"></i>
+                    <span>Stalls</span></a>
+
+
             <li class="nav-item active">
                 <a class="nav-link active" href="/stall-types">
                     <i class="fas fa-fw fa-store"></i>
@@ -233,11 +238,9 @@
 
 
                     <!-- Include Bootstrap CSS and JS -->
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" >
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
                     
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
 
 
                     @yield('clients.index')
@@ -254,6 +257,8 @@
                     @yield('violations.index')
                     @yield('violations.create')
                     @yield('violations.edit')
+                    @yield('stall-number.index')
+                    @yield('stall-number.create')
                     @yield('stall-types.index')
                     @yield('stall-types.create')
                     @yield('stall-types.edit')
@@ -267,9 +272,9 @@
 
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  
                    
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
                     
                     
                 </div>
@@ -285,12 +290,11 @@
 
     <!-- Bootstrap core JavaScript-->
 
-    <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
 
 </body>
 
 </html>
 @endauth
+
+
