@@ -44,6 +44,9 @@
 
 <body>
     <div class="content">
+
+        @yield('stall-number.index')
+        @yield('stall-number.create')
         @yield('clients.addclients')
         @yield('clients.edit')
 

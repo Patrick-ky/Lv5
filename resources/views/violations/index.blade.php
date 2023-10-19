@@ -18,8 +18,11 @@
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
-            @endif
-
+            @endif<br>
+            <form action='/create-violation' method="GET">
+                <button type="submit" class="btn btn-primary float-lg-right">Create new Violation</button>
+            </form>
+            <br><br>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -47,9 +50,7 @@
             </table>
 
             <br>
-            <form action='/create-violation' method="GET">
-                <button type="submit" class="btn btn-primary">Create new Violation</button>
-            </form>
+
         </div>
     </div>
 </div>

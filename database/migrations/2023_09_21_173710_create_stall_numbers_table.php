@@ -16,7 +16,6 @@ class CreateStallNumbersTable extends Migration
             $table->integer('stall_number');
             $table->string('nameforstallnumber');
             $table->string('description');
-            $table->unsignedBigInteger('stall_type_id');
             $table->enum('status', ['available', 'occupied'])->default('available');
             $table->timestamps();
         });

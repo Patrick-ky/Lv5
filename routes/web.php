@@ -149,13 +149,26 @@ Route::put('/stall-types/{stallType}', [StallTypesController::class, 'update'])
 Route::delete('/stall-types/{stallType}', [StallTypesController::class, 'destroy'])
 ->name('stall-types.destroy');
 
+Route::get('/stall-types/{stallType}/stall-numbers/create', [StallNumberController::class, 'create'])
+->name('stall-types.stall-numbers.create');
+
 
 // para sa stall numbers
+Route::get('/stall-number/index', [StallNumberController::class, 'index'])->name('stall-number.index');
+
+// Create view for adding new stall numbers
+Route::get('/stall-number/create', [StallNumberController::class, 'create'])->name('stall-number.create');
+
+// Store a new stall number
+Route::post('/stall-number', [StallNumberController::class, 'store'])->name('stall-number.store');
+
+// Delete a stall number
+Route::delete('/stall-number/{stallNumber}', [StallNumberController::class, 'destroy'])->name('stall-number.destroy');
+
 Route::get('/stall-types/{stallType}/view', [StallNumberController::class, 'view'])
 ->name('stall-types.stallnumbers.view');
 
-Route::get('/stall-types/{stallType}/stall-numbers/create', [StallNumberController::class, 'create'])
-->name('stall-types.stall-numbers.create');
+
 
 
 
@@ -183,8 +196,10 @@ Route::delete('/client_info/delete/{id}', [ClientInfoController::class, 'deleteC
 
 Route::get('/client_info/violationbilling/{id}', [CitationController::class,'violationbilling'])->name('client_info.violationbilling');
 
- Route::get('/client_info/citation/{stall_number_id}', [CitationController::class,'clientcitation'])->name('client_info.citation');
 
+
+
+Route::get('/client_info/citation/{stall_number_id}', [CitationController::class,'clientcitation'])->name('client_info.citation');
 
 Route::post('/client_info/store-citation', [CitationController::class,'storeCitation'])->name('client_info.store_citation');
 
