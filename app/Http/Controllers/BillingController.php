@@ -17,14 +17,14 @@ class BillingController extends Controller
 
     public function index()
     {
-        // Group client information by their names and collect stall information
+        //igrupo ang client information base sa pangalan ug collect stall information
         $clientInfo = ClientInfo::with('client', 'stallNumber', 'stallType')->get();
         $groupedData = [];
     
         foreach ($clientInfo as $billing) {
             $clientName = $billing->client->firstname . ' ' . $billing->client->middlename . ' ' . $billing->client->lastname;
     
-            // If the client is not yet in the grouped data, add them
+            //pag ang client kay wala pa sa grouped data, I add
             if (!isset($groupedData[$clientName])) {
                 $groupedData[$clientName] = [
                     'client' => $billing->client,
@@ -32,7 +32,7 @@ class BillingController extends Controller
                 ];
             }
     
-            // Add stall information to the client's data
+            //idungag ang stall information sa clients data
             $groupedData[$clientName]['stalls'][] = [
                 'stallType' => $billing->stallType,
                 'stallNumber' => $billing->stallNumber,

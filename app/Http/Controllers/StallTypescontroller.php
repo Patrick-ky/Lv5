@@ -53,9 +53,9 @@ class StallTypesController extends Controller
         ]);
 
         $stalltype = StallTypes::findOrFail($id);
-        $existingPrice = $stalltype->price; // Get the existing price
+        $existingPrice = $stalltype->price; // Kuhaon ang price
 
-        $stalltype->update($data); // Update the stall type with new data
+        $stalltype->update($data); // iupdate ang stall type sa bago na data
 
   
 

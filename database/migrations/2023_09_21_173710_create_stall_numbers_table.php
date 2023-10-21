@@ -14,11 +14,18 @@ class CreateStallNumbersTable extends Migration
         Schema::create('stall_numbers', function (Blueprint $table) {
             $table->id(); 
             $table->integer('stall_number');
+            $table->unsignedBigInteger('stall_type_id');
             $table->string('nameforstallnumber');
             $table->string('description');
             $table->enum('status', ['available', 'occupied'])->default('available');
             $table->timestamps();
+
+
+
+            $table->foreign('stall_type_id')->references('id')->on('stall_types');
         });
+
+
     }
 
     /**

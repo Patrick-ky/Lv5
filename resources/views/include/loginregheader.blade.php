@@ -15,17 +15,17 @@
             background-color: #daf3c6;
         }
 
-        /* Add light green font color to the navbar brand */
+        /* Pang dungag ug light green font sa navbar */
         .navbar-title {
             color: rgb(198, 235, 198);
         }
-        /* Increase the size of the logo */
+        /* Padakoon ang size sa logo */
         .navbar-logo img {
             background-color: #098309;
             width: 85px;
             height: auto;
         }
-        /* Reduce the height of the navbar */
+        /* bawasan height sa navbar */
         .navbar {
             background-color:color: rgb(0, 95, 0);
             min-height:  45px;

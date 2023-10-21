@@ -10,7 +10,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('stall_type_id'); 
-            $table->unsignedBigInteger('stall_number_id')->unique();
+            $table->unsignedBigInteger('stall_number_id');
             $table->decimal('ownerMonthly', 9, 2);
             $table->date('start_date'); 
             $table->date('due_date');  

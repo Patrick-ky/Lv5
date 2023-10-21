@@ -14,10 +14,10 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        // Retrieve all transactions
+        // Makuha tanan transactions
         $transactions = Transaction::all();
 
-        // Pass the transactions to the view
+        // Ipasa ang transaction sa view
         return view('transactions.index', compact('transactions'));
     }
 
@@ -33,7 +33,7 @@ class TransactionController extends Controller
             'stall_number_id' => 'required|exists:stall_numbers,id',
         ]);
 
-        // Check if validation fails
+        // ICheck kung ang validation ma palpak
         if ($validator->fails()) {
             return redirect()->route('clientform')
                 ->withErrors($validator)

@@ -31,7 +31,7 @@ Login-registration routes
 Route::get('/login', [Authcontroller::class, 'login'])->name('login');
 Route::post('/login', [Authcontroller::class, 'loginp'])->name('login.p');
 Route::get('/registration', [Authcontroller::class, 'registration'])->name('registration');
-Route::post('/registration', [Authcontroller::class, 'registrationp'])->name('registration.p');
+Route::post('/registration', [Authcontroller::class, 'registrationp'])->name('registrationp');
 Route::get('/logout',[Authcontroller::class,'logout'])->name('logout');
 
 /*
@@ -95,7 +95,6 @@ Route::get('/billing-record', [CitationController:: class, 'records']) ->name('b
 // client records
 
 
-Route::get('/clientrecords', [ClientRecordController::class, 'index'])->name('clientrecords.index');
 
 
 
@@ -181,8 +180,7 @@ Route::delete('/stall-numbers/{stallNumber}', [StallNumberController::class, 'de
 ->name('stall-numbers.destroy');
 
 
-Route::get('/clientrecords/index',[ClientRecordController::class, 'index'])
-->name('clientrecords.index');
+
 
 #client info
 Route::get('/client_info', [ClientInfoController::class, 'index'])->name('client_info.index');
@@ -191,6 +189,7 @@ Route::post('/client_info/store', [ClientInfoController::class, 'clientinfostore
 Route::get('/client_info/view/{id}', [ClientInfoController::class, 'view'])->name('client_info.view');
 Route::put('/client_info/update/{id}', [ClientInfoController::class, 'updateClient'])->name('client_info.update');
 Route::delete('/client_info/delete/{id}', [ClientInfoController::class, 'deleteClient'])->name('client_info.delete');
+
 
 
 

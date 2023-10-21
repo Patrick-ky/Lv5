@@ -1,248 +1,190 @@
 @auth
+    
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fontawesome-free-6.4.2-web/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('sb-admin-2.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Home</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="{{ URL('images/logo-lgu.png') }}" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Include jQuery (required for Bootstrap) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: Impact
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+          @keyframes slide-up {
+      0% {
+        transform: translateY(25%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .profile-dropdown {
+      position: relative;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+    .profile-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      right: 0; /* Adjust ang position para ma align sa right side */
+    }
+    .profile-dropdown-content a {
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .profile-dropdown:hover .profile-dropdown-content {
+      display: block;
+    }
+    #hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50vh;
+    }
+    .hero-content {
+      text-align: center;
+    }
+    .hero-content h2 {
+      font-size: 70px;
+    }
+    .hero-content p {
+      font-size: 16px;
+    }
+    .hero-content a.btn {
+      background-color: #098309;
+      color: white;
+      border: 2px solid #e7ece2;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+    }
+    .menu-box {
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .menu-item {
+      flex: 1;
+      margin: 0 5px;
+      padding: 60px 20px;
+      border: 3px solid #c2f8bb;
+      border-radius: 10px;
+      color: #fcfffcf5;
+      text-align: center;
+      font-size: 25px;
+      transition: transform 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      transform: scale(1.05);
+    }
+    .menu-item::before {
+      content: 'SELECT';
+      display: none;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-
-
-
-    <style>
-        
-        .bg{
-            background-color: rgb(182, 247, 182);
-        }
-        /* Add light green background color to the top navbar */
-        .navbar-nav {
-            background-color: rgb(9, 131, 9);
-        }
-
-        .navbar-nipatrick {
-            background-color: #098309;
-        }
-    
-        /* Adjust text color for links in the top navbar */
-        .navbar-nav .nav-link {
-            color: rgb(211, 247, 227); /* You can change the text color as needed */
-        }
-    
-        /* Add light green background color to the user profile dropdown */
-        .navbar-nav .dropdown-menu {
-            background-color: #098309;
-        }
-    
-        /* Adjust text color for items in the dropdown menu */
-        .navbar-nav .dropdown-menu .dropdown-item {
-            color: rgb(211, 247, 227); /* You can change the text color as needed */
-        }
-    </style>
-    
+      color: #c2f8bb;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      z-index: 1;
+    }
+    .menu-item:hover::before {
+      display: block;
+    }
+  </style>
 </head>
 
-
-
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-    
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color:rgb(3, 90, 3);" id="accordionSidebar">
-    
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <img style="width:65px;height:65px;" src="{{URL('images\logo-lgu.png')}}">
-                </div>
-                <div class="sidebar-brand-text mx-50" style="font-size: 13px;">{{ config('app.name') }}</div>
-            </a>
-    
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-    
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link active" href="/home">
-                <i class="fas fa-fw fa-gauge-high"></i>
-                    <span>Dashboard</span></a>
-            </li>
-    
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-    
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                <h4>TABS</h4>
-            </div>
-            <li class="nav-item active">
-                <a class="nav-link active" href="/stall-number/index">
-                    <i class="fas fa-fw fa-store"></i>
-                    <span>Stalls</span></a>
-
-
-            <li class="nav-item active">
-                <a class="nav-link active" href="/stall-types">
-                    <i class="fas fa-fw fa-store"></i>
-                    <span>Stall Category</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link active" href="/violations">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>Violations</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link active" href="/clients">
-                <i class="fas fa-solid fa-users"></i>
-                    <span>Stall Owner Registration</span></a>
-            </li>
-            
-            <li class="nav-item active">
-                <a class="nav-link active" href="/client_info">
-                <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Stall Owner Information</span></a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link active" href="/billingskie">
-                <i class="fas fa-solid fa-table"></i>
-                    <span>Billings</span></a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link active" href="/billing-record">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Client Records</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-          <div id="content">
-                <!-- Topbar -->
-                <nav class=" navbar navbar-nipatrick navbar-expand navbar-light topbar mb-4 static-top shadow">
-                    <div class="flex ml-3" id="welcome-message" style="display: none;">
-                        <h4 style="color: rgb(210, 248, 210)">Welcome, <strong>{{ Auth::user()->name }}!</strong></h4>
-                    </div>
-                    
-                
-      
-                
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-
-                        
-                        <!-- Nav Item - Alerts -->
-                        
-                        <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter"></span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="alertsDropdown">
-                            <h6 class="dropdown-header">
-                                Alerts Center
-                            </h6>
-                                <!-- ... (Your alert content here) ... -->
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter"></span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <!-- ... (Your message content here) ... -->
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-white"><strong>{{ Auth::user()->name }}<strong></span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('images/undraw_profile.svg') }}">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                              <strong>  Manage Account</strong>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                 <strong>   Logout   </strong>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-
-                </nav>
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Are you sure you want to Log out?.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
-                </div>
-            </div>
-        </div>
+<body>
+  <header id="header" class="header">
+    <div class="header-left">
+      <img style="width: 60px;" src="{{ URL('images\logo-lgu.png') }}" alt="LGU Logo">
+      <h1 class="logo h1 ml-3" style="color: rgb(159, 248, 118);"><strong>LOCAL GOVERNMENT UNIT</strong> |<span > General Santos City</span></h1>
     </div>
+    <div class="header-right">
+      <div class="profile-dropdown">
+        <h3><span style="color: rgb(159, 248, 118);">Profile</span></h3>
+        <div class="profile-dropdown-content">
+          <a href="#">Manage</a>
+          <a href="/logout" onclick="confirmLogout('Are you sure you wanna Log out?')">Log out</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+ 
+
                 <!-- End of Topbar -->
-                <div class="content ">
+                <div class="content">
+                    <body style="background-color: #098309">
+                      <style>
+       @keyframes slide-up {
+      0% {
+        transform: translateY(25%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
-
-
-                    <!-- Include Bootstrap CSS and JS -->
-
-                    
-
-
-
+                      </style>
+   
+                      
+    <br><br>
+                    @yield('stall-holders.create')
                     @yield('clients.index')
                     @yield('clients.addclients')
                     @yield('client_info.index')
@@ -269,6 +211,13 @@
                     @yield('scripts') 
                     @yield('billing.record') 
                     @yield('payments.create')
+                    @yield('client_info.addclientstall')
+                    </body>
+                    <!-- Include Bootstrap CSS and JS -->
+
+                
+
+
 
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -285,10 +234,7 @@
             </div>
         </div>
     </div>
-    
 
-
-    <!-- Bootstrap core JavaScript-->
 
 
 

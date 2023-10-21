@@ -36,7 +36,7 @@ class ViolationController extends Controller
         $existingviolation = Violation::where('violation_name', $data['violation_name'])->first();
 
         if ($existingviolation) {
-            // Billing record already exists for this client, show an error message and redirect
+            // Billing record kay na ulit na sa  client, magpakita ug error message tapos ma redirect
             return redirect()->route('violation.index')->with('error', 'This type of violation is already exist .');
         }
         

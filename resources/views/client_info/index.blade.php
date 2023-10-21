@@ -1,35 +1,104 @@
-    @extends('include.header')
+@extends('include.header')
 
-    @section('client_info.index')
-    <style>
-        /* Your CSS styles here */
-    </style>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2><strong>Stall Owners' Profile</strong></h2>
-            </div>
-            <div class="col-md-6 text-md-right">
-                <a href="{{ route('client_info.add') }}" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Stall Owner</a>
-            </div>
-        </div>
-    
-        @if(session('success'))
+@section('client_info.index')
+<style>
+    @keyframes slide-up {
+        0% {
+            transform: translateY(35%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .slide-up-content {
+        animation: slide-up 0.5s ease-in-out;
+    }
+
+    table {
+        border: 1px solid black;
+        width: 120%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 100px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #333;
+        color: white;
+        font-size: 14px;
+    }
+
+    .btn-success {
+        background-color: #098309;
+        color: white;
+        border: 2px solid #e7ece2;
+    }
+
+    .btn-success:hover {
+        background-color: #0a940b;
+    }
+
+    .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .alert-success {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .alert-danger {
+        background-color: #f44336;
+        color: white;
+    }
+</style>
+
+<body>
+    @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-        @endif
-    
-        @if(session('error'))
+    @endif
+
+    @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
         </div>
-        @endif
-    
+    @endif
+
+    <div class="container">
+            <a href="/home"
+
+    class="btn btn-success btn-oblong pulsate" 
+    style="background-color: #098309; color:
+                            white; border: 2px solid 
+                        #e7ece2;" >Back to Home</a><br><br>
+        
+    <h2 style="color: rgb(192, 247, 167)"><strong>Stall Holders Profile</strong></h2>
+        <div class="col-md-12">
+            <a href="{{ route('client_info.add') }}" class="btn btn-success btn-oblong pulsate ml-5" style="float: right">Add</a>
+           
+        </div>           
+           <br><br><br><br>
+       
+   
+
+    <div class="container">
+    <div class="slide-up-content">
+       
+
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th class="text-center"><strong>Client Name</strong></th>
+                    <th class="text-center"><strong>Stall Holder Name</strong></th>
                     <th class="text-center"><strong>Actions</strong></th>
                 </tr>
             </thead>
@@ -45,96 +114,7 @@
             </tbody>
         </table>
     </div>
-    
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="addModalLabel"><strong>Register Stall Owner</strong></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="addModalContent">
-                    <form action="{{ route('client_info.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-2">
-                            <label for="client_id" class="form-label">Select Client</label>
-                            <select class="form-control" id="client_id" name="client_id" required>
-                                <option value="" disabled selected>Select Client</option>
-                                @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}">
-                                        {{ $client->firstname }} {{ $client->lastname }} {{ $client->middlename }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="stall_type_id" class="form-label">Stall Type</label>
-                            <select class="form-control" id="stall_type_id" name="stall_type_id" required>
-                                <option value="" disabled selected>Select Stall Type</option>
-                                @foreach ($stalltypes as $stalltype)
-                                    <option value="{{ $stalltype->id }}" data-price="{{ $stalltype->price }}">
-                                        {{ $stalltype->stall_name }}---Monthly:(₱{{ $stalltype->price }})
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="ownerMonthly" class="form-label"> Set Monthly Rent for Stall Owner</label>
-                            <input type="text" class="form-control" id="ownerMonthly" name="ownerMonthly" placeholder="Insert Monthly Rent Based on Selected Stall Type" required>
-                        </div>
-                    
-                        <div class="mb-2">
-                            <label for="stall_number_id" class="form-label">Stall Number</label>
-                            <select class="form-control" id="stall_number_id" name="stall_number_id" required>
-                                <option value="" disabled selected>Select Stall Number</option>
-                            </select>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="start_date" class="form-label">Start Date</label>
-                            <input type="date" class="form-control" id="start_date" name="start_date" required>
-                        </div>
-                    
-                        <div class="mb-2">
-                            <label for="due_date" class="form-label">Due Date</label>
-                            <input type="date" class="form-control" id="due_date" name="due_date" required>
-                        </div><br>
-                    
-                        <button type="submit" class="btn btn-primary">Add Client Info</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        $(document).ready(function () {
-            // Stalltype change event
-            $('#stall_type_id').change(function () {
-                var stalltype_id = $(this).val();
-                if (stalltype_id) {
-                    $.ajax({
-                        url: '/get-available-stalls/' + stalltype_id,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (data) {
-                            $('#stall_number_id').empty();
-                            $('#stall_number_id').append('<option value="" disabled selected>Select Stall Number</option>');
-                            $.each(data, function (key, value) {
-                                $('#stall_number_id').append('<option value="' + key + '">' + value + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#stall_number_id').empty();
-                    $('#stall_number_id').append('<option value="" disabled selected>Select Stall Number</option>');
-                }
-            });
-        });
-    </script>
-
-   
-    @endsection
+    </div></div>
+</body>
+@endsection

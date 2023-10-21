@@ -58,6 +58,7 @@ class ClientController extends Controller
 
         return view('clients.addclients', $data);
     }
+    
     public function clientstore(Request $request)
     {
         $rules = [
@@ -136,7 +137,7 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id);
     
-        // Display an error message and prevent deletion
+        // Mag display ug error message para ma iwasan ma delete
         return redirect()->back()->with('error', 'Cannot delete Stall Owner (Has Associations with stalls, bills, etc.)');
     }
 

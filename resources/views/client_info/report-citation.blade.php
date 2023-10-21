@@ -2,7 +2,7 @@
 
 @section('client_info.report-citation')
 <style>
-    /* Define a custom CSS class for borderless input fields */
+    /* hatag ug CSS class para sa borderless na input fields */
     .borderless-input {
         border: none;
         background-color: transparent;

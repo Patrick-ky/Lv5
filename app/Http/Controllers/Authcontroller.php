@@ -32,31 +32,45 @@ class Authcontroller extends Controller
         if(Auth::attempt($credentials)){
             return redirect()->intended(route('homepage'))->with("logged in Successfully");
         };
-        return redirect(route('login'))->with("error", "Login failed, please check your email and password");
+        return redirect(route('welcomepage'))->with("error", "Login failed, please check your email and password");
     }
 
-    function registrationp(Request $request){
+    function registrationp(Request $request) {
         $request->validate([
-            'name'=> 'required',
-            'email'=> 'required|email|unique:users',
-            'password'=> 'required'
+            'fname' => 'required',
+            'mname' => 'nullable',
+            'lname' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'password_confirmation' => 'required',
         ]);
-
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-        $data['password'] = Hash::make($request->password);
-        $user = User::create($data);
-        if(!$user){
-            return redirect(route('registration'))->with("error", "Registration failed, please check your Name, email and password");
+    
+        if ($request->input('password') !== $request->input('password_confirmation')) {
+            return view('registration.registration')->with("error", "Password and confirmation do not match.");
         }
-        return redirect(route('login'))->with("Success", "Registration success");
+    
+        $data = [
+            'fname' => $request->input('fname'),
+            'mname' => $request->input('mname'),
+            'lname' => $request->input('lname'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password'))
+        ];
+    
+        $user = User::create($data);
+    
+        if (!$user) {
+            return redirect()->route('registration')->with("error", "Registration failed, please check your details.");
+        }
+    
+        return redirect()->route('welcomepage')->with("success", "Registration successful. You may now log in.");
     }
 
 
     function logout(){
         Session::flush();
         Auth::logout();
-        return redirect(route('login'));
+        return redirect(route('welcomepage'));
     }
 
 

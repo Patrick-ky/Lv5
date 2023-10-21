@@ -13,13 +13,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="text-center">Create Stall Type</h4>
+                    <h4 class="text-center">Create Market Stall Type</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('stall-types.store') }}" method="POST" >
                         @csrf
                         <div class="mb-3">
-                            <label for="stall_name" class="form-label">Stall Name</label>
+                            <label for="stall_name" class="form-label">Market Stall Name</label>
                             <input type="text" class="form-control" id="stall_name" name="stall_name" required>
                         </div>
                         

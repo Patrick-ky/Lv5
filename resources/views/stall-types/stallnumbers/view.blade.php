@@ -31,7 +31,7 @@
             </div>
             @endif
 
-            <h1><strong>Stalls on : {{ $stallType->stall_name }}</h1>
+            <h1 style="color: rgb(159, 248, 118)"><strong>Stalls on : {{ $stallType->stall_name }}</h1>
 
             @if(count($stallNumbers) > 0) <!-- Check if there are any stall numbers -->
                 <table class="table table-bordered">
@@ -55,7 +55,7 @@
                                 <form action="{{ route('stall-numbers.destroy', $stallNumber) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-secondary">Delete</button>
                                 </form>
                             </td>
                         </tr>

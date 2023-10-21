@@ -13,11 +13,16 @@ class StallNumberController extends Controller
 
     public function index()
     {
-        // Retrieve all stall numbers from the database
-        $stallNumbers = StallNumber::paginate(15);
+        // Kuhaon ang tanan stall numbers sa database
+        $stallNumbers = StallNumber::paginate(25);
     
-        return view('stall-number.index', compact('stallNumbers'));
+        // I calculate ang bilang sa available ug occupied na stalls
+        $availableStallsCount = StallNumber::where('status', 'Available')->count();
+        $occupiedStallsCount = StallNumber::where('status', 'Occupied')->count();
+    
+        return view('stall-number.index', compact('stallNumbers', 'availableStallsCount', 'occupiedStallsCount'));
     }
+    
     
     public function view(StallTypes $stallType)
     {
@@ -50,11 +55,11 @@ class StallNumberController extends Controller
 
     public function destroy(StallNumber $stallNumber)
     {
-        // Get the stall type ID before deleting the stall number
+        // Kuhaon ang stall type ID bago ma delete ang stall number
         $stallTypeId = $stallNumber->stall_type_id;
     
         try {
-            // Attempt to delete the stall number
+            // Itry idelete ang stall number
             $stallNumber->delete();
             
             return redirect()->route('stall-types.stallnumbers.view', $stallTypeId)

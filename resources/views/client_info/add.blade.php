@@ -1,82 +1,101 @@
-@extends('layout')
+@extends('include.header')
 
 @section('client_info.add')
 <div class="container">
-
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
     @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('client_info.storecitation') }}" method="POST">
+    <form action="{{ route('client_info.store') }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label for="stall_type_id">Select Stall Type</label>
-            <select class="form-control" id="stall_type_id" name="stall_type_id" required>
-                <option value="" disabled selected>Select Stall Type</option>
-                @foreach ($stallTypes as $stallType)
-                    <option value="{{ $stallType->id }}">{{ $stallType->stall_name }}</option>
+        <div class="mb-2">
+            <label for="client_id" class="form-label">Select Client</label>
+            <select class="form-control" id="client_id" name="client_id" required>
+                <option value="" disabled selected>Select Client</option>
+                @foreach ($clients as $client)
+                    <option value="{{ $client->id }}">
+                        {{ $client->firstname }} {{ $client->lastname }} {{ $client->middlename }}
+                    </option>
                 @endforeach
             </select>
         </div>
-        
         <div class="form-group">
-            <label for="stall_number_id">Stall Number</label>
+            <label for="stall_type_id" class="form-label">Stall Type</label>
+            <select class="form-control" id="stall_type_id" name="stall_type_id" required>
+                <option value="" disabled selected>Select Stall Type</option>
+                @foreach ($stalltypes as $stalltype)
+                    <option value="{{ $stalltype->id }}" data-price="{{ $stalltype->price }}">
+                        {{ $stalltype->stall_name }}---Monthly:(₱{{ $stalltype->price }})
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="ownerMonthly" class="form-label"> Set Monthly Rent for Stall Owner</label>
+            <input type="text" class="form-control" id="ownerMonthly" name="ownerMonthly" placeholder="Insert Monthly Rent Based on Selected Stall Type" required>
+        </div>
+    
+        <div class="mb-2">
+            <label for="stall_number_id" class="form-label">Stall Number</label>
             <select class="form-control" id="stall_number_id" name="stall_number_id" required>
                 <option value="" disabled selected>Select Stall Number</option>
             </select>
         </div>
-        
-        
-
-        </div>
-
+    
         <div class="form-group">
             <label for="start_date" class="form-label">Start Date</label>
             <input type="date" class="form-control" id="start_date" name="start_date" required>
         </div>
-
-        <div class="form-group">
+    
+        <div class="mb-2">
             <label for="due_date" class="form-label">Due Date</label>
             <input type="date" class="form-control" id="due_date" name="due_date" required>
         </div><br>
-
+    
         <button type="submit" class="btn btn-primary">Add Client Info</button>
-    </form>
-</div>
+                                                         OR
+        <a href="/client_info"
 
+        class="btn btn-secondary btn-oblong pulsate" 
+        style="background-color: #098309; color:
+                                white; border: 2px solid 
+                            #e7ece2;" >cancel</a></div>
+    </form>
+   
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Get references to the select elements
-    const $stallTypeSelect = $('#stall_type_id');
-    const $stallNumberSelect = $('#stall_number_id');
+$(document).ready(function () {
+    $('#stall_type_id').on('change', function () {
+        var stallTypeId = $(this).val(); // Kuhaa ang napili na stall type ID
+        var $stallNumberSelect = $('#stall_number_id');
 
-    // Add an onchange event handler to the Stall Type select element
-    $stallTypeSelect.on('change', function () {
-        const selectedStallType = $(this).val();
-        const clientId = "{{ $clientInfo->id }}"; // Replace with your actual client ID
-
-        // Make an AJAX request to fetch associated stall numbers
+        // hatag AJAX request pang fetch available stall numbers
         $.ajax({
-            url: `/fetch-stall-numbers?stallType=${selectedStallType}&clientId=${clientId}`,
+            url: '/get-available-stalls/' + stallTypeId, 
             method: 'GET',
             success: function (data) {
-                // Clear existing options
-                $stallNumberSelect.empty();
+                $stallNumberSelect.empty(); 
+                $stallNumberSelect.append($('<option>', {value: '', text: 'Select Stall Number'}));
 
-                // Add the default "Select Stall Number" option
-                $stallNumberSelect.append('<option value="" disabled selected>Select Stall Number</option>');
-
-                // Add the retrieved stall numbers to the select element
-                data.forEach(function (stallNumber) {
-                    $stallNumberSelect.append(`<option value="${stallNumber.id}">${stallNumber.nameforstallnumber}</option>`);
+                $.each(data, function (key, value) {
+                    $stallNumberSelect.append($('<option>', {value: key, text: value}));
                 });
             },
-            error: function (xhr, textStatus, errorThrown) {
-                console.error('Error:', errorThrown);
+            error: function (xhr, status, error) {
+                console.error('Error fetching available stalls:', error);
             }
         });
     });
+});
 </script>
+
+
 
 
 @endsection

@@ -1,125 +1,281 @@
-@extends('include.header')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title', 'Home')
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Home</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="{{ URL('images/logo-lgu.png') }}" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Include jQuery (required for Bootstrap) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: Impact
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+          @keyframes slide-up {
+      0% {
+        transform: translateY(25%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    .profile-dropdown {
+      position: relative;
+      cursor: pointer;
+      margin-right: 20px; /* dungag ug margin para maka kuha ug space sa tunga sa Profile ug menu */
+    }
+    .profile-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      right: 0; /* Adjust the position to align with the right side */
+    }
+    .profile-dropdown-content a {
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .profile-dropdown:hover .profile-dropdown-content {
+      display: block;
+    }
+    #hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50vh;
+    }
+    .hero-content {
+      text-align: center;
+    }
+    .hero-content h2 {
+      font-size: 70px;
+    }
+    .hero-content p {
+      font-size: 16px;
+    }
+    .hero-content a.btn {
+      background-color: #098309;
+      color: white;
+      border: 2px solid #e7ece2;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+    }
+    .menu-box {
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .menu-item {
+      flex: 1;
+      margin: 0 5px;
+      padding: 60px 20px;
+      border: 3px solid #c2f8bb;
+      border-radius: 10px;
+      color: #fcfffcf5;
+      text-align: center;
+      font-size: 25px;
+      transition: transform 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      transform: scale(1.05);
+    }
+    .menu-item::before {
+      content: 'SELECT';
+      display: none;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    
+      color: #c2f8bb;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      z-index: 1;
+    }
+    .menu-item:hover::before {
+      display: block;
+    }
+  </style>
+</head>
 
-@section('home')
-<div class="center-container">
-    <img class="center" src="{{ asset('images/logo-lgu.png') }}" alt="Your Image" style="width: 200px; height: 200px;">
-</div>
+<body style="background-color: #098309">
+  <header id="header" class="header">
+    <div class="header-left">
+      <img style="width: 60px;" src="{{ URL('images\logo-lgu.png') }}" alt="LGU Logo">
+      <h1 class="logo h1 ml-3" style="color: rgb(159, 248, 118);"><strong>LOCAL GOVERNMENT UNIT</strong> |<span> General Santos City</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="profile-dropdown">
+        <h3><span style="color: rgb(159, 248, 118);">Profile</span></h3>
+        <div class="profile-dropdown-content">
+          <a href="#">Manage</a>
+          <a href="/logout" onclick="confirmLogout()">Log out</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<div class="container text-center">
-    <br>
-    <h1>The Local Government Unit Public Market</h1>
-    <h3>Rental Billing System with SMS Notification</h3>
-</div><br><br>
-
-<div class="inner-content-container">
-    <h2 class="text-center">Objectives</h2>
-    <p>
-        The<strong><i> Rental Billing System</i></strong> is designed to simplify billing monitoring for stall owners in the Public Market of 
-        <strong><i>General Santos City</i></strong> by providing automated SMS notifications five days prior to their due dates.
-    </p>
-</div>
-
-<div class="content-container">
-    <div class="inner-content-container">
-        <h2>Steps</h2>
-        <p>
-            The steps of adding stalls, stall numbers, clients, and their billings and violations:
-        </p>
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
+    <div class="container position-relative">
+        <div class="hero-content">
+            <h2>Welcome, to <span style="color: rgb(159, 248, 118)">The Rental Billing System</span></h2>
+            <h4><span style="text-decoration: overline; color: rgb(159, 248, 118)">With SMS Notification</span></h4><br>
+            <h5 style="color:#ffffff">The rental billing system provides an overview of stall holders 
+            along with their associated stalls and acquired violations that will keep them on track for their payments</h5>
+          </div>
+    </div>
+  </section>
+  <h2 class="text-center"><span style="color: rgb(159, 248, 118)">TABS</span></h2><br>
+  <div class="menu-box">
+    <div class="menu-item">
+      <a class="nav-link active" href="/clients">
+        <i class="bi bi-file-person"style="font-size: 36px;"></i>
+        <h2 class="text-center"><strong>STALL HOLDERS</strong></h2>
+        <h6 class="text-center" style="color: rgb(192, 247, 167)">Manage Stall Holders</h6>
+      </a>
+    </div>
+    <div class="menu-item">
+      <a class="nav-link active" href="/stall-number/index">
+        <i class="bi bi-shop" style="font-size: 36px;"></i>
+        <h2 class="text-center"><strong>STALLS</strong></h2>
+        <h6 class="text-center" style="color: rgb(192, 247, 167)">View all Stalls</h6>
+      </a>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="step-box text-center step-hover">
-                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 1</h1>
-                <p style="font-size: 14px;">Add <strong>Stall Names</strong> and <strong>Stall Numbers</strong> for each stall.</p>
-                <a href="/stall-types">(Go now)</a>
-            </div>
-            <div class="step-box text-center step-hover">
-                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 2</h1>
-                <p style="font-size: 14px;">Add <strong>Violations</strong>.</p>
-                <a href="/violations">(Go now)</a>
-            </div>
-            <div class="step-box text-center step-hover">
-                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 3</h1>
-                <p style="font-size: 14px;">Add <strong>Clients</strong> who become stall owners. <strong>Set their due dates</strong>.</p>
-                <a href="/clients">(Go now)</a>
-            </div>
-        </div>
+    <div class="menu-item">
+        <a class="nav-link active" href="/violations">
+          <i class="bi bi-exclamation-triangle" style="font-size: 36px;"></i>
+          <h2 class="text-center"><strong>VIOLATIONS</strong></h2>
+          <h6 class="text-center" style="color: rgb(192, 247, 167)">View Violations' List</h6>
+        </a>
+      </div>
 
-        <div class="col-md-6">
-            <div class="step-box text-center step-hover">
-                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 4</h1>
-                <p style="font-size: 14px;">Create <strong>Billings</strong>.</p>
-                <a href="/billingskie">(Go now)</a>
-            </div>
-            <div class="step-box text-center step-hover">
-                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 5</h1>
-                <p style="font-size: 14px;">Track/Monitor <strong>Violations</strong> for stall owners by viewing them.</p>
-                <a href="/billingskie">(Go now)</a>
-            </div>
-            <div class="step-box text-center step-hover">
-                <h1 style="font-size: 18px;"><i class="fas fa-plus-circle"></i> Step 6</h1>
-                <p style="font-size: 14px;">Monitor <strong>Clients</strong> for their payment.</p>
-                <a href="/stall-types">(Go now)</a>
-            </div>
-        </div>
+    <div class="menu-item">
+        <a class="nav-link active" href="/stall-types">
+        
+                <i class="bi bi-shop" style="font-size: 36px;"></i>
+                <i class="bi bi-info-circle" style="font-size: 36px; margin-left: 10px;"></i>
+            <h2 class="text-center"><strong>MARKET STALLS</strong></h2>
+            <h6 class="text-center" style="color: rgb(192, 247, 167)">Manage Stall Based on <br> Category</h6>
+            
+        </a>
+        
     </div>
-</div>
 
-<style>
-.center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20vh;
-}
+    <div class="menu-item">
+      <a class="nav-link active" href="/client_info">
+        <i class="bi bi-clipboard2-data" style="font-size: 36px;"></i>
+        <h2 class="text-center"><strong>STALL HOLDER INFORMATION</strong></h2>
+        <h6 class="text-center" style="color: rgb(192, 247, 167)">View Stall Holders with associated <br> stalls</h6>
+      </a>
+    </div>
+    <div class="menu-item">
+      <a class="nav-link active" href="/billing-record">
+        <i class="bi bi-card-list"  style="font-size: 36px;"></i>
+        <h2 class="text-center"><strong>RECORDS</strong></h2>
+        <h6 class="text-center" style="color: rgb(192, 247, 167)">Overall view of <br>Stall holders information</h6>
+      </a>
+    </div>
+  </div>
 
-.content-container {
-    text-align: center;
-    width: 100%;
-    padding: 20px;
-    border: 2px solid #646464;
-    background-color: #f8f8f8;
-}
 
-.inner-content-container {
-    margin: 0 auto;
-    max-width: 600px;
-}
+  <div class="content">
+  @yield('stall-holders.create')
+  @yield('clients.index')
+  @yield('clients.addclients')
+  @yield('client_info.index')
+  @yield('client_info.add')
+  @yield('client_info.edit')
+  @yield('client_info.violationbilling')
+  @yield('client_info.report-citation')
+  @yield('client_info.citation')
+  {{-- @yield('clients.edit') --}}
+  @yield('billings.index')
+  @yield('billings.create')
+  @yield('violations.index')
+  @yield('violations.create')
+  @yield('violations.edit')
+  @yield('stall-number.index')
+  @yield('stall-number.create')
+  @yield('stall-types.index')
+  @yield('stall-types.create')
+  @yield('stall-types.edit')
+  @yield('stall-types.stallnumbers.view')
+  @yield('stall-types.stallnumbers.create')
+  @yield('clientrecords.index')
+  @yield('home')
+  @yield('scripts') 
+  @yield('billing.record') 
+  @yield('payments.create')
+  </div>
 
-/* Additional styling for the objectives */
-.inner-content-container p {
-    margin-bottom: 10px;
-}
+  
 
-/* Style for step boxes */
-.step-box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #fff;
-    transition: transform 0.5s;
-}
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
 
-.step-box:hover {
-    transform: translateY(-5px);
-}
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script>
+        function confirmLogout() {
+      if (confirm("Are you sure you want to log out?")) {
+        window.location.href = "{{ route('logout') }}";
+      }
+    }
+  </script>
+ 
+</body>
 
-.step-box h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.step-box p {
-    font-size: 16px;
-}
-
-/* Custom class for step boxes with hover effect */
-.step-hover:hover {
-    transform: translateY(-18px);
-}
-</style>
-
-@endsection
+</html>
