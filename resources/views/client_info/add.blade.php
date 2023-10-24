@@ -35,10 +35,6 @@
             </select>
         </div>
     
-        <div class="form-group">
-            <label for="ownerMonthly" class="form-label"> Set Monthly Rent for Stall Owner</label>
-            <input type="text" class="form-control" id="ownerMonthly" name="ownerMonthly" placeholder="Insert Monthly Rent Based on Selected Stall Type" required>
-        </div>
     
         <div class="mb-2">
             <label for="stall_number_id" class="form-label">Stall Number</label>

@@ -206,7 +206,7 @@ Route::get('/client_info/citation/{stall_id}', [CitationController::class,'viewC
 
 Route::get('/report-citation/{client_id}/{stall_number_id}', [CitationController::class, 'reportCitationForm'])->name('client_info.report_citation_form');
 
-
+Route::post('/start-scheduled-sms', [ClientInfoController::class, 'startScheduledSMS'])->name('start-scheduled-sms');
 
 
 

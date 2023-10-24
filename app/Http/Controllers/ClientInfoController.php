@@ -8,6 +8,7 @@ use App\Models\ClientInfo;
 use App\Models\StallTypes;
 use App\Models\StallNumber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -58,7 +59,7 @@ class ClientInfoController extends Controller
             }
         }
     
-        return view('client_info.index', compact('groupedData','clients', 'stalltypes', 'stallnumbers'));
+        return view('client_info.index', compact('groupedData','clients', 'stallType', 'stallnumbers'));
     }
     
     
@@ -80,7 +81,7 @@ public function clientinfostore(Request $request)
         'stall_number_id' => 'required|exists:stall_numbers,id',
         'start_date' => 'required|date',
         'due_date' => 'required|date|after:start_date',
-        'ownerMonthly' => 'required', // Include ownerMonthly
+       
     ];
 
     $messages = [
@@ -225,7 +226,11 @@ public function violationbilling($id)
     return view('client_info.violationbilling', compact('clientInfo', 'clientInfos','violations'));
 }
 
-
+public function startScheduledSMS()
+{
+    Artisan::call('send:due-date-reminders');
+    return redirect()->back()->with('success', 'Scheduled SMS for Stall Holders started.');
+}
 
 
 

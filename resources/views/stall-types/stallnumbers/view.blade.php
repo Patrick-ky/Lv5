@@ -17,6 +17,7 @@
 </style>
 
 <div class="container">
+    <a href="{{ route('stall-types.index') }}" class="btn btn-secondary">Back</a>
     <div class="row">
         <div class="col-md-12">
             @if(session('success'))
@@ -71,59 +72,16 @@
             <br>
 
             <!-- Add the "Add Stall Number" button outside the foreach loop -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStallModal">Add Stall Number</button>
 
             <!-- Add the "Back" button that redirects to the previous page -->
-            <a href="{{ route('stall-types.index') }}" class="btn btn-secondary">Back</a>
+            
         </div>
     </div>
 </div>
-<!-- Modal -->
 
 
-<div class="modal fade" id="addStallModal" tabindex="-1" role="dialog" aria-labelledby="addStallModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addStallModalLabel">Add Stall Number</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-            <div class="modal-body">
-                {{-- Display a form to add a new lot number here --}}
-                <form method="POST" action="{{ route('stall-types.stallnumbers.store') }}">
-                    @csrf
-                <div class="container">
-                    <input type="hidden" name="stall_type_id" value="{{ $stallType->id }}">
 
-                    <div class="mb-3">
-                        <label for="stall_number">Stall Number:</label>
-                        <input type="text" class="form-control" name="stall_number" id="stall_number" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="nameforstallnumber">Stall Code:</label>
-                        <input type="text" class="form-control" name="nameforstallnumber" id="nameforstallnumber" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="description">Description:</label>
-                        <input type="text" class="form-control" name="description" id="description" required>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <button type="submit" class="btn btn-primary">Add</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
             </div>
         </div>

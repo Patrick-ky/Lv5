@@ -12,7 +12,7 @@ class Citation extends Model
         'stall_type_id',
         'stall_number_id',
         'start_date',
-        'acquiredviolationprice', 
+        
     ];
     public function stallNumber()
     {

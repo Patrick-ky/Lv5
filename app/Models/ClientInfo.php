@@ -20,7 +20,6 @@ class ClientInfo extends Model
         'stall_number_id',
         'start_date',
         'due_date',
-        'ownerMonthly',
     ];
     public function client()
     {

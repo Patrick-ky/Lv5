@@ -55,14 +55,7 @@
             </div>
             @endif
             <div class="slide-up-content">
-            <a
-                        href="{{ route('stall-types.create') }}"
-                      
-                        class="btn btn-success btn-oblong pulsate" 
-                        style="background-color: #098309; color:
-                                                 white; border: 2px solid 
-                                              #e7ece2;
-                                              float:right" >Add</a>
+            
                                               <br><br>
                                               
 
@@ -70,30 +63,23 @@
                 <table class="table table-bordered">
                     <thead class="">
                         <tr>
-                            <th class="text-center"><strong>Id</strong></th>
+                            
                             <th class="text-center"><strong>Stall Name</strong></th>
                             <th class="text-center"><strong>Rent Per Month </strong></th>
                             <th class="text-center"><strong>Stall Number</strong></th>
-                            <th class="text-center"><strong>Actions</strong></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($stalltypes as $stalltype)
                         <tr>
-                            <th class="text-center">{{ $stalltype->id }}</th>
+                            
                             <td class="text-center">{{ $stalltype->stall_name }}</td>
                             <td class="text-center">₱{{ $stalltype->price }}</td>
                             <td class="text-center"> 
                                 <a href="{{ route('stall-types.stallnumbers.view', ['stallType' => $stalltype->id]) }}" class="btn btn-success">VIEW</a>
                             </td>
-                            <td class="text-center">
-                                <a href="{{ route('stall-types.edit', ['stallType' => $stalltype->id]) }}" class="btn btn-success">Edit</a>
-                                <form action="{{ route('stall-types.destroy', ['stallType' => $stalltype->id]) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-secondary" onclick="return confirm('Are you sure you want to delete this stall type?')">Delete</button>
-                                </form>
-                            </td>
+                            
                         </tr>
                         @endforeach
                     </tbody>
@@ -113,3 +99,15 @@
 </div>
 @endsection
 @endauth
+{{-- INSERT INTO stall_types (stall_name, price)
+VALUES
+('Sari Sari Store', 600.00),
+('Refreshment', 300.00),
+('Fruits', 400.00),
+('Dry Goods', 700.00),
+('Green Table', 550.00),
+('Vegetable', 750.00),
+('Carenderia', 850.00),
+('Central Peripheral', 900.00),
+('Cultural Minorities', 950.00),
+('Native Products', 980.00); --}}

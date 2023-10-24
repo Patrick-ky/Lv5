@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('stall_type_id');
             $table->unsignedBigInteger('stall_number_id');
             $table->date('start_date');
-            $table->decimal('acquiredviolationprice', 9, 2); // Add this line
+            
 
 
             $table->foreign('client_info_id')->references('id')->on('client_info');

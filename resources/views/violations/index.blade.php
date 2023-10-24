@@ -68,7 +68,7 @@
                     @foreach($violations as $violation)
                     <tr>
                         <td class="text-center">{{ $violation->violation_name }}</td>
-                        <td class="text-center">{{ $violation->penalty_value }}</td>
+                        <td class="text-center">₱{{ $violation->penalty_value }}</td>
     
                     </tr>
                     @endforeach
@@ -82,3 +82,10 @@
 </div>
 @endsection
 @endauth
+
+{{-- INSERT INTO violations(violation_name,penalty_value)
+    VALUES
+('No Bussiness Permit', 600),
+('No Market Clearance', 300),
+('Illegal Display', 300) --}}
+

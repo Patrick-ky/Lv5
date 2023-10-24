@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\StallTypes;
 use App\Models\StallNumber;
 use Illuminate\Http\Request;
+use App\Rules\PhoneNumber;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -60,42 +61,45 @@ class ClientController extends Controller
     }
     
     public function clientstore(Request $request)
-    {
-        $rules = [
-            'firstname' => 'required|string|max:255',
-            'middlename' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'birthdate' => 'required|date', // Added 'Age' field
-            'clients_number' => 'required|numeric',
-            'gender' => 'required|in:Male,Female',
-            'purok'=>'required|string|max:255',
-            'street'=>'required|string|max:255',
-            'barangay'=>'required|string|max:255',
-            'city'=>'required|string|max:255',
-            'province'=>'required|string|max:255',
-            'zipcode'=>'required|string|max:255',
-        ];
-    
-        $messages = [
-            'unique' => 'A client with the same first name, middle name, and last name already exists.',
-        ];
-    
-        $validatedData = $request->validate($rules, $messages);
-    
-        $existingClient = Client::where([
-            'firstname' => $validatedData['firstname'],
-            'middlename' => $validatedData['middlename'],
-            'lastname' => $validatedData['lastname'],
-        ])->first();
-    
-        if ($existingClient) {
-            return redirect()->route('clients.index')->with('error', 'A client with the same name already exists.');
-        }
-    
-        Client::create($validatedData);
-    
-        return redirect()->route('clients.index')->with('success', 'Client created successfully!');
+{
+    $rules = [
+        'firstname' => 'required|string|max:255',
+        'middlename' => 'required|string|max:255',
+        'lastname' => 'required|string|max:255',
+        'birthdate' => 'required|date',
+        'clients_number' => ['required', 'string', 'max:255'], 
+        'gender' => 'required|in:Male,Female',
+        'purok' => 'required|string|max:255',
+        'street' => 'required|string|max:255',
+        'barangay' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'province' => 'required|string|max:255',
+        'zipcode' => 'required|string|max:255',
+    ];
+
+    $messages = [
+        'unique' => 'A client with the same first name, middle name, and last name already exists.',
+        
+    ];
+
+    $validatedData = $request->validate($rules, $messages);
+
+    $existingClient = Client::where([
+        'firstname' => $validatedData['firstname'],
+        'middlename' => $validatedData['middlename'],
+        'lastname' => $validatedData['lastname'],
+    ])->first();
+
+    if ($existingClient) {
+        return redirect()->route('clients.index')->with('error', 'A client with the same name already exists.');
     }
+
+    Client::create($validatedData);
+
+    return redirect()->route('clients.index')->with('success', 'Client created successfully!');
+}
+
+    
     
 
     public function updateClient(Request $request, $id)

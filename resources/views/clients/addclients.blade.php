@@ -103,10 +103,10 @@ style="background-color: #098309; color:
                 <div class="col-md-9">
                     <div class="mb-3">
                         <label for="clients_number" class="form-label text-dark">Contact Number</label>
-                        <input type="text" class="form-control" id="clients_number" name="clients_number" required>
+                        <input type="text" class="form-control" id="clients_number" name="clients_number" required placeholder="+63">
                     </div>
                 </div>
-            </div>
+                
             
 
             <!-- Gender -->

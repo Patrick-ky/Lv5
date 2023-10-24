@@ -1,9 +1,15 @@
 @extends('include.header')
 
 @section('client_info.citation')
-
 <div class="container">
-    <h3><strong>Citations for Stall: {{ $stall->nameforstallnumber }}</strong></h3>
+    <a href="/client_info"
+
+class="btn btn-success btn-oblong pulsate" 
+style="background-color: #098309; color:
+                    white; border: 2px solid 
+                #e7ece2;" >Back to Home</a><br><br>
+<div class="container">
+    <h3 style="color: rgb(192, 247, 167)"><strong>Citations under Stall: {{ $stall->nameforstallnumber }}</strong></h3>
     <div class="row">
         <div class="col-md-6">
             

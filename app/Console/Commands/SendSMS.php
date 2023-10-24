@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Twilio\Rest\Client;
 
+
+//para ma test if naga send ba jud sya 
 class SendSMS extends Command
 {
     protected $signature = 'sms:send {to} {message}';

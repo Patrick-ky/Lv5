@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\ClientInfo;
 use Illuminate\Console\Command;
-use Twilio\Rest\Client; // Import the Twilio client
+use Twilio\Rest\Client;
 
 class SendDueDateReminders extends Command
 {
@@ -17,24 +17,26 @@ class SendDueDateReminders extends Command
 
     public function handle()
     {
-        // Your logic here to query the client_info table for records 15 days before the due date
-        $records = ClientInfo::whereDate('due_date', '=', now()->addDays(15)->toDateString())->get();
+        // Kwentahon niya ang adlaw kada kinsenas 
+        $fifteenDaysFromToday = now()->addDays(15);
 
-        // Initialize Twilio client
-     
-    $twilio = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
+        //sugdon niya ug bilang base sa start_date
+        $records = ClientInfo::whereDate('start_date', '=', $fifteenDaysFromToday->toDateString())->get();
 
+        
+        $twilio = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
 
         foreach ($records as $record) {
-            // Compose the SMS message
-            $message = "Hello, {$record->client->firstname}. Your due date is approaching on {$record->due_date}. please pay your bill {$record->ownerMonthly}";
+            // message content
+            $message = "Hello,  {$record->client->firstname}. Your due date
+            for your stall {$record->stallNumber->nameforstallnumber} on category {$record->stallType->stall_name} is approaching on {$record->due_date}. Please pay your bill {$record->ownerMonthly} 
+            Disregard message if already paid";
 
-            // Send SMS
+            // SMS configuration
             $twilio->messages->create(
                 $record->client->clients_number,
                 [
                     'from' => env('TWILIO_PHONE_NUMBER'),
-
                     'body' => $message,
                 ]
             );

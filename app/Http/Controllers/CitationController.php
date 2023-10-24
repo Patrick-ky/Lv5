@@ -70,7 +70,6 @@ class CitationController extends Controller
             'stall_type_id' => 'required',
             'client_info_id' => 'required|exists:client_info,id',
             'stall_id' => 'required|exists:stall_numbers,id', // Update validation for stall_id
-            'acquiredviolationprice' => 'required|numeric', // Add validation for acquiredviolationprice
         ]);
     
         // Kuhaa ang napili na stall_id gikan sa request
@@ -86,7 +85,6 @@ class CitationController extends Controller
             'stall_type_id' => $stall->stall_type_id,
             'stall_number_id' => $stallId,
             'start_date' => $request->input('start_date'),
-            'acquiredviolationprice' => $request->input('acquiredviolationprice'),
         ];
     
         Citation::create($data);

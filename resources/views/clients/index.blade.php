@@ -53,7 +53,7 @@
 </style>
 
 <div class="slide-up-content">
-    <div class="container" style="width: 90%;">
+    <div class="container" style="width: 100%;">
     <a
     href="/home"
   
