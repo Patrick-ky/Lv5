@@ -1,7 +1,6 @@
 @auth
 @extends('include.header')
-
-@section('violations.index')
+@section('content')
 <style>
     @keyframes slide-up {
    0% {
@@ -13,7 +12,6 @@
      opacity: 1;
    }
  }
-
  /* Maaply ang animation na ma slide up ang content */
  .slide-up-content {
    animation: slide-up 0.5s ease-in-out; /* Adjust the duration and timing function as needed */
@@ -35,13 +33,13 @@
     <a
     href="/home"
   
-    class="btn btn-success btn-oblong pulsate" 
+    class="btn btn-success btn-sm btn-oblong pulsate" 
     style="background-color: #098309; color:
                              white; border: 2px solid 
                           #e7ece2;" >Back to Home</a><br><br>
     <div class="row">
         <div class="col-md-12">
-            <h2 style="color: rgb(159, 248, 118)"><strong>Violations</strong></h2>
+            <h2><strong>Violations</strong></h2>
 
             @if(session('success'))
             <div class="alert alert-success">
@@ -53,12 +51,10 @@
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
-            @endif<br>
-
-            <br><br>
-            <table class="table table-bordered">
+            @endif
+            <table class="table table-bordered table-sm table-hover">
                 <thead>
-                    <tr>
+                    <tr class="table-primary"> 
                         <th class="text-center">Violation Name</th>
                         <th class="text-center">Penalty</th>
                       

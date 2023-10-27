@@ -3,23 +3,44 @@
 namespace App\Http\Controllers;
 
 
+use DateTime;
 use App\Models\Client;
 use App\Models\StallTypes;
-use App\Models\StallNumber;
-use Illuminate\Http\Request;
 use App\Rules\PhoneNumber;
+use App\Models\StallNumber;
 
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ClientController extends Controller
 {
+
+    public function calculateAge($birthdate)
+    {
+        // Convert the birthdate to a DateTime object
+        $birthDate = new DateTime($birthdate);
+
+        // Get the current date
+        $currentDate = new DateTime();
+
+        // Calculate the difference in years
+        $age = $currentDate->format('Y') - $birthDate->format('Y');
+
+        // Check if the birthdate has occurred this year already
+        if ($currentDate < $currentDate->setDate($currentDate->format('Y'), $birthDate->format('m'), $birthDate->format('d'))) {
+            $age--;
+        }
+
+        return $age;
+    }
+
     public function index()
     {
-        
-
         $distinctFullNames = Client::select('firstname', 'middlename', 'lastname')
             ->groupBy('firstname', 'middlename', 'lastname')
             ->get();
@@ -43,8 +64,14 @@ class ClientController extends Controller
         'barangay',
         'city',
         'province',
-        'zipcode', 'gender', 'clients_number')
+        'block', 
+        'lot',
+        'gender', 'clients_number')
         ->get();
+
+        foreach ($clients as $client) {
+            $client->age = $this->calculateAge($client->birthdate);
+        }
 
         return view('clients.index', compact('clients'));
     }
@@ -59,42 +86,64 @@ class ClientController extends Controller
 
         return view('clients.addclients', $data);
     }
-    
     public function clientstore(Request $request)
 {
+    // Validation rules
     $rules = [
         'firstname' => 'required|string|max:255',
         'middlename' => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
-        'birthdate' => 'required|date',
-        'clients_number' => ['required', 'string', 'max:255'], 
+        'birthdate' => [
+            'required',
+            'date',
+            function ($attribute, $value, $fail) {
+                $age = $this->calculateAge($value);
+                if ($age < 18) {
+                    return redirect()->route('clients.addclients')->with('error', 'Stall holders must be of legal Age (18 years old) to be awarded with a stall');
+                }
+            },
+        ],
+        'clients_number' => ['required', 'string', 'max:13'], 
         'gender' => 'required|in:Male,Female',
         'purok' => 'required|string|max:255',
         'street' => 'required|string|max:255',
         'barangay' => 'required|string|max:255',
         'city' => 'required|string|max:255',
         'province' => 'required|string|max:255',
-        'zipcode' => 'required|string|max:255',
+        'block' => 'nullable|string|max:255',
+        'lot' => 'nullable|string|max:255',
     ];
 
     $messages = [
         'unique' => 'A client with the same first name, middle name, and last name already exists.',
-        
     ];
 
-    $validatedData = $request->validate($rules, $messages);
+    $validator = Validator::make($request->all(), $rules, $messages);
 
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    // Check age again after validation
+    $age = $this->calculateAge($request->input('birthdate'));
+
+    if ($age < 18) {
+        return redirect()->route('clients.addclients')->with('error', 'Stall holders must be of legal Age (18 years old) to be awarded with a stall');
+    }
+
+    // Existing client check
     $existingClient = Client::where([
-        'firstname' => $validatedData['firstname'],
-        'middlename' => $validatedData['middlename'],
-        'lastname' => $validatedData['lastname'],
+        'firstname' => $request->input('firstname'),
+        'middlename' => $request->input('lastname'),
+        'lastname' => $request->input('lastname'),
     ])->first();
 
     if ($existingClient) {
-        return redirect()->route('clients.index')->with('error', 'A client with the same name already exists.');
+        return redirect()->route('clients.addclients')->with('error', 'A client with the same name already exists.');
     }
 
-    Client::create($validatedData);
+    // Client creation
+    Client::create($request->all());
 
     return redirect()->route('clients.index')->with('success', 'Client created successfully!');
 }
@@ -102,47 +151,54 @@ class ClientController extends Controller
     
     
 
-    public function updateClient(Request $request, $id)
-    {
-        $rules = [
-            'firstname' => 'required|string|max:255',
-            'middlename' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'birthdate' => 'required|date', // Adjusted 'Age' field
-            'clients_number' => 'required|numeric',
-            'gender' => 'required|in:Male,Female',
-            'Address' => 'required|string|max:255',
-            'purok',
-            'street',
-            'barangay',
-            'city',
-            'province',
-            'zipcode',
-        ];
-    
-        $messages = [
-            'unique' => 'A client with the same first name, middle name, and last name already exists.',
-        ];
-    
-        $validatedData = $request->validate($rules, $messages);
-    
-        try {
-            $client = Client::findOrFail($id);
-    
-            $client->update($validatedData);
-    
-            return redirect()->route('clients.index')->with('success', 'Client information updated successfully!');
-        } catch (\Exception $e) {
-            return redirect()->route('clients.editclient', ['id' => $id])->with('error', 'Failed to update client information. Please try again.');
-        }
+public function updateClient(Request $request, $id)
+{
+    $rules = [
+        'firstname' => 'required|string|max:255',
+        'middlename' => 'required|string|max:255',
+        'lastname' => 'required|string|max:255',
+        'birthdate' => 'required|date',
+        'clients_number' => 'required|string|max:13',
+        'gender' => 'required|in:Male,Female',
+        'purok' => 'required|string|max:255',
+        'street' => 'required|string|max:255',
+        'barangay' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'province' => 'required|string|max:255',
+        'block' => 'nullable|string|max:255',
+        'lot' => 'nullable|string|max:255',
+    ];
+
+    $messages = [
+        'unique' => 'A client with the same first name, middle name, and last name already exists.',
+    ];
+
+    $validatedData = $request->validate($rules, $messages);
+
+    // Check age again after validation
+    $age = $this->calculateAge($request->input('birthdate'));
+
+    if ($age < 18) {
+        return redirect()->route('clients.editclient', ['id' => $id])->with('error', 'Stall holders must be of legal Age (18 years old) to be awarded with a stall');
     }
+
+    try {
+        $client = Client::findOrFail($id);
+
+        $client->update($validatedData);
+
+        return redirect()->route('clients.index')->with('success', 'Client information updated successfully!');
+    } catch (\Exception $e) {
+        return redirect()->route('clients.editclient', ['id' => $id])->with('error', 'Failed to update client information. Please try again.');
+    }
+}
 
     public function deleteClient($id)
     {
         $client = Client::findOrFail($id);
     
         // Mag display ug error message para ma iwasan ma delete
-        return redirect()->back()->with('error', 'Cannot delete Stall Owner (Has Associations with stalls, bills, etc.)');
+        return redirect()->back()->with('error', 'Cannot delete Stall Holder (Has Associations with stalls, violations, etc.)');
     }
 
     public function editClient($id)
@@ -153,6 +209,29 @@ class ClientController extends Controller
 
         return view('clients.editclient', compact('client', 'clients'));
     }
+
+ 
+
+    // public function deleteClient($id)
+    // {
+    //     // Find the client with the given ID
+    //     $client = Client::find($id);
+    
+    //     if ($client) {
+    //         // Client found, delete it
+    //         $client->delete();
+    
+    //         // Redirect to the client list page with a success message
+    //         return redirect()->route('clients.index')->with('success', 'Client deleted successfully');
+    //     } else {
+    //         // Client not found, redirect with an error message
+    //         return redirect()->route('clients.index')->with('error', 'Client not found or couldnt be deleted');
+    //     }
+    // }
+    
+
+
+
 
 
 }

@@ -1,6 +1,5 @@
 @extends('include.header')
-
-@section('stall-types.create')
+@section('content')
 
 @if(session('error'))
 <div class="alert alert-danger">

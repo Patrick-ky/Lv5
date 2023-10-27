@@ -1,10 +1,10 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 @auth
     
 
 @extends('include.header')
-
-@section('stall-types.index')
+@section('content')
 <style>
     @keyframes slide-up {
         0% {
@@ -25,23 +25,17 @@
         width: 100%; /* Use full width */
         border-collapse: collapse; /* Merge adjacent borders */
     }
-
-    th, td {
-        border: 1px solid black;
-        padding: 8px; /* Add some padding for better spacing */
-        text-align: center; /* Center-align content */
-    }
 </style>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <a href="/home"
 
-                class="btn btn-success btn-oblong pulsate" 
+                class="btn btn-success btn-sm btn-oblong pulsate" 
                 style="background-color: #098309; color:
                                         white; border: 2px solid 
-                                    #e7ece2;" >Back to Home</a><br><br>
-            <h1 style="color: rgb(192, 247, 167)"><strong>Market Stalls</strong></h1>
+                                    #e7ece2;" >Back to Home</a>
+            <h1 style="color: black"><strong>Market Stalls</strong></h1>
 
             @if(session('success'))
             <div class="alert alert-success">
@@ -55,31 +49,24 @@
             </div>
             @endif
             <div class="slide-up-content">
-            
-                                              <br><br>
-                                              
-
+    
             @if(count($stalltypes) > 0) <!-- Check if there are any stalltypes -->
-                <table class="table table-bordered">
-                    <thead class="">
-                        <tr>
-                            
-                            <th class="text-center"><strong>Stall Name</strong></th>
-                            <th class="text-center"><strong>Rent Per Month </strong></th>
-                            <th class="text-center"><strong>Stall Number</strong></th>
-                            
+                <table class="table table-bordered table-sm table-hover">
+                    <thead class="table-light">
+                        <tr class="table-primary">     
+                            <th class="text-center"> Market Stall Name</th>
+                            <th class="text-center">Rental Fee</th>
+                            <th class="text-center">Stall Number</th> 
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($stalltypes as $stalltype)
                         <tr>
-                            
                             <td class="text-center">{{ $stalltype->stall_name }}</td>
                             <td class="text-center">₱{{ $stalltype->price }}</td>
                             <td class="text-center"> 
-                                <a href="{{ route('stall-types.stallnumbers.view', ['stallType' => $stalltype->id]) }}" class="btn btn-success">VIEW</a>
-                            </td>
-                            
+                                <a href="{{ route('stall-types.stallnumbers.view', ['stallType' => $stalltype->id]) }}" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                            </td> 
                         </tr>
                         @endforeach
                     </tbody>

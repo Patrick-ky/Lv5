@@ -114,7 +114,7 @@
   <section id="topbar" class="topbar d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">2022_cete_casuyonpc@online.htsgsc.edu.ph</a></i>
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">info@gensantos.gov.ph</a></i>
         <i class="bi bi-phone d-flex align-items-center ms-4"><span>+63 977-419-5927</span></i>
         <div class="social-links d-none d-md-flex align-items-center">
           <a href="https://www.facebook.com/LguGensan" class="facebook"><i class="bi bi-facebook"></i>Visit LGU-Gensan</a>
@@ -129,7 +129,7 @@
   <header id="header" class="header d-flex align-items-center logo img ">
   <div class="container-fluid container-xl d-flex align-items-center slide-up-content">
     <img src="{{ URL('images\logo-lgu.png') }}" alt="LGU Logo">
-        <h1 class="logo h1"style="color: white;"><strong>LOCAL GOVERNMENT UNIT</strong> |<span> General Santos City</span>.</h1>
+        <h2 class="logo h1"style="color: white;"><strong>LOCAL GOVERNMENT UNIT</strong> |<span> General Santos City</span>.</h2>
     </div> 
   </header>
   

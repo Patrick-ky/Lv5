@@ -1,6 +1,7 @@
-@extends('include.header')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-@section('stall-types.stallnumbers.view')
+@extends('include.header')
+@section('content')
 
 <style>
     table {
@@ -17,7 +18,12 @@
 </style>
 
 <div class="container">
-    <a href="{{ route('stall-types.index') }}" class="btn btn-secondary">Back</a>
+    <a href="/stall-types"
+
+    class="btn btn-success btn-sm btn-oblong pulsate" 
+    style="background-color: #098309; color:
+                            white; border: 2px solid 
+                        #e7ece2;" >Back</a><br><br>
     <div class="row">
         <div class="col-md-12">
             @if(session('success'))
@@ -32,17 +38,17 @@
             </div>
             @endif
 
-            <h1 style="color: rgb(159, 248, 118)"><strong>Stalls on : {{ $stallType->stall_name }}</h1>
+            <h2><strong>Stalls on : {{ $stallType->stall_name }}</h2>
 
             @if(count($stallNumbers) > 0) <!-- Check if there are any stall numbers -->
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
+                <table id="stallNumbersTable" class="table table-bordered table-sm table-hover">
+                    <thead class="table-light">
+                        <tr class="table-primary"> 
                             <th class="text-center"><strong>Stall Number</strong></th>
                             <th class="text-center"><strong>Stall Code</strong></th>
                             <th class="text-center"><strong>Description</strong></th> <!-- Added this line -->
                             <th class="text-center"><strong>Status</strong></th>
-                            <th class="text-center"><strong>Actions</strong></th>
+        
                         </tr>
                     </thead>
                     <tbody>
@@ -52,13 +58,7 @@
                             <td>{{ $stallNumber->nameforstallnumber }}</td>
                             <td>{{ $stallNumber->description }}</td> <!-- Added this line -->
                             <td>{{ $stallNumber->status }}</td>
-                            <td>
-                                <form action="{{ route('stall-numbers.destroy', $stallNumber) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-secondary">Delete</button>
-                                </form>
-                            </td>
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -69,8 +69,6 @@
             <br><br>
             @endif
 
-            <br>
-
             <!-- Add the "Add Stall Number" button outside the foreach loop -->
 
             <!-- Add the "Back" button that redirects to the previous page -->
@@ -78,7 +76,15 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#stallNumbersTable').DataTable({
+            "paging": true, // Enable pagination
+            "pageLength": 10, // Set the number of entries per page
+            "lengthChange": false, // Disable changing the number of entries per page
+        });
+    });
+    </script>
 
 
 
@@ -88,3 +94,6 @@
     </div>
 </div>
 @endsection
+
+
+    

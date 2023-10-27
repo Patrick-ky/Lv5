@@ -11,6 +11,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "bootstrap-datepicker": "^1.10.0"
+        "bootstrap-datepicker": "^1.10.0",
+        "bootstrap-icons": "^1.11.1"
     }
 }

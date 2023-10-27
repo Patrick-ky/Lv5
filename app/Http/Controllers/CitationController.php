@@ -28,22 +28,21 @@ class CitationController extends Controller
     return view('client_info.citation', compact('stall', 'citations', 'clientInfo'));
 }
 
-    public function violationbilling($id)
-    {
-        
+public function violationbilling($id)
+{
+    $clientInfo = ClientInfo::findOrFail($id);
+    $clientInfos = ClientInfo::where('client_id', $clientInfo->client_id)->get();
+    $violations = Violation::all();
 
-        $clientInfo = ClientInfo::findOrFail($id);
-        $clientInfos = ClientInfo::where('client_id', $clientInfo->client_id)->get();
-        $violations = Violation::all();
-        
-        // Kuhaa ang violations na naapil sa napili nga stall 
-        $citations = Citation::where('stall_number_id', $clientInfo->stall_number_id)->get();
-        
-        
-    
-    
-        return view('client_info.violationbilling', compact('clientInfo', 'clientInfos', 'violations', 'citations'));
-    }
+    // Kuhaa ang violations na naapil sa napili nga stall 
+    $citations = Citation::where('stall_number_id', $clientInfo->stall_number_id)->get();
+
+    // Retrieve the stall associated with the client
+    $stall = StallNumber::findOrFail($clientInfo->stall_number_id);
+
+    return view('client_info.violationbilling', compact('clientInfo', 'clientInfos', 'violations', 'citations', 'stall'));
+}
+
     
     
     public function reportCitationForm($client_id, $stall_number_id)
@@ -89,28 +88,28 @@ class CitationController extends Controller
     
         Citation::create($data);
     
-        return redirect()->route('client_info.index', ['id' => $request->input('client_info_id')])
-            ->with('success', 'Citation created successfully.');
+        return redirect()->route('client_info.violationbilling', ['id' => $request->input('client_info_id')])
+            ->with('success', 'Citation for client   created successfully.');
     }
     
 
     
      
-    public function viewCitations($stall_id)
-    {
+    // public function viewCitations($stall_id)
+    // {
       
-        // Makuha ang listahan sa violation
-        $violations = Violation::all();
+    //     // Makuha ang listahan sa violation
+    //     $violations = Violation::all();
         
-        $clientInfo = ClientInfo::findOrFail($stall_id);
-        // Makuha ang napili na stall ug ang iyang citations
-        $stall = StallNumber::findOrFail($stall_id);
+    //     $clientInfo = ClientInfo::findOrFail($stall_id);
+    //     // Makuha ang napili na stall ug ang iyang citations
+    //     $stall = StallNumber::findOrFail($stall_id);
     
-        //Makuha ang citations nga naa sa napili na stall
-        $citations = Citation::where('stall_number_id', $stall->id)->get();
+    //     //Makuha ang citations nga naa sa napili na stall
+    //     $citations = Citation::where('stall_number_id', $stall->id)->get();
     
-        return view('client_info.citation', compact('stall', 'citations', 'clientInfo','violations'));
-    }
+    //     return view('client_info.citation', compact('stall', 'citations', 'clientInfo','violations'));
+    // }
 
 
 
@@ -118,10 +117,6 @@ class CitationController extends Controller
 public function records()
 {
 
-
-
-
-    
     $clientinfos = ClientInfo::with(['client', 'stallType', 'stallNumber'])->get();
 
     foreach ($clientinfos as $clientinfo) {

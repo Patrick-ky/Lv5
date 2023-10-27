@@ -1,7 +1,6 @@
 @auth
 @extends('include.header')
-
-@section('violations.edit')
+@section('content')
 
 
 <div class="container">

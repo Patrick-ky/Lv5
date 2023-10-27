@@ -1,6 +1,11 @@
 @extends('include.header')
 
-@section('client_info.add')
+@section('content')
+<style>
+    .button-container {
+        text-align: center;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,9 +18,9 @@
     <form action="{{ route('client_info.store') }}" method="POST">
         @csrf
         <div class="mb-2">
-            <label for="client_id" class="form-label">Select Client</label>
+            <label for="client_id" class="form-label">Select Stall Holder</label>
             <select class="form-control" id="client_id" name="client_id" required>
-                <option value="" disabled selected>Select Client</option>
+                <option value="" disabled selected>Select Holder</option>
                 @foreach ($clients as $client)
                     <option value="{{ $client->id }}">
                         {{ $client->firstname }} {{ $client->lastname }} {{ $client->middlename }}
@@ -53,14 +58,11 @@
             <input type="date" class="form-control" id="due_date" name="due_date" required>
         </div><br>
     
-        <button type="submit" class="btn btn-primary">Add Client Info</button>
-                                                         OR
-        <a href="/client_info"
-
-        class="btn btn-secondary btn-oblong pulsate" 
-        style="background-color: #098309; color:
-                                white; border: 2px solid 
-                            #e7ece2;" >cancel</a></div>
+        <div class="button-container d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Save</button>
+            <a href="/client_info" class="btn btn-danger">Cancel</a>
+        </div>
+        
     </form>
    
 </div>

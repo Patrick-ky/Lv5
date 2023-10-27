@@ -14,7 +14,7 @@ class StallNumberController extends Controller
     public function index()
     {
         // Kuhaon ang tanan stall numbers sa database
-        $stallNumbers = StallNumber::paginate(25);
+        $stallNumbers = StallNumber::paginate(10);
     
         // I calculate ang bilang sa available ug occupied na stalls
         $availableStallsCount = StallNumber::where('status', 'Available')->count();

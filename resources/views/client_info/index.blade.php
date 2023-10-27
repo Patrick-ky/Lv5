@@ -1,6 +1,8 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 @extends('include.header')
 
-@section('client_info.index')
+@section('content')
 <style>
     @keyframes slide-up {
         0% {
@@ -73,48 +75,47 @@
             {{ session('error') }}
         </div>
     @endif
-
     <div class="container">
-            <a href="/home"
+        <a href="/home" class="btn btn-success btn-sm " style="background-color: #098309; color: white; border: 2px solid #e7ece2;">Back to Home</a><br><br>
+        <h2 style="color: black"><strong>Stall Holders Profile</strong></h2>
+        <div class="col-md-12" style=" margin-buttom:10px;">
+            <a href="{{ route('client_info.add') }}"  style=" float: right; " class=" btn btn-success mb-2"><i class="bi bi-person-plus mb-2"></i>Add</a>
+        </div>
 
-    class="btn btn-success btn-oblong pulsate" 
-    style="background-color: #098309; color:
-                            white; border: 2px solid 
-                        #e7ece2;" >Back to Home</a><br><br>
-        
-    <h2 style="color: rgb(192, 247, 167)"><strong>Stall Holders Profile</strong></h2>
-        <div class="col-md-12">
-            <a href="{{ route('client_info.add') }}" class="btn btn-success btn-oblong pulsate ml-5" style="float: right">Add</a>
-           
-        </div>           
-           <br><br><br><br>
-       
-   
-
-    <div class="container">
-    <div class="slide-up-content">
-       
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th class="text-center"><strong>Stall Holder Name</strong></th>
-                    <th class="text-center"><strong>Actions</strong></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($groupedData as $clientName => $clientInfo)
-                    <tr>
-                        <td>{{ $clientName }}</td>
-                        <td>
-                            <a href="{{ route('client_info.violationbilling', ['id' => $clientInfo->id]) }}" class="btn btn-primary">View</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="container">
+            <div class="slide-up-content">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="table-primary"> 
+                            <th class="text-center">Stall Holder</th>
+                            <th class="text-center">Stall Category</th>
+                            <th class="text-center">Citations</th> <!-- Added column for citations -->
+                            <th class="text-center">Stall Code</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($clientInfos as $clientInfo)
+                        <tr>
+                            <td>{{ $clientInfo->client->firstname }} {{ $clientInfo->client->middlename }} {{ $clientInfo->client->lastname }}</td>
+                            <td>{{ $clientInfo->stallType->stall_name }}</td>
+                            <td>
+                                @if ($citationCounts[$clientInfo->client->firstname . ' ' . $clientInfo->client->middlename . ' ' . $clientInfo->client->lastname] > 0)
+                                    {{ $citationCounts[$clientInfo->client->firstname . ' ' . $clientInfo->client->middlename . ' ' . $clientInfo->client->lastname] }}
+                                @else
+                                    None
+                                @endif
+                            </td>
+                            <td>{{ $clientInfo->stallNumber->nameforstallnumber }}</td>
+                            <td>
+                                <a href="{{ route('client_info.violationbilling', ['id' => $clientInfo->id]) }}" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    </div></div>
 </body>
 @endsection

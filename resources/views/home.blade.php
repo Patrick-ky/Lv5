@@ -110,7 +110,7 @@
     .menu-item {
       flex: 1;
       margin: 0 5px;
-      padding: 60px 20px;
+      padding: 20px 20px;
       border: 3px solid #c2f8bb;
       border-radius: 10px;
       color: #fcfffcf5;
@@ -143,15 +143,15 @@
   </style>
 </head>
 
-<body style="background-color: #098309">
-  <header id="header" class="header">
+<body style="background-color: #228B22">
+  <header id="header" class="header" style="background-color: #228B22">
     <div class="header-left">
       <img style="width: 60px;" src="{{ URL('images\logo-lgu.png') }}" alt="LGU Logo">
-      <h1 class="logo h1 ml-3" style="color: rgb(159, 248, 118);"><strong>LOCAL GOVERNMENT UNIT</strong> |<span> General Santos City</span></h1>
+      <h1 class="logo h1 ml-3" style="color: rgb(255, 255, 255);"><strong>LOCAL GOVERNMENT UNIT</strong> | <span> Gensan Public Market </span></h1>
     </div>
     <div class="header-right">
       <div class="profile-dropdown">
-        <h3><span style="color: rgb(159, 248, 118);">Profile</span></h3>
+        <div style="color: rgb(255, 255, 255);"> {{ Auth::user()->fname }} </div>
         <div class="profile-dropdown-content">
           <a href="#">Manage</a>
           <a href="/logout" onclick="confirmLogout()">Log out</a>
@@ -160,18 +160,18 @@
     </div>
   </header>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero">
+  
+  <section id="hero" class="hero" style="background-color: #228B22">
     <div class="container position-relative">
         <div class="hero-content">
-            <h2>Welcome, to <span style="color: rgb(159, 248, 118)">The Rental Billing System</span></h2>
-            <h4><span style="text-decoration: overline; color: rgb(159, 248, 118)">With SMS Notification</span></h4><br>
+            <h2>Welcome to <span style="color: rgb(255, 255, 255)">the Rental and Billing System</span></h2>
+            <h4><span style="text-decoration: overline; color: rgb(255, 255, 255)">With SMS Notification</span></h4><br>
             <h5 style="color:#ffffff">The rental billing system provides an overview of stall holders 
             along with their associated stalls and acquired violations that will keep them on track for their payments</h5>
           </div>
     </div>
   </section>
-  <h2 class="text-center"><span style="color: rgb(159, 248, 118)">TABS</span></h2><br>
+
   <div class="menu-box">
     <div class="menu-item">
       <a class="nav-link active" href="/clients">

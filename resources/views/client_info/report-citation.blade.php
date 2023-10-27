@@ -1,6 +1,6 @@
 @extends('include.header')
 
-@section('client_info.report-citation')
+@section('content')
 <style>
     /* hatag ug CSS class para sa borderless na input fields */
     .borderless-input {
@@ -43,4 +43,5 @@
         <button type="submit" class="btn btn-primary">Create Citation</button>
     </form>
 </div>
+
 @endsection

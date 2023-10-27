@@ -1,5 +1,5 @@
 @extends('include.header')
-@section('stall-number.index')
+@section('content')
 
 <style>
     @keyframes slide-up {
@@ -40,25 +40,24 @@
 </style>
 
 <div class="container">
-    <a href="/home" class="btn btn-success btn-oblong pulsate" style="background-color: #098309; color: white; border: 2px solid #e7ece2;">Back to Home</a><br><br>
+    <a href="/home" class="btn btn-success btn-sm btn-oblong pulsate" style="background-color: #098309; color: white; border: 2px solid #e7ece2;">Back to Home</a>
     <div class="row">
-        <div class="col-md-12">
-            <h1 style="color: rgb(159, 248, 118)"><strong>Stalls</strong></h1><br>
-
+        <div class="flex justify-between"">
+            <h1 style="color: black"><strong>Stalls</strong></h1>
             <div class="slide-up-content">
-
-                <div class="col-md-12">
-                    <div style="float: right">
-                    <p style="color: rgb(159, 248, 118)"><strong>Available</strong> Stalls: </strong>{{ $availableStallsCount }}</strong></p>
-                    <p style="color: rgb(159, 248, 118)"><strong>Occupied</strong> Stalls: </strong>{{ $occupiedStallsCount }}</strong></p><br>
-                    </div>
-                    <div class="slide-up-content">
+               
+                            <p style="color: black"><strong>Available Stalls:</strong> {{ $availableStallsCount }}</p>
+                            <p style="color: black"><strong>Occupied Stalls:</strong> {{ $occupiedStallsCount }}</p>
                         
-                <table class="table table-bordered">
+                    
+                </div>
+                
+
+                <table class="table table-bordered table-sm table-hover">
                     <thead>
-                        <tr>
+                        <tr class="table-success"> 
                             <th>Stall Number</th>
-                            <th>Name for Stall Number</th>
+                            <th>Stall Code</th>
                             <th>Description</th>
                             <th>Status</th>
                         </tr>
@@ -77,9 +76,18 @@
             </div>
             <div class="pagination">
                 {{ $stallNumbers->links() }}
-            </div>
+            </div>            
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('#stallNumbersTable').DataTable({
+            "paging": true, // Enable pagination
+            "pageLength": 10, // Set the number of entries per page
+            "lengthChange": false, // Disable changing the number of entries per page
+        });
+    });
+    </script>
 @endsection

@@ -28,6 +28,12 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <!-- =======================================================
   * Template Name: Impact
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -99,7 +105,7 @@
     }
     .hero-content a.btn {
       background-color: #098309;
-      color: white;
+      color: rgb(255, 255, 255);
       border: 2px solid #e7ece2;
       padding: 10px 20px;
       border-radius: 20px;
@@ -111,50 +117,49 @@
       overflow: hidden;
     }
     .menu-item {
-      flex: 1;
-      margin: 0 5px;
-      padding: 60px 20px;
-      border: 3px solid #c2f8bb;
-      border-radius: 10px;
-      color: #fcfffcf5;
-      text-align: center;
-      font-size: 25px;
-      transition: transform 0.3s ease;
-      position: relative;
-      cursor: pointer;
-    }
-    .menu-item:hover {
-      transform: scale(1.05);
-    }
-    .menu-item::before {
-      content: 'SELECT';
-      display: none;
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    
-      color: #c2f8bb;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 16px;
-      z-index: 1;
-    }
-    .menu-item:hover::before {
-      display: block;
-    }
+  flex: 1;
+  margin: 0 5px;
+  padding: 60px 20px;
+  border: 3px solid #c2f8bb;
+  border-radius: 10px;
+  color: #fcfffcf5;
+  text-align: center;
+  font-size: 25px;
+  transition: transform 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden; /* Add this line */
+}
+
+.menu-item::before {
+  
+  display: block;
+  position: absolute;
+  bottom: 0; /* Adjust to place it at the bottom */
+  left: 0;
+  right: 0; /* Make it cover the full width */
+  background-color: #c2f8bb;
+  padding: 10px 0; /* Adjust padding */
+  border-radius: 0 0 10px 10px; /* Rounded corners only at the bottom */
+  font-size: 16px;
+  z-index: 1;
+}
+
+.menu-item:hover::before {
+  display: block;
+}
   </style>
 </head>
 
 <body>
-  <header id="header" class="header">
+  <header id="header" class="header" style="background-color: #228B22">
     <div class="header-left">
-      <img style="width: 60px;" src="{{ URL('images\logo-lgu.png') }}" alt="LGU Logo">
-      <h1 class="logo h1 ml-3" style="color: rgb(159, 248, 118);"><strong>LOCAL GOVERNMENT UNIT</strong> |<span > General Santos City</span></h1>
+      <img style="width: 80px;" class="mt-2" src="{{ URL('images\logo-lgu.png') }}" alt="LGU Logo">
+      <h2 class="" style="color: white;"><strong>LOCAL GOVERNMENT UNIT </strong> | Gensan Public Market</h2>
     </div>
     <div class="header-right">
       <div class="profile-dropdown">
-        <h3><span style="color: rgb(159, 248, 118);">Profile</span></h3>
+        <h3><span style="color: rgb(255, 255, 255);" id="printButton">ADMIN</span></h3>
         <div class="profile-dropdown-content">
           <a href="#">Manage</a>
           <a href="/logout" onclick="confirmLogout('Are you sure you wanna Log out?')">Log out</a>
@@ -167,7 +172,7 @@
 
                 <!-- End of Topbar -->
                 <div class="content">
-                    <body style="background-color: #098309">
+                    <body style="background-color: white">
                       <style>
        @keyframes slide-up {
       0% {
@@ -184,34 +189,8 @@
    
                       
     <br><br>
-                    @yield('stall-holders.create')
-                    @yield('clients.index')
-                    @yield('clients.addclients')
-                    @yield('client_info.index')
-                    @yield('client_info.add')
-                    @yield('client_info.edit')
-                    @yield('client_info.violationbilling')
-                    @yield('client_info.report-citation')
-                    @yield('client_info.citation')
-                    {{-- @yield('clients.edit') --}}
-                    @yield('billings.index')
-                    @yield('billings.create')
-                    @yield('violations.index')
-                    @yield('violations.create')
-                    @yield('violations.edit')
-                    @yield('stall-number.index')
-                    @yield('stall-number.create')
-                    @yield('stall-types.index')
-                    @yield('stall-types.create')
-                    @yield('stall-types.edit')
-                    @yield('stall-types.stallnumbers.view')
-                    @yield('stall-types.stallnumbers.create')
-                    @yield('clientrecords.index')
-                    @yield('home')
-                    @yield('scripts') 
-                    @yield('billing.record') 
-                    @yield('payments.create')
-                    @yield('client_info.addclientstall')
+                    @yield('content')
+                    
                     </body>
                     <!-- Include Bootstrap CSS and JS -->
 
@@ -228,9 +207,7 @@
                     
                 </div>
                 <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
+
             </div>
         </div>
     </div>
@@ -241,6 +218,21 @@
 </body>
 
 </html>
+
+<script>
+
+function printReport() {
+
+document.getElementById('printButton').style.display = 'none';
+
+
+window.print();
+
+document.getElementById('printButton').style.display = 'block';
+}
+
+
+</script>
 @endauth
 
 

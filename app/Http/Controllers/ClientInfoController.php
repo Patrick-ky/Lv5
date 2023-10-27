@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Citation;
 use App\Models\Violation;
 use App\Models\ClientInfo;
 use App\Models\StallTypes;
 use App\Models\StallNumber;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Validation\ValidationException;
 
 
@@ -44,23 +45,23 @@ class ClientInfoController extends Controller
 
     public function index()
     {
-        // Retrieve all client info records
-        $clientInfoModels = ClientInfo::with(['client', 'stallNumber', 'stallType'])->get();
-        $clients = Client::all();
-        $stalltypes = StallTypes::all();
-        $stallnumbers = StallNumber::all();
-        // Group the data by client names
-        $groupedData = [];
-        foreach ($clientInfoModels as $clientInfo) {
-            $clientName = $clientInfo->client->firstname . ' ' . $clientInfo->client->middlename . ' ' . $clientInfo->client->lastname;
+        $clientInfos = ClientInfo::with(['client', 'stallNumber', 'stallType'])->get();
     
-            if (!isset($groupedData[$clientName])) {
-                $groupedData[$clientName] = $clientInfo;
-            }
+        // Create an array to store the citation counts for each client's stall
+        $citationCounts = [];
+    
+        foreach ($clientInfos as $clientInfo) {
+            $clientName = $clientInfo->client->firstname . ' ' . $clientInfo->client->middlename . ' ' . $clientInfo->client->lastname;
+            
+            // Calculate and store the citation count for each client's stall
+            $citationCounts[$clientName] = Citation::where('stall_number_id', $clientInfo->stallNumber->id)->count();
         }
     
-        return view('client_info.index', compact('groupedData','clients', 'stallType', 'stallnumbers'));
+        return view('client_info.index', compact('clientInfos', 'citationCounts'));
     }
+    
+    
+    
     
     
     public function addclientinfo()
@@ -72,58 +73,59 @@ class ClientInfoController extends Controller
         return view('client_info.add', compact('clients', 'stalltypes', 'stallnumbers'));
     }
     
-public function clientinfostore(Request $request)
-{
-    // Validation rules and messages
-    $rules = [
-        'client_id' => 'required|exists:clients,id',
-        'stall_type_id' => 'required|exists:stall_types,id',
-        'stall_number_id' => 'required|exists:stall_numbers,id',
-        'start_date' => 'required|date',
-        'due_date' => 'required|date|after:start_date',
-       
-    ];
-
-    $messages = [
-        'stall_number_id.exists' => 'The selected stall number does not exist.',
-        'stall_type_id.exists' => 'The selected stall type does not exist.',
-        'due_date.after' => 'The due date must be after the start date.',
-    ];
-
-    // Validate the request
-    $validatedData = $request->validate($rules, $messages);
-
-    try {
-        DB::beginTransaction();
-
-        // Check if a client info record with the same client_id already exists
-        $existingClientInfo = ClientInfo::where('client_id', $validatedData['client_id'])
-            ->where('stall_type_id', $validatedData['stall_type_id'])
-            ->where('stall_number_id', $validatedData['stall_number_id'])
-            ->first();
-
-        if ($existingClientInfo) {
-            // If the record exists, update it instead of creating a new one
-            $existingClientInfo->update($validatedData);
-        } else {
-            // Otherwise, create a new client info record
+    public function clientinfostore(Request $request)
+    {
+        // Validation rules and messages
+        $rules = [
+            'client_id' => 'required|exists:clients,id',
+            'stall_type_id' => 'required|exists:stall_types,id',
+            'stall_number_id' => 'required|exists:stall_numbers,id',
+            'start_date' => 'required|date',
+            'due_date' => 'required|date|after:start_date',
+        ];
+    
+        $messages = [
+            'stall_number_id.exists' => 'The selected stall number does not exist.',
+            'stall_type_id.exists' => 'The selected stall type does not exist.',
+            'due_date.after' => 'The due date must be after the start date.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        try {
+            DB::beginTransaction();
+    
+            // Check if a client info record with the same client_id already exists
+            $existingClientInfo = ClientInfo::where('client_id', $validatedData['client_id'])->first();
+    
+            if ($existingClientInfo) {
+                return redirect()
+                    ->route('client_info.index')
+                    ->with('error', 'The client already has a stall registered.');
+            }
+    
+            // Ensure the stall number status is updated to 'occupied'
+            $stallNumber = StallNumber::findOrFail($validatedData['stall_number_id']);
+            $stallNumber->status = 'occupied';
+            $stallNumber->save();
+    
+            // Create a new client info record
             ClientInfo::create($validatedData);
+    
+            DB::commit();
+    
+            return redirect()
+                ->route('client_info.index')
+                ->with('success', 'Stall Holder successfully created!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()
+                ->route('client_info.index')
+                ->with('error', 'Failed to create client info. Please try again.');
         }
-
-        // Ensure the stall number status is updated to 'occupied'
-        $stallNumber = StallNumber::findOrFail($validatedData['stall_number_id']);
-        $stallNumber->status = 'occupied';
-        $stallNumber->save();
-
-        DB::commit();
-
-        return redirect()->route('client_info.index')->with('success', 'Client info created/updated successfully!');
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect()->route('client_info.index')->with('error', 'Failed to create/update client info. Please try again.');
     }
-}
-
+    
     public function updateClient(Request $request, $id)
     {
         $validatedData = $request->validate([

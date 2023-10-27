@@ -1,6 +1,5 @@
 @extends('include.header')
-
-@section('stall-types.stallnumbers.create')
+@section('content')
 
 <div class="container">
     <div class="row justify-content-center">

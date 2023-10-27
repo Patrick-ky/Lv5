@@ -1,5 +1,5 @@
 @extends('include.header')
-@section('client_info.addclientstall')
+@section('content')
 
 <form action="{{ route('client_info.store') }}" method="POST">
     @csrf

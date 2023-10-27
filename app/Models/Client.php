@@ -21,7 +21,8 @@ class Client extends Model
         'barangay',
         'city',
         'province',
-        'zipcode',
+        'block',
+        'lot',
         'clients_number',
         'gender',
     ];

@@ -2,7 +2,7 @@
 
 @include('include.header')
 
-@section('stalltypes.index')
+@section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-9">

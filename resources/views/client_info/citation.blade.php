@@ -1,6 +1,6 @@
 @extends('include.header')
 
-@section('client_info.citation')
+@section('content')
 <div class="container">
     <a href="/client_info"
 
@@ -18,27 +18,12 @@ style="background-color: #098309; color:
     <div class="text-center">
         <a class="btn btn-danger float-right" href="{{ route('client_info.report_citation_form', ['client_id' => $clientInfo->id, 'stall_number_id' => $stall->id]) }}" type="button" class="btn btn-danger">ADD CITATION</a>
     </div>
-    
-
-    <br>
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
-
-    @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @endif
-    <br><br>
 
 
    
-    <table class="table table-bordered">
+    <table class="table table-bordered table-sm">
         <thead>
-            <tr>
+            <tr class="table-primary"> 
                 <th class="text-center"><strong>Violation Name</strong></th>
                 <th class="text-center"><strong>Penalty Price</strong></th>
                 <th class="text-center"><strong>Date Acquired</strong></th>

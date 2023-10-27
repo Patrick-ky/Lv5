@@ -14,13 +14,14 @@ class CreateClientsTable extends Migration
             $table->string('middlename');
             $table->string('lastname');
             $table->date('birthdate');
-            $table->string('clients_number', 255)->unique()->comment('Must start with +63 and have 10 digits');
+            $table->string('clients_number', 13)->unique()->comment('Must start with +63 and have 10 digits');
             $table->string('purok');
             $table->string('barangay');
             $table->string('street');
             $table->string('city');
             $table->string('province');
-            $table->string('zipcode');
+            $table->string('block')->nullable();
+            $table->string('lot')->nullable();
             $table->enum('gender', ['Male', 'Female']);
             $table->timestamps();
         });
